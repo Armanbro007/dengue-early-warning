@@ -25,10 +25,50 @@ CACHE = config.CACHE_DIR / "briefings"
 USAGE_FILE = config.CACHE_DIR / "llm_usage.json"
 MAX_WARDS = 5
 
-ACTIONS = {
-    "Critical": "deploy larvicide + fogging teams this week, alert nearby hospitals to stock saline and NS1 kits",
-    "High": "schedule source-reduction drives (drains, containers) and community warnings",
+# All fixed wording of the template, in English and Bangla. Numbers and ward
+# names come from the model; only these phrases are translated.
+TEXT = {
+    "en": {
+        "header": "**{area}, forecast for week of {week}:** {Critical} Critical, {High} High, {Medium} Medium, {Low} Low wards.",
+        "quiet": "No ward is forecast above Medium. Keep routine surveillance and drain clearing.",
+        "more": " and {n} more",
+        "tier_line": "- **{tier}:** {names}. **Action:** {action}.",
+        "tiers": {"Critical": "Critical", "High": "High"},
+        "actions": {
+            "Critical": "deploy larvicide + fogging teams this week, alert nearby hospitals to stock saline and NS1 kits",
+            "High": "schedule source-reduction drives (drains, containers) and community warnings",
+        },
+        "early": "- **Early warning:** {n} wards are Low/Medium today but forecast High or Critical. "
+                 "Acting there now is cheaper than responding after admissions rise.",
+        "why": "- **Why:** {ward} had {mm} mm of rain in the last 3 weeks ({pct:+.0f}% vs normal for this "
+               "time of year); main driver: {driver}.",
+        "drivers": {},
+    },
+    "bn": {
+        "header": "**{area}, {week} সপ্তাহের পূর্বাভাস:** {Critical}টি ওয়ার্ড সংকটজনক, {High}টি উচ্চ, "
+                  "{Medium}টি মাঝারি এবং {Low}টি নিম্ন ঝুঁকিতে।",
+        "quiet": "কোনো ওয়ার্ডে মাঝারির বেশি ঝুঁকির পূর্বাভাস নেই। নিয়মিত নজরদারি ও ড্রেন পরিষ্কার চালিয়ে যান।",
+        "more": " এবং আরও {n}টি",
+        "tier_line": "- **{tier}:** {names}। **করণীয়:** {action}।",
+        "tiers": {"Critical": "সংকটজনক", "High": "উচ্চ ঝুঁকি"},
+        "actions": {
+            "Critical": "এই সপ্তাহেই লার্ভিসাইড ও ফগিং টিম পাঠান, কাছের হাসপাতালগুলোকে স্যালাইন ও NS1 কিট মজুত রাখতে বলুন",
+            "High": "ড্রেন ও পানি জমে থাকা পাত্র পরিষ্কারের অভিযান চালান এবং এলাকাবাসীকে সতর্ক করুন",
+        },
+        "early": "- **আগাম সতর্কতা:** {n}টি ওয়ার্ডে এখন ঝুঁকি নিম্ন বা মাঝারি, কিন্তু পূর্বাভাস উচ্চ বা সংকটজনক। "
+                 "হাসপাতালে ভর্তি বাড়ার আগেই সেখানে ব্যবস্থা নেওয়া কম খরচের।",
+        "why": "- **কারণ:** {ward}-এ গত ৩ সপ্তাহে {mm} মিমি বৃষ্টি হয়েছে (এই সময়ের স্বাভাবিকের তুলনায় "
+               "{pct:+.0f}%); প্রধান কারণ: {driver}।",
+        "drivers": {
+            "Rainfall (0-6 wks ago)": "বৃষ্টিপাত",
+            "Humidity": "আর্দ্রতা",
+            "Temperature": "তাপমাত্রা",
+            "Ward vulnerability": "ওয়ার্ডের জলাবদ্ধতা, ঘনবসতি ও স্যানিটেশন",
+            "Seasonal norm": "মৌসুমি স্বাভাবিক মাত্রা",
+        },
+    },
 }
+LANGUAGES = {"en": "English", "bn": "বাংলা (Bangla)"}
 
 
 def build_facts(fc: pd.DataFrame, as_of, h: int, city: str | None) -> dict:
@@ -55,14 +95,12 @@ def build_facts(fc: pd.DataFrame, as_of, h: int, city: str | None) -> dict:
     }
 
 
-def template_briefing(facts: dict) -> str:
+def template_briefing(facts: dict, lang: str = "en") -> str:
+    t = TEXT[lang]
     c = facts["counts"]
-    lines = [
-        f"**{facts['area']}, forecast for week of {facts['target_week']}:** "
-        f"{c['Critical']} Critical, {c['High']} High, {c['Medium']} Medium, {c['Low']} Low wards."
-    ]
+    lines = [t["header"].format(area=facts["area"], week=facts["target_week"], **c)]
     if not facts["wards"]:
-        lines.append("No ward is forecast above Medium. Keep routine surveillance and drain clearing.")
+        lines.append(t["quiet"])
         return "\n\n".join(lines)
     for tier in ("Critical", "High"):
         wards = [w for w in facts["wards"] if w["tier"] == tier]
@@ -70,18 +108,15 @@ def template_briefing(facts: dict) -> str:
             continue
         names = ", ".join(f"{w['ward']} (~{w['cases']:.0f})" for w in wards)
         if c[tier] > len(wards):
-            names += f" and {c[tier] - len(wards)} more"
-        lines.append(f"- **{tier}:** {names}. **Action:** {ACTIONS[tier]}.")
+            names += t["more"].format(n=c[tier] - len(wards))
+        lines.append(t["tier_line"].format(tier=t["tiers"][tier], names=names, action=t["actions"][tier]))
     if facts.get("escalating"):
-        lines.append(f"- **Early warning:** {facts['escalating']} wards are Low/Medium today but forecast High or "
-                     "Critical. Acting there now is cheaper than responding after admissions rise.")
+        lines.append(t["early"].format(n=facts["escalating"]))
     top = facts["wards"][0]
     if top["normal_mm"] > 0:
         pct = (top["breeding_rain_mm"] / top["normal_mm"] - 1) * 100
-        lines.append(
-            f"- **Why:** {top['ward']} had {top['breeding_rain_mm']} mm of rain in the last 3 weeks "
-            f"({pct:+.0f}% vs normal for this time of year); main driver: {top['driver'].lower()}."
-        )
+        driver = t["drivers"].get(top["driver"], top["driver"].lower())
+        lines.append(t["why"].format(ward=top["ward"], mm=top["breeding_rain_mm"], pct=pct, driver=driver))
     return "\n".join(lines)
 
 
@@ -113,25 +148,26 @@ PROMPT = (
     "health officer: one summary sentence, then one bullet per ward with a concrete action "
     "(larvicide/fogging, drain clearing, hospital stock alerts). Max 120 words. No new numbers.\n\n"
 )
+BANGLA = "Write the briefing in Bangla (Bengali script); keep ward IDs and numbers as given.\n\n"
 
 
-def get_briefing(facts: dict, use_llm: bool = True) -> tuple[str, str]:
+def get_briefing(facts: dict, use_llm: bool = True, lang: str = "en") -> tuple[str, str]:
     """Return (markdown, source) where source is 'template', 'cache' or 'llm'."""
     if not (use_llm and config.GEMINI_API_KEY):
-        return template_briefing(facts), "template"
+        return template_briefing(facts, lang), "template"
 
     payload = json.dumps(facts, sort_keys=True, separators=(",", ":"))
-    key = hashlib.sha256((config.GEMINI_MODEL + payload).encode()).hexdigest()[:16]
+    key = hashlib.sha256((config.GEMINI_MODEL + lang + payload).encode()).hexdigest()[:16]
     cached = CACHE / f"{key}.md"
     if cached.exists():
         return cached.read_text(encoding="utf-8"), "cache"
 
     usage = _usage_today()
     if usage["calls"] >= config.LLM_DAILY_CALL_BUDGET:
-        return template_briefing(facts), "template (daily LLM budget reached)"
+        return template_briefing(facts, lang), "template (daily LLM budget reached)"
 
     body = {
-        "contents": [{"parts": [{"text": PROMPT + payload}]}],
+        "contents": [{"parts": [{"text": PROMPT + (BANGLA if lang == "bn" else "") + payload}]}],
         "generationConfig": {"maxOutputTokens": config.LLM_MAX_OUTPUT_TOKENS, "temperature": 0.2},
     }
     if config.GEMINI_MODEL.startswith("gemini-2.5"):
@@ -145,7 +181,7 @@ def get_briefing(facts: dict, use_llm: bool = True) -> tuple[str, str]:
         )
         text = resp["candidates"][0]["content"]["parts"][0]["text"].strip()
     except (NetworkUnavailable, KeyError, IndexError, TypeError) as exc:
-        return template_briefing(facts), f"template (LLM unavailable: {str(exc)[:60]})"
+        return template_briefing(facts, lang), f"template (LLM unavailable: {str(exc)[:60]})"
 
     meta = resp.get("usageMetadata", {})
     usage["calls"] += 1

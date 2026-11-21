@@ -144,6 +144,12 @@ def test_briefing_without_key_uses_template(monkeypatch):
     assert source == "template" and "W1" in text
 
 
+def test_bangla_template_keeps_wards_and_numbers(monkeypatch):
+    monkeypatch.setattr(config, "GEMINI_API_KEY", "")
+    text, _ = briefing.get_briefing(FACTS, lang="bn")
+    assert "W1" in text and "আগাম সতর্কতা" in text and "200" in text
+
+
 def test_briefing_falls_back_when_llm_fails(llm_sandbox, monkeypatch):
     def fail(*a, **k):
         raise NetworkUnavailable("simulated 503")

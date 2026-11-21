@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from dengue.briefing import build_facts, get_briefing
+from dengue.briefing import LANGUAGES, build_facts, get_briefing
 from dengue.config import TIERS, TIER_MIN_CASES
 from ui_common import TIER_COLORS, cached_forecast, fmt_week, style_fig
 
@@ -33,9 +33,10 @@ left, right = st.columns([3, 2], gap="large")
 with right:
     st.subheader("Officer briefing")
     facts = build_facts(fc, as_of, h, c["city"])
+    lang = st.radio("Language", list(LANGUAGES), format_func=LANGUAGES.get, horizontal=True, key="brief_lang")
     use_llm = st.toggle("Use AI wording (optional, needs API key)", value=False,
                         help="Off = instant template. On = one cached LLM call; falls back to template on any error.")
-    text, source = get_briefing(facts, use_llm=use_llm)
+    text, source = get_briefing(facts, use_llm=use_llm, lang=lang)
     st.markdown(text)
     st.caption(f"Source: {source}. Built only from the model's numbers.")
 
