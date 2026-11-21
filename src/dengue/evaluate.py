@@ -55,7 +55,11 @@ def evaluate_split(bundle: dict, feat: pd.DataFrame, start: str, end: str | None
         p = predict(bundle, rows, h)
         y = rows[f"target_h{h}"]
         base_ok = rows[f"last_year_h{h}"].notna()
+        season = (rows["date"] + pd.Timedelta(weeks=h)).dt.month.between(6, 10).to_numpy()
         res[h] = {
+            "model_in_season": score(y[season], p["pred"][season], p["lo"][season], p["hi"][season]),
+            "persistence_in_season": score(y[season], rows.loc[season, f"persistence_h{h}"]),
+            "last_year_in_season": score(y[season & base_ok.to_numpy()], rows.loc[season & base_ok.to_numpy(), f"last_year_h{h}"]),
             "model": score(y, p["pred"], p["lo"], p["hi"]),
             "persistence": score(y, rows[f"persistence_h{h}"]),
             "last_year": score(y[base_ok], rows.loc[base_ok, f"last_year_h{h}"]),
