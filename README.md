@@ -8,6 +8,10 @@ Built for the **EDU AI Engineering Hackathon 2026, Phase 1: "AI for Urban Dengue
 
 ![DengueWatch overview page](docs/screenshots/overview.png)
 
+**Two languages.** A switch at the top right shows the whole dashboard in **English or Bangla (বাংলা)**, including the officer briefing, chart labels, dates and numbers. The Bangla is written the way a city corporation health office would say it, not translated word for word. Your city, week and look-ahead settings stay the same when you switch.
+
+![DengueWatch overview page in Bangla](docs/screenshots/overview_bangla.png)
+
 ## Quick start (about 2 minutes)
 
 Requires **Python 3.10 - 3.14** and git. No API keys needed. Tested on every push on Linux and Windows (see the *tests* badge above).
@@ -31,7 +35,7 @@ Optional:
 ```bash
 cp .env.example .env        # (Windows: copy .env.example .env) then add GEMINI_API_KEY for AI-worded briefings
 python scripts/train.py     # rebuild features, evaluation (metrics.json) and models (~35 s)
-python -m pytest            # 34 tests: lag correctness, no leakage, explanations, retries/fallbacks, every page loads
+python -m pytest            # 36 tests: lag correctness, no leakage, explanations, retries/fallbacks, every page loads in English and Bangla
 python scripts/ingest.py new_weeks.csv   # add new weekly data and retrain (--reset to undo)
 ```
 
@@ -42,7 +46,7 @@ Set `ALLOW_NETWORK=0` in `.env` to run fully offline.
 | Page | What an officer gets |
 |---|---|
 | **Overview** | The answer first: how many wards will reach high risk and when, a four-step picture of the rain-to-cases delay, each city at a glance, and the wards to act on first. |
-| **Ward priorities** | All wards ranked by expected cases with a likely range and risk level. Wards **getting worse** (low or medium today, high or critical soon) are flagged. Includes an action briefing in **English or Bangla** and a CSV export. |
+| **Ward priorities** | All wards ranked by expected cases with a likely range and risk level. Wards **getting worse** (low or medium today, high or critical soon) are flagged. Includes an action briefing that follows the language switch, and a CSV export. |
 | **Why this ward?** | Plain bars showing how recent rain, humidity, temperature and drainage, crowding and sanitation push the forecast above or below normal for the season; a "rain now, cases later" chart; a rain what-if slider; the ward's forecast-vs-real track record. |
 | **Season calendar** | Every ward × every week of a season, coloured by forecast risk (or real risk, or forecast error). |
 | **Live forecast** | The same model fed with this week's real and forecast weather from Open-Meteo: one API call for all cities, cached, with offline fallbacks. |
@@ -72,6 +76,7 @@ Details, diagrams and the efficiency and failure-handling design are in **[ARCHI
 app.py                  Streamlit entry (navigation + shared controls)
 ui_common.py            cached engine, chart styling, sidebar
 views/                  one file per dashboard page
+ui_text.py              every English and Bangla string on the dashboard
 static/fonts/           bundled fonts, so the design works offline
 src/dengue/
   config.py             all settings: horizons, tiers, split dates, network limits
@@ -83,6 +88,7 @@ src/dengue/
   explain.py            Shapley driver breakdown, rain what-if
   tiers.py              risk tiers + escalation flags
   briefing.py           officer briefing (English/Bangla): template or optional cached LLM
+  i18n.py               Bangla names, digits and dates shared by the briefing and the pages
   ingest.py             add new weekly data, retrain, reset
   weather_api.py        Open-Meteo client with cache and fallbacks
   http.py               retries, backoff, Retry-After, circuit breaker
@@ -102,7 +108,7 @@ models/                 trained model bundle + evaluation metrics
 | **Open-Meteo Forecast API** (`api.open-meteo.com`) | Weather API, free, no key | Live weather for the Live forecast page. |
 | **Google Sheets CSV export** | Dataset source | Official hackathon dataset; downloaded only if `data/bangladesh_dengue.csv` is missing. |
 
-No other AI services or external APIs are used. Open-source libraries: pandas, NumPy, scikit-learn, joblib, PyArrow, Streamlit, Plotly, Requests, python-dotenv, pytest (see `requirements.txt`). Fonts: Newsreader and Plus Jakarta Sans (SIL Open Font License, bundled in `static/fonts`). No significant third-party code snippets were copied.
+No other AI services or external APIs are used. Open-source libraries: pandas, NumPy, scikit-learn, joblib, PyArrow, Streamlit, Plotly, Requests, python-dotenv, pytest (see `requirements.txt`). Fonts: Geist, Geist Mono and Noto Sans Bengali (SIL Open Font License, bundled in `static/fonts`). No significant third-party code snippets were copied.
 
 ## Limitations and honest notes
 
