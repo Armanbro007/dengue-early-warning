@@ -164,7 +164,7 @@ TEXT = {
         "lv_src_live": "Live weather", "lv_src_cache": "Saved weather",
         "lv_src_stale-cache": "Offline: using the last saved weather", "lv_src_climatology": "Offline: using typical weather",
         "lv_section": "Expected risk in the week of {date}",
-        "lv_section_sub": "Forecast made on {date}, {h} weeks ahead.",
+        "lv_section_sub": "Based on weather up to the week of {date}. Looks {h} weeks ahead.",
         "lv_m": "{tier} wards",
         "lv_rain": "Weekly rain feeding the model", "lv_rain_sub": "Measured and forecast rain in each city",
         "lv_rain_hover": "{city}, week of {d}: {mm} mm",
@@ -389,7 +389,7 @@ TEXT = {
         "lv_msg_climatology": "আবহাওয়ার API-তে সংযোগ পাওয়া যাচ্ছে না, সংরক্ষিত পূর্বাভাসও নেই। এ সময়ের স্বাভাবিক "
                               "আবহাওয়া ব্যবহার করা হচ্ছে।",
         "lv_section": "{date} থেকে শুরু হওয়া সপ্তাহের সম্ভাব্য ঝুঁকি",
-        "lv_section_sub": "পূর্বাভাস দেওয়া হয়েছে {date}, {h} সপ্তাহ আগে।",
+        "lv_section_sub": "{date} থেকে শুরু হওয়া সপ্তাহ পর্যন্ত আবহাওয়ার তথ্য ধরে {h} সপ্তাহের আগাম পূর্বাভাস।",
         "lv_m": "{tier} ঝুঁকির ওয়ার্ড",
         "lv_rain": "মডেলে ব্যবহৃত সাপ্তাহিক বৃষ্টিপাত", "lv_rain_sub": "প্রতিটি সিটি করপোরেশনের মাপা ও পূর্বাভাসিত বৃষ্টি",
         "lv_rain_hover": "{city}, {d} থেকে শুরু সপ্তাহ: {mm} মিমি",
