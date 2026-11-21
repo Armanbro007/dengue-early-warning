@@ -17,6 +17,7 @@ pages = st.navigation(
         "Live & validation": [
             st.Page("views/live_forecast.py", title="Live Forecast (API)", icon=":material/cloud:"),
             st.Page("views/accuracy.py", title="Model Accuracy", icon=":material/fact_check:"),
+            st.Page("views/data_update.py", title="Add Weekly Data", icon=":material/upload_file:"),
         ],
     }
 )

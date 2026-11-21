@@ -4,7 +4,8 @@ from streamlit.testing.v1 import AppTest
 
 from dengue import config
 
-PAGES = ["views/ward_detail.py", "views/heatmap.py", "views/accuracy.py", "views/live_forecast.py"]
+PAGES = ["views/ward_detail.py", "views/heatmap.py", "views/accuracy.py", "views/live_forecast.py",
+         "views/data_update.py"]
 
 
 @pytest.fixture(scope="module")
