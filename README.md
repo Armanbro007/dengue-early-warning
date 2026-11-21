@@ -6,6 +6,8 @@
 
 Built for the **EDU AI Engineering Hackathon 2026, Phase 1: "AI for Urban Dengue Outbreak"** by team **Vibe Engineers**.
 
+**Live demo: [denguewatchedu.streamlit.app](https://denguewatchedu.streamlit.app/)** (free hosting: if the app is asleep, press the wake-up button and give it about a minute).
+
 ![DengueWatch overview page](docs/screenshots/overview.png)
 
 **Two languages.** A switch at the top right shows the whole dashboard in **English or Bangla (বাংলা)**, including the officer briefing, chart labels, dates and numbers. The Bangla is written the way a city corporation health office would say it, not translated word for word. Your city, week and look-ahead settings stay the same when you switch.
