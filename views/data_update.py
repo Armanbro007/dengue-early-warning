@@ -2,63 +2,62 @@
 import pandas as pd
 import streamlit as st
 
+import ui_text as tx
 from dengue.data import has_updates, load_from_bytes
 from dengue.ingest import apply_update, check_update, reset_updates, retrain, template_csv
-from ui_common import get_engine, html, page_header, section
+from ui_common import card_head, get_engine, html, icon, page_header
 
 engine = get_engine()
+n = tx.num
 
-page_header(
-    "Add weekly data", "Keep the forecast up to date",
-    "Each week, a health office uploads the latest ward reports: cases and weather. DengueWatch checks the file, "
-    "adds it and re-learns in about 15 seconds. New rows are kept apart from the official dataset, so you can "
-    "always go back.",
-)
+page_header(tx.t("du_eyebrow"), tx.t("du_title"), tx.t("du_lead"))
 
 raw = engine.raw
-k = st.columns(3)
-k[0].metric("Wards", raw["ward_id"].nunique())
-k[1].metric("Latest week in the data", f"{raw['date'].max():%d %b %Y}")
-k[2].metric("Model has learned up to", pd.Timestamp(engine.bundle["train_end"]).strftime("%d %b %Y"))
-
-steps = [("1", "Download the template", "It has the right columns and the latest week as an example."),
-         ("2", "Fill in the new week", "One row per ward: cases, rain, humidity and temperature."),
-         ("3", "Upload, check and retrain", "Problems are listed before anything is changed.")]
-section("Three steps")
-html('<div class="dw-steps" style="grid-template-columns:repeat(3,1fr)">' + "".join(
-    f'<div class="dw-step"><div class="ic" style="font-family:var(--dw-serif);font-size:1.2rem">{n}</div>'
-    f'<div class="what">{what}</div><p>{text}</p></div>' for n, what, text in steps) + "</div>")
+with st.container(key="dark_data"):
+    k = st.columns(3)
+    k[0].metric(tx.t("du_m_wards"), n(raw["ward_id"].nunique()))
+    k[1].metric(tx.t("du_m_latest"), tx.date(raw["date"].max()))
+    k[2].metric(tx.t("du_m_trained"), tx.date(engine.bundle["train_end"]))
 st.write("")
 
-st.download_button("Download the template (CSV)", template_csv().encode(), file_name="weekly_update_template.csv",
-                   mime="text/csv", icon=":material/download:")
-up = st.file_uploader("Upload new weekly rows (CSV with the same columns as the official dataset)", type="csv")
-if up is not None:
-    try:
-        new = load_from_bytes(up.getvalue())
-        s = check_update(new)
-    except ValueError as exc:
-        st.error(f"This file can't be used: {exc}")
-        st.stop()
-    st.success(f"{s.rows} rows look good: {s.new_rows} new and {s.replaced_rows} that update existing values. "
-               f"Weeks {s.weeks[0]:%d %b %Y} to {s.weeks[1]:%d %b %Y}.")
-    for w in s.warnings:
-        st.warning(w)
-    st.dataframe(new.head(10), hide_index=True, width="stretch")
-    if st.button("Add these rows and retrain", type="primary"):
-        with st.spinner("Adding rows and retraining..."):
-            apply_update(new)
-            info = retrain()
-        st.cache_resource.clear()
-        st.cache_data.clear()
-        st.success(f"Done. The model has now learned up to {info['trained_through']} ({info['seconds']} s). "
-                   "Pick the new week under “Pretend today is” to see its forecast.")
+steps = [("download", 1, ""), ("note", 2, ""), ("upload", 3, " hl")]
+html(f'<div class="gc">{card_head(tx.t("du_steps"), tx.t("du_steps_sub"))}'
+     '<div class="steps" style="grid-template-columns:repeat(3,1fr)">' + "".join(
+         f'<div class="st{cls}"><div class="ic">{icon(ic, 20)}</div><div class="w">{tx.t("du_step", n=n(i))}</div>'
+         f'<div class="t">{tx.t(f"du_s{i}")}</div><p>{tx.t(f"du_s{i}_t")}</p></div>' for ic, i, cls in steps)
+     + "</div></div>")
+st.write("")
 
-if has_updates():
-    st.divider()
-    if st.button("Go back to the official dataset"):
-        reset_updates()
-        info = retrain()
-        st.cache_resource.clear()
-        st.cache_data.clear()
-        st.success(f"Uploaded rows removed. The model has learned up to {info['trained_through']}.")
+with st.container(key="glass_upload"):
+    st.download_button(tx.t("du_dl"), template_csv().encode(), file_name="weekly_update_template.csv",
+                       mime="text/csv", icon=":material/download:")
+    up = st.file_uploader(tx.t("du_up"), type="csv")
+    if up is not None:
+        try:
+            new = load_from_bytes(up.getvalue())
+            s = check_update(new)
+        except ValueError as exc:
+            st.error(tx.t("du_bad", e=exc))
+            st.stop()
+        st.success(tx.t("du_ok", rows=n(s.rows), new=n(s.new_rows), rep=n(s.replaced_rows),
+                        a=tx.date(s.weeks[0]), b=tx.date(s.weeks[1])))
+        for w in s.warnings:
+            st.warning(w)
+        st.dataframe(new.head(10), hide_index=True, width="stretch")
+        if st.button(tx.t("du_apply"), type="primary"):
+            with st.spinner(tx.t("du_spin")):
+                apply_update(new)
+                info = retrain()
+            st.cache_resource.clear()
+            st.cache_data.clear()
+            st.success(tx.t("du_done", d=tx.date(pd.Timestamp(info["trained_through"])), s=n(f"{info['seconds']}"),
+                            replay=tx.t("replay")))
+
+    if has_updates():
+        st.divider()
+        if st.button(tx.t("du_reset")):
+            reset_updates()
+            info = retrain()
+            st.cache_resource.clear()
+            st.cache_data.clear()
+            st.success(tx.t("du_reset_done", d=tx.date(pd.Timestamp(info["trained_through"]))))
