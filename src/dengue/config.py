@@ -52,11 +52,12 @@ INTERVAL = (0.10, 0.90)  # 80% prediction interval
 # Set from the training distribution: ~p70 / p80 / p93 of weekly ward cases.
 TIERS = ("Low", "Medium", "High", "Critical")
 TIER_MIN_CASES = {"Low": 0.0, "Medium": 2.0, "High": 5.0, "Critical": 10.0}
+# Status palette (always shown with the tier name, never colour alone)
 TIER_COLORS = {
-    "Low": "#2e9e6b",
-    "Medium": "#e0b020",
-    "High": "#ee7a2f",
-    "Critical": "#d43c3c",
+    "Low": "#0ca30c",
+    "Medium": "#fab219",
+    "High": "#ec835a",
+    "Critical": "#d03b3b",
 }
 
 # ---- Network / cost controls --------------------------------------------

@@ -1,8 +1,15 @@
 """Train, save, load and run the dengue forecasting models.
 
 One model per horizon (2, 3, 4 weeks ahead), each a HistGradientBoosting
-regressor with a Poisson loss (cases are non-negative counts, 58% zeros),
-plus two quantile models (10th / 90th percentile) for an 80% interval.
+regressor with a Poisson loss (cases are non-negative counts, 58% zeros).
+
+80% intervals use split-conformal calibration: we re-fit the model on earlier
+years, forecast the following year it never saw, and record how far off it was.
+The 10th/90th percentiles of those out-of-sample errors (per forecast-size bin)
+become the interval. Cheap, honest and needs no extra models at inference.
+(sklearn's quantile-loss boosting collapsed to 0 on this zero-heavy target,
+so we deliberately do not use it.)
+
 Models are serialized with joblib and loaded once, so inference is ~ms.
 """
 from __future__ import annotations
@@ -24,11 +31,10 @@ from .features import FEATURES, MONOTONIC, seasonal_reference
 log = logging.getLogger(__name__)
 
 
-def make_model(loss: str = "poisson", quantile: float | None = None) -> HistGradientBoostingRegressor:
-    kwargs = dict(config.MODEL_PARAMS, loss=loss, monotonic_cst={c: MONOTONIC.get(c, 0) for c in FEATURES})
-    if quantile is not None:
-        kwargs["quantile"] = quantile
-    return HistGradientBoostingRegressor(**kwargs)
+def make_model(loss: str = "poisson") -> HistGradientBoostingRegressor:
+    return HistGradientBoostingRegressor(
+        **config.MODEL_PARAMS, loss=loss, monotonic_cst={c: MONOTONIC.get(c, 0) for c in FEATURES}
+    )
 
 
 def training_rows(feat: pd.DataFrame, h: int, start=None, end=None) -> pd.DataFrame:
@@ -45,13 +51,40 @@ def training_rows(feat: pd.DataFrame, h: int, start=None, end=None) -> pd.DataFr
     return d[mask]
 
 
+INTERVAL_BIN_EDGES = (0.0, 0.5, 2.0, 5.0, 10.0, np.inf)
+CALIBRATION_YEARS = 3
+
+
+def _calibrate(train: pd.DataFrame, h: int) -> dict:
+    """Out-of-sample residual quantiles from the last few training years."""
+    tcol = f"target_h{h}"
+    target_year = (train["date"] + pd.Timedelta(weeks=h)).dt.year
+    years = sorted(target_year.unique())[-CALIBRATION_YEARS:]
+    preds, ys = [], []
+    for year in years:
+        fit_part, cal_part = train[target_year < year], train[target_year == year]
+        if fit_part.empty or cal_part.empty:
+            continue
+        m = make_model("poisson").fit(fit_part[FEATURES], fit_part[tcol])
+        preds.append(np.clip(m.predict(cal_part[FEATURES]), 0, None))
+        ys.append(cal_part[tcol].to_numpy())
+    pred, y = np.concatenate(preds), np.concatenate(ys)
+    resid = y - pred
+    bins = np.digitize(pred, INTERVAL_BIN_EDGES[1:-1])
+    lo_q, hi_q = config.INTERVAL
+    lo_off, hi_off = [], []
+    for b in range(len(INTERVAL_BIN_EDGES) - 1):
+        r = resid[bins == b] if (bins == b).sum() >= 30 else resid  # fall back to all residuals
+        lo_off.append(float(np.quantile(r, lo_q)))
+        hi_off.append(float(np.quantile(r, hi_q)))
+    return {"edges": INTERVAL_BIN_EDGES, "lo_off": lo_off, "hi_off": hi_off, "years": [int(y) for y in years]}
+
+
 def fit_horizon(train: pd.DataFrame, h: int, intervals: bool = True) -> dict:
     X, y = train[FEATURES], train[f"target_h{h}"]
     models = {"mean": make_model("poisson").fit(X, y)}
     if intervals:
-        lo_q, hi_q = config.INTERVAL
-        models["lo"] = make_model("quantile", lo_q).fit(X, y)
-        models["hi"] = make_model("quantile", hi_q).fit(X, y)
+        models["interval"] = _calibrate(train, h)
     return models
 
 
@@ -74,10 +107,14 @@ def train_bundle(feat: pd.DataFrame, end_date: str, data_hash: str = "", horizon
 def predict(bundle: dict, X: pd.DataFrame, h: int) -> pd.DataFrame:
     """Point forecast + 80% interval. Quantile lines are sorted so lo <= pred <= hi."""
     m = bundle["models"][h]
-    Xf = X[bundle["features"]]
-    pred = np.clip(m["mean"].predict(Xf), 0, None)
-    lo = np.clip(m["lo"].predict(Xf), 0, None) if "lo" in m else pred
-    hi = np.clip(m["hi"].predict(Xf), 0, None) if "hi" in m else pred
+    pred = np.clip(m["mean"].predict(X[bundle["features"]]), 0, None)
+    if "interval" in m:
+        cal = m["interval"]
+        b = np.digitize(pred, cal["edges"][1:-1])
+        lo = np.clip(pred + np.take(cal["lo_off"], b), 0, None)
+        hi = pred + np.take(cal["hi_off"], b)
+    else:
+        lo = hi = pred
     lo, hi = np.minimum(lo, pred), np.maximum(hi, pred)
     return pd.DataFrame({"pred": pred, "lo": lo, "hi": hi}, index=X.index)
 
