@@ -5,76 +5,74 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
+import ui_text as tx
 from dengue import config
 from dengue.config import TIERS
 from dengue.tiers import tier_index
-from ui_common import ACCENT, INK, MUTED, get_engine, html, page_header, section, style_fig
+from ui_common import INK, MUTED, TIER_COLORS, card_head, get_engine, html, page_header, style_fig
 
 engine = get_engine()
 c = st.session_state["controls"]
 h = c["horizon"]
+n = tx.num
+pc = lambda v: n(f"{v:.0%}")  # noqa: E731
 m = json.loads(config.METRICS_PATH.read_text())
 t = m["test"][str(h)]
 bt = pd.DataFrame(m["backtest"])
 btd = bt[bt["horizon"] == h] if not bt.empty else bt
 
-page_header(
-    "How accurate is it?", "Tested on two years it had never seen",
-    f"DengueWatch learned from 2016–2023. It was then scored once on <b>2024 and 2025</b>, using only the data "
-    f"that would have been available each week. Nothing was shuffled, so it could never peek at the future. "
-    f"Numbers below are for forecasts <b>{h} weeks ahead</b>.",
-)
+page_header(tx.t("ac_eyebrow"), tx.t("ac_title"), tx.t("ac_lead", h=n(h)))
 
 s_m, s_p = t["model_in_season"]["mae"], t["persistence_in_season"]["mae"]
 wins = int((btd["mae"] < btd["persistence_mae"]).sum()) if not btd.empty else 0
+yr = lambda v: n(int(v), "{}") if len(btd) else "–"  # noqa: E731
 cards = [
-    (f"{s_m:.1f}", "cases per ward per week",
-     f"Average miss in the monsoon season (June–October). A simple “same as this week” guess misses by {s_p:.1f}, "
-     f"so DengueWatch is {(1 - s_m / s_p) * 100:.0f}% closer."),
-    (f"{t['model']['high_critical_recall']:.0%}", "of high-risk weeks caught",
-     "Of all the ward-weeks that really turned high or critical, this share was flagged in advance."),
-    (f"{t['model']['interval_coverage']:.0%}", "inside the likely range",
-     "How often the real count landed inside the range we show. We aim for 80%, so the ranges are honest."),
-    (f"{wins} of {len(btd)}", "years beaten",
-     f"Re-trained each year from {int(btd['year'].min()) if len(btd) else '–'} to {int(btd['year'].max()) if len(btd) else '–'} "
-     "on earlier years only, it beat the simple guess every time." if wins == len(btd) else
-     "Years in which it beat the simple guess, re-trained each year on earlier years only."),
+    (n(s_m, "{:.1f}"), tx.t("ac_c1_label"),
+     tx.t("ac_c1_text", p=n(s_p, "{:.1f}"), pct=n((1 - s_m / s_p) * 100))),
+    (pc(t["model"]["high_critical_recall"]), tx.t("ac_c2_label"), tx.t("ac_c2_text")),
+    (pc(t["model"]["interval_coverage"]), tx.t("ac_c3_label"), tx.t("ac_c3_text")),
+    (tx.t("ac_c4_big", w=n(wins), n=n(len(btd))), tx.t("ac_c4_label"),
+     tx.t("ac_c4_all", a=yr(btd["year"].min()), b=yr(btd["year"].max())) if wins == len(btd) else tx.t("ac_c4_some")),
 ]
 html('<div class="dw-grid">' + "".join(
-    f'<div class="dw-card"><div class="dw-big">{big}</div><div style="font-weight:600;margin:4px 0 8px">{label}</div>'
-    f'<div class="dw-meta" style="line-height:1.5">{text}</div></div>' for big, label, text in cards) + "</div>")
+    f'<div class="{"dk" if i == 0 else "gc"}"><div class="dw-big">{big}</div>'
+    f'<div style="font-weight:600;margin:4px 0 8px">{label}</div>'
+    f'<div class="dw-meta" style="line-height:1.5">{text}</div></div>' for i, (big, label, text) in enumerate(cards))
+     + "</div>")
+st.write("")
 
-a, b = st.columns(2, gap="large")
-with a:
-    section("Better than a simple guess, every year", "Average miss per ward per week. Lower is better.")
+a, b = st.columns(2, gap="small")
+with a, st.container(key="glass_bt"):
+    html(card_head(tx.t("ac_bt"), tx.t("ac_bt_sub"), "bars"))
     if not btd.empty:
         fig = go.Figure()
-        fig.add_bar(x=btd["year"], y=btd["mae"], name="DengueWatch", marker_color=ACCENT, marker_line_width=0,
-                    hovertemplate="%{x}: misses by %{y:.2f} cases<extra>DengueWatch</extra>")
-        fig.add_bar(x=btd["year"], y=btd["persistence_mae"], name="Simple guess (same as this week)",
-                    marker_color="#CFCAC0", marker_line_width=0,
-                    hovertemplate="%{x}: misses by %{y:.2f} cases<extra>Simple guess</extra>")
+        for col, name, color in (("mae", "DengueWatch", INK), ("persistence_mae", tx.t("ac_simple"), "#C9CCD4")):
+            fig.add_bar(x=btd["year"], y=btd[col], name=name, marker_color=color, marker_line_width=0,
+                        customdata=[tx.t("ac_bt_hover", y=n(y, "{}"), v=n(v, "{:.2f}")) for y, v in zip(btd["year"], btd[col])],
+                        hovertemplate="%{customdata}<extra>" + name + "</extra>")
         fig.update_layout(barmode="group", bargap=0.35, bargroupgap=0.08, barcornerradius=4,
-                          yaxis_title="Average miss (cases)", xaxis=dict(dtick=1))
-        st.plotly_chart(style_fig(fig, height=340), width="stretch")
+                          yaxis_title=tx.t("ac_miss_axis"))
+        fig.update_xaxes(tickvals=list(btd["year"]), ticktext=[n(y, "{}") for y in btd["year"]])
+        st.plotly_chart(style_fig(fig, height=330), width="stretch", config={"displayModeBar": False})
 
-with b:
-    section("Why three weeks?", "How closely cases follow the weather of earlier weeks.")
+with b, st.container(key="glass_lag"):
+    html(card_head(tx.t("ac_lag"), tx.t("ac_lag_sub"), "clock"))
     lc = pd.DataFrame(m["lag_correlations"])
     fig = go.Figure()
-    for var, color in [("Rainfall", "#2a78d6"), ("Temperature", "#eb6834"), ("Humidity", "#1baf7a")]:
+    for var, color in [("Rainfall", INK), ("Temperature", TIER_COLORS["High"]), ("Humidity", TIER_COLORS["Low"])]:
         d = lc[lc["variable"] == var]
-        fig.add_scatter(x=d["lag_weeks"], y=d["correlation"], name=var, mode="lines+markers",
+        name = tx.t(f"var_{var}")
+        fig.add_scatter(x=d["lag_weeks"], y=d["correlation"], name=name, mode="lines+markers",
                         line=dict(color=color, width=2), marker=dict(size=8, line=dict(color="white", width=2)),
-                        hovertemplate=f"{var}, %{{x}} weeks earlier: r = %{{y:.2f}}<extra></extra>")
+                        customdata=[f"{name}, {n(x)}: r = {n(y, '{:.2f}')}" for x, y in zip(d["lag_weeks"], d["correlation"])],
+                        hovertemplate="%{customdata}<extra></extra>")
     best = lc[lc["variable"] == "Rainfall"].sort_values("correlation").iloc[-1]
-    fig.add_annotation(x=best["lag_weeks"], y=best["correlation"], text=f"rain peaks at {int(best['lag_weeks'])} weeks",
+    fig.add_annotation(x=best["lag_weeks"], y=best["correlation"], text=tx.t("ac_peak", n=n(int(best["lag_weeks"]))),
                        showarrow=True, arrowcolor=MUTED, arrowwidth=1, ay=-34, font=dict(color=INK, size=12))
-    fig.update_layout(xaxis_title="Weeks between the weather and the cases", yaxis_title="Correlation")
-    st.plotly_chart(style_fig(fig, height=340), width="stretch")
+    fig.update_layout(xaxis_title=tx.t("ac_lag_x"), yaxis_title=tx.t("ac_lag_y"))
+    st.plotly_chart(style_fig(fig, height=330), width="stretch", config={"displayModeBar": False})
 
-st.caption("Rain lines up with dengue cases best about 3 weeks later: the time for water to breed mosquitoes, "
-           "plus infection and symptoms. That is why the default forecast looks 3 weeks ahead.")
+st.caption(tx.t("ac_lag_cap"))
 
 
 # ---- Full detail -----------------------------------------------------------------------
@@ -84,43 +82,44 @@ def test_preds(h: int) -> pd.DataFrame:
     return pd.concat([e.season_grid(y, h) for y in (2024, 2025)], ignore_index=True).dropna(subset=["actual"])
 
 
-with st.expander("Technical details: error metrics, baselines and the tier confusion matrix"):
+with st.expander(tx.t("ac_tech")):
     rows = []
     for hh in config.HORIZONS:
         tt = m["test"][str(hh)]
-        for name, key in [("DengueWatch", "model"), ("Naive: same as this week", "persistence"),
-                          ("Naive: same week last year", "last_year")]:
-            rows.append({"Horizon": f"{hh} weeks", "Method": name, "MAE Jun–Oct": tt[f"{key}_in_season"]["mae"],
-                         "MAE all weeks": tt[key]["mae"], "RMSE": tt[key]["rmse"],
-                         "Tier accuracy": tt[key]["tier_accuracy"], "High/Critical recall": tt[key]["high_critical_recall"]})
-    st.markdown("**Test set 2024–2025 against simple baselines** (MAE and RMSE in cases per ward per week)")
+        for key in ("model", "persistence", "last_year"):
+            name = tx.t({"model": "ac_m_model", "persistence": "ac_m_persist", "last_year": "ac_m_last"}[key])
+            rows.append({tx.t("ac_col_h"): tx.t("ac_weeks", h=n(hh)), tx.t("ac_col_m"): name,
+                         tx.t("ac_col_mae_s"): tt[f"{key}_in_season"]["mae"], tx.t("ac_col_mae"): tt[key]["mae"],
+                         tx.t("ac_col_rmse"): tt[key]["rmse"], tx.t("ac_col_tacc"): tt[key]["tier_accuracy"],
+                         tx.t("ac_col_rec"): tt[key]["high_critical_recall"]})
+    st.markdown(tx.t("ac_table"))
+    two = lambda v: n(v, "{:.2f}")  # noqa: E731
     st.dataframe(pd.DataFrame(rows).style.format(
-        {"MAE Jun–Oct": "{:.2f}", "MAE all weeks": "{:.2f}", "RMSE": "{:.2f}", "Tier accuracy": "{:.0%}",
-         "High/Critical recall": "{:.0%}"}, na_rep="–"), hide_index=True, width="stretch")
+        {tx.t("ac_col_mae_s"): two, tx.t("ac_col_mae"): two, tx.t("ac_col_rmse"): two,
+         tx.t("ac_col_tacc"): pc, tx.t("ac_col_rec"): pc}, na_rep="–"), hide_index=True, width="stretch")
 
     tp = test_preds(h)
     a, b = st.columns(2, gap="large")
     with a:
         fig = go.Figure()
-        fig.add_scatter(x=tp["actual"], y=tp["pred"], mode="markers", marker=dict(size=5, color=ACCENT, opacity=0.3),
-                        name="ward-week", hovertemplate="real %{x:.0f} · forecast %{y:.1f}<extra></extra>")
+        fig.add_scatter(x=tp["actual"], y=tp["pred"], mode="markers", marker=dict(size=5, color=INK, opacity=0.25),
+                        name="ward-week", hovertemplate="%{x:.0f} · %{y:.1f}<extra></extra>")
         mx = float(max(tp["actual"].max(), tp["pred"].max()))
         fig.add_scatter(x=[0, mx], y=[0, mx], mode="lines", line=dict(color=MUTED, dash="dot", width=1), name="perfect")
-        fig.update_layout(title="Forecast against real cases, 2024–2025", xaxis_title="Real cases", yaxis_title="Forecast cases")
+        fig.update_layout(title=tx.t("ac_scatter"), xaxis_title=tx.t("ac_real"), yaxis_title=tx.t("ac_fc"))
         st.plotly_chart(style_fig(fig, height=380, legend=False), width="stretch")
     with b:
         yt, pt = tier_index(tp["actual"]), tier_index(tp["pred"])
         cm = pd.crosstab(pd.Categorical(yt, categories=range(4)), pd.Categorical(pt, categories=range(4)), dropna=False).values
         share = cm / cm.sum(axis=1, keepdims=True).clip(min=1)
+        labels = [tx.tier(x) for x in TIERS]
         fig = go.Figure(go.Heatmap(
-            z=share, x=list(TIERS), y=list(TIERS), colorscale=[[0, "#FFFFFF"], [1, ACCENT]], zmin=0, zmax=1,
-            text=cm, texttemplate="%{text}", xgap=2, ygap=2, showscale=False,
-            hovertemplate="Real %{y}, forecast %{x}: %{text} ward-weeks (%{z:.0%} of row)<extra></extra>",
+            z=share, x=labels, y=labels, colorscale=[[0, "#FFFFFF"], [1, INK]], zmin=0, zmax=1,
+            text=[[n(v) for v in r] for r in cm], texttemplate="%{text}", xgap=2, ygap=2, showscale=False,
+            hovertemplate="%{y} → %{x}: %{text}<extra></extra>",
         ))
-        fig.update_layout(title="Risk level: real (rows) vs forecast (columns)", xaxis_title="Forecast level",
-                          yaxis_title="Real level")
+        fig.update_layout(title=tx.t("ac_cm"), xaxis_title=tx.t("ac_cm_x"), yaxis_title=tx.t("ac_cm_y"))
         fig.update_yaxes(autorange="reversed")
         st.plotly_chart(style_fig(fig, height=380, legend=False), width="stretch")
-    st.caption(f"Speed: shipped models train in {m['timing']['train_shipped_seconds']} s on a laptop CPU; all 60 wards "
-               f"are scored in {m['timing']['inference_ms_all_wards']} ms; the model file is "
-               f"{m['timing']['model_file_kb']:.0f} KB.")
+    st.caption(tx.t("ac_speed", t=n(f"{m['timing']['train_shipped_seconds']}"),
+                    ms=n(f"{m['timing']['inference_ms_all_wards']}"), kb=n(m["timing"]["model_file_kb"])))
