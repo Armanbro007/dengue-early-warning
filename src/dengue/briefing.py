@@ -33,12 +33,13 @@ ACTIONS = {
 
 def build_facts(fc: pd.DataFrame, as_of, h: int, city: str | None) -> dict:
     """Compact, model-derived facts. This is the ONLY thing the LLM ever sees."""
-    top = fc[fc["tier"].isin(["Critical", "High"]) | fc["critical_watch"]].head(MAX_WARDS)
+    top = fc[fc["tier"].isin(["Critical", "High"])].head(MAX_WARDS)
     return {
         "area": city or "All cities",
         "issued_week": str(pd.Timestamp(as_of).date()),
         "target_week": str((pd.Timestamp(as_of) + pd.Timedelta(weeks=h)).date()),
         "counts": {t: int((fc["tier"] == t).sum()) for t in config.TIERS},
+        "escalating": int(fc["escalating"].sum()),
         "wards": [
             {
                 "ward": r.ward_id,
@@ -68,15 +69,17 @@ def template_briefing(facts: dict) -> str:
         if not wards:
             continue
         names = ", ".join(f"{w['ward']} (~{w['cases']:.0f})" for w in wards)
+        if c[tier] > len(wards):
+            names += f" and {c[tier] - len(wards)} more"
         lines.append(f"- **{tier}:** {names}. **Action:** {ACTIONS[tier]}.")
-    watch = [w for w in facts["wards"] if w["tier"] not in ("Critical", "High")]
-    if watch:
-        lines.append("- **Watch:** " + ", ".join(w["ward"] for w in watch) + " (upper forecast range reaches Critical).")
+    if facts.get("escalating"):
+        lines.append(f"- **Early warning:** {facts['escalating']} wards are Low/Medium today but forecast High or "
+                     "Critical. Acting there now is cheaper than responding after admissions rise.")
     top = facts["wards"][0]
     if top["normal_mm"] > 0:
         pct = (top["breeding_rain_mm"] / top["normal_mm"] - 1) * 100
         lines.append(
-            f"- **Why:** {top['ward']} had {top['breeding_rain_mm']} mm of rain 1-3 weeks ago "
+            f"- **Why:** {top['ward']} had {top['breeding_rain_mm']} mm of rain in the last 3 weeks "
             f"({pct:+.0f}% vs normal for this time of year); main driver: {top['driver'].lower()}."
         )
     return "\n".join(lines)

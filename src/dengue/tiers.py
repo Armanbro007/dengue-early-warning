@@ -19,14 +19,20 @@ def tier_of(cases) -> np.ndarray:
 
 
 def add_tiers(df: pd.DataFrame) -> pd.DataFrame:
-    """Adds tier + an early 'could reach Critical' flag from the interval's upper bound.
+    """Adds the tier plus two early-warning flags.
 
-    Officers would rather check a false alarm than miss an outbreak, so a ward whose
-    90th-percentile forecast crosses the Critical line is flagged even if its
-    central forecast is lower.
+    * near_critical: High, and the forecast is within 25% of the Critical line.
+    * escalating: the ward is Low/Medium *now* (this week's reported cases) but is
+      forecast High/Critical, i.e. exactly the wards where acting early pays off.
     """
     df = df.copy()
     df["tier"] = tier_of(df["pred"])
     df["tier_rank"] = tier_index(df["pred"])
-    df["critical_watch"] = (df["hi"] >= TIER_MIN_CASES["Critical"]) & (df["tier"] != "Critical")
+    df["near_critical"] = (df["tier"] == "High") & (df["pred"] >= 0.75 * TIER_MIN_CASES["Critical"])
+    if "cases_now" in df:
+        now_rank = pd.Series(tier_index(df["cases_now"].fillna(0)), index=df.index)
+        df["tier_now"] = np.where(df["cases_now"].notna(), tier_of(df["cases_now"].fillna(0)), None)
+        df["escalating"] = df["cases_now"].notna() & (now_rank <= 1) & (df["tier_rank"] >= 2)
+    else:
+        df["tier_now"], df["escalating"] = None, False
     return df

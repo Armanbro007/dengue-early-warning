@@ -46,7 +46,7 @@ class Engine:
     def forecast_weeks(self) -> list[pd.Timestamp]:
         """As-of weeks that have the full 6-week lag history."""
         ok = self.feat.dropna(subset=FEATURES)
-        return sorted(ok["date"].unique())
+        return [pd.Timestamp(d) for d in sorted(ok["date"].unique())]
 
     @property
     def train_end(self) -> pd.Timestamp:
@@ -67,6 +67,7 @@ class Engine:
         e = explain(self.bundle, X, h)
         out = rows[["date", "city", "ward_id", *STATIC_COLS]].join(p).join(e.drop(columns="prediction"))
         out["target_week"] = out["date"] + pd.Timedelta(weeks=h)
+        out["cases_now"] = rows[TARGET]
         tcol = f"target_h{h}"
         out["actual"] = rows[tcol] if tcol in rows else np.nan
         return add_tiers(out).sort_values("pred", ascending=False).reset_index(drop=True)

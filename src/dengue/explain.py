@@ -63,8 +63,9 @@ def explain(bundle: dict, X: pd.DataFrame, h: int) -> pd.DataFrame:
     top = out[DRIVER_GROUPS]
     out["main_driver"] = top.idxmax(axis=1).where(top.max(axis=1) > 0.25, "Seasonal norm")
 
-    # Plain-language evidence for the rainfall driver (breeding window = 1-3 weeks back)
-    window = ["rain_lag_1", "rain_lag_2", "rain_lag_3"]
+    # Plain-language evidence for the rainfall driver: rain in the last 3 weeks is what
+    # breeds the mosquitoes behind cases 2-4 weeks from now.
+    window = ["rain_lag_0", "rain_lag_1", "rain_lag_2"]
     out["breeding_rain_mm"] = X[window].sum(axis=1)
     out["breeding_rain_normal_mm"] = ref[window].sum(axis=1)
     return out
