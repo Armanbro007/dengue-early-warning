@@ -18,8 +18,9 @@ def app():
 
 def test_overview_answers_the_main_question(app):
     assert not app.exception, [e.value for e in app.exception]
-    # The default replay week (2 Jun 2025) gives a headline answer, not a generic title.
-    assert "wards are likely to reach high dengue risk" in app.title[0].value
+    assert app.title[0].value == "Dengue outlook for 23 June"  # default replay week: 2 Jun 2025, 3 weeks ahead
+    page = " ".join(m.value for m in app.markdown)
+    assert "wards likely to reach high dengue risk" in page
 
 
 def test_ward_priorities_metrics(app):
