@@ -29,8 +29,8 @@ MAX_WARDS = 5
 # names come from the model; only these phrases are translated.
 TEXT = {
     "en": {
-        "header": "**{area}, forecast for week of {week}:** {Critical} Critical, {High} High, {Medium} Medium, {Low} Low wards.",
-        "quiet": "No ward is forecast above Medium. Keep routine surveillance and drain clearing.",
+        "header": "**{area}, week of {week}:** {Critical} critical, {High} high, {Medium} medium and {Low} low-risk wards.",
+        "quiet": "No ward is expected to go above medium risk. Keep up routine checks and drain clearing.",
         "more": " and {n} more",
         "tier_line": "- **{tier}:** {names}. **Action:** {action}.",
         "tiers": {"Critical": "Critical", "High": "High"},
@@ -38,11 +38,17 @@ TEXT = {
             "Critical": "deploy larvicide + fogging teams this week, alert nearby hospitals to stock saline and NS1 kits",
             "High": "schedule source-reduction drives (drains, containers) and community warnings",
         },
-        "early": "- **Early warning:** {n} wards are Low/Medium today but forecast High or Critical. "
-                 "Acting there now is cheaper than responding after admissions rise.",
-        "why": "- **Why:** {ward} had {mm} mm of rain in the last 3 weeks ({pct:+.0f}% vs normal for this "
-               "time of year); main driver: {driver}.",
-        "drivers": {},
+        "early": "- **Early warning:** {n} wards are low or medium risk today but are expected to reach high or critical. "
+                 "Acting there now costs less than responding after hospital admissions rise.",
+        "why": "- **Why:** {ward} had {mm} mm of rain in the last 3 weeks ({pct:+.0f}% compared with normal for this "
+               "time of year). Main reason: {driver}.",
+        "drivers": {
+            "Rainfall (0-6 wks ago)": "recent rain",
+            "Humidity": "humidity",
+            "Temperature": "temperature",
+            "Ward vulnerability": "poor drainage, crowding and sanitation",
+            "Seasonal norm": "the normal pattern for this season",
+        },
     },
     "bn": {
         "header": "**{area}, {week} সপ্তাহের পূর্বাভাস:** {Critical}টি ওয়ার্ড সংকটজনক, {High}টি উচ্চ, "
@@ -82,7 +88,7 @@ def build_facts(fc: pd.DataFrame, as_of, h: int, city: str | None) -> dict:
         "escalating": int(fc["escalating"].sum()),
         "wards": [
             {
-                "ward": r.ward_id,
+                "ward": r.ward_id.replace("_", " "),
                 "tier": r.tier,
                 "cases": round(float(r.pred), 1),
                 "range": [round(float(r.lo), 1), round(float(r.hi), 1)],
@@ -98,7 +104,8 @@ def build_facts(fc: pd.DataFrame, as_of, h: int, city: str | None) -> dict:
 def template_briefing(facts: dict, lang: str = "en") -> str:
     t = TEXT[lang]
     c = facts["counts"]
-    lines = [t["header"].format(area=facts["area"], week=facts["target_week"], **c)]
+    week = pd.Timestamp(facts["target_week"]).strftime("%d %b %Y").lstrip("0")
+    lines = [t["header"].format(area=facts["area"], week=week, **c)]
     if not facts["wards"]:
         lines.append(t["quiet"])
         return "\n\n".join(lines)

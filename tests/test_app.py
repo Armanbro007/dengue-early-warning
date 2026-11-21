@@ -4,8 +4,8 @@ from streamlit.testing.v1 import AppTest
 
 from dengue import config
 
-PAGES = ["views/ward_detail.py", "views/heatmap.py", "views/accuracy.py", "views/live_forecast.py",
-         "views/data_update.py"]
+PAGES = ["views/risk_board.py", "views/ward_detail.py", "views/heatmap.py", "views/accuracy.py",
+         "views/live_forecast.py", "views/data_update.py"]
 
 
 @pytest.fixture(scope="module")
@@ -16,10 +16,17 @@ def app():
     config.ALLOW_NETWORK = True
 
 
-def test_risk_board_renders(app):
+def test_overview_answers_the_main_question(app):
     assert not app.exception, [e.value for e in app.exception]
-    assert app.title[0].value == "Ward Risk Board"
-    assert [m.label for m in app.metric][:2] == ["Critical wards", "High wards"]
+    # The default replay week (2 Jun 2025) gives a headline answer, not a generic title.
+    assert "wards are likely to reach high dengue risk" in app.title[0].value
+
+
+def test_ward_priorities_metrics(app):
+    app.switch_page("views/risk_board.py").run()
+    assert not app.exception, [e.value for e in app.exception]
+    assert app.title[0].value == "Which wards need help first"
+    assert [m.label for m in app.metric][:2] == ["Critical wards", "High-risk wards"]
 
 
 @pytest.mark.parametrize("page", PAGES)
