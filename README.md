@@ -27,7 +27,8 @@ Optional:
 ```bash
 cp .env.example .env        # (Windows: copy .env.example .env) then add GEMINI_API_KEY for AI-worded briefings
 python scripts/train.py     # rebuild features, evaluation (metrics.json) and models (~35 s)
-python -m pytest            # 10 tests: lag correctness, no leakage, explanation maths, tiers
+python -m pytest            # 32 tests: lag correctness, no leakage, explanations, retries/fallbacks, every page loads
+python scripts/ingest.py new_weeks.csv   # add new weekly data and retrain (--reset to undo)
 ```
 
 Set `ALLOW_NETWORK=0` in `.env` to run fully offline.
@@ -36,11 +37,12 @@ Set `ALLOW_NETWORK=0` in `.env` to run fully offline.
 
 | Page | What an officer gets |
 |---|---|
-| **Ward Risk Board** | Pick city, week and horizon. All wards are ranked by forecast cases with 80% ranges and tiers. **Escalating** wards (Low/Medium today, High+ soon) are flagged. Includes an action briefing and a CSV export. |
+| **Ward Risk Board** | Pick city, week and horizon. All wards are ranked by forecast cases with 80% ranges and tiers. **Escalating** wards (Low/Medium today, High+ soon) are flagged. Includes an action briefing in **English or Bangla** and a CSV export. |
 | **Ward Drivers & What-if** | A waterfall showing how rainfall, humidity, temperature and ward vulnerability push the forecast above or below the seasonal norm; the "breeding clock" rain chart; a rain what-if slider; forecast-vs-actual track record. |
 | **Season Heatmap** | Every ward × every week of a season, coloured by forecast tier (or actual tier, or forecast error). |
 | **Live Forecast (API)** | The same model fed with this week's real and forecast weather from Open-Meteo: one API call for all cities, cached, with offline fallbacks. |
 | **Model Accuracy** | Chronological test results vs naive baselines, year-by-year backtest, lag-correlation evidence, tier confusion matrix. |
+| **Add Weekly Data** | Upload the latest ward reports (CSV). The file is checked, merged and the models retrain in about 15 s. Reset any time. |
 
 The dashboard opens on **2 June 2025**, a week the model never saw during training. 56 of the 60 wards were still Low that week. The system flagged 46 wards as High for 23 June, and 52 of the 60 wards actually reached High or Critical.
 
@@ -74,11 +76,13 @@ src/dengue/
   engine.py             prediction engine used by the UI (and a future API)
   explain.py            Shapley driver breakdown, rain what-if
   tiers.py              risk tiers + escalation flags
-  briefing.py           officer briefing: template or optional cached LLM
+  briefing.py           officer briefing (English/Bangla): template or optional cached LLM
+  ingest.py             add new weekly data, retrain, reset
   weather_api.py        Open-Meteo client with cache and fallbacks
   http.py               retries, backoff, Retry-After, circuit breaker
 scripts/train.py        rebuild models + models/metrics.json
-tests/                  pytest suite
+scripts/ingest.py       add new weekly data from the command line
+tests/                  pytest suite (also run by GitHub Actions on Linux and Windows)
 data/                   official hackathon dataset (60 wards × 522 weeks)
 models/                 trained model bundle + evaluation metrics
 ```

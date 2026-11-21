@@ -84,9 +84,10 @@ All external calls go through `src/dengue/http.py`:
 - a **circuit breaker**: after 3 consecutive failures, the service is skipped for 10 minutes instead of hammering it;
 - graceful fallbacks: weather goes from fresh cache to stale cache to climatology (each city's median weather for that week of the year), and the briefing falls back to the template. The UI shows which source was used instead of crashing;
 - `ALLOW_NETWORK=0` runs fully offline. The core dashboard needs no network or API keys at all.
+- These paths are tested (`tests/test_resilience.py`) with a fake HTTP session: 429 + `Retry-After`, growing backoff, no retry on 4xx, breaker opening, stale-cache and climatology fallbacks, LLM failure, cache hits and the daily budget. GitHub Actions runs the whole suite on Linux and Windows on every push.
 
 ## 7. Scaling to a live system (Phase 2)
 
-- New weekly data: append rows to the CSV (or upload) → `python scripts/train.py` (≈ 35 s) → the app picks up the new bundle via the data hash.
+- New weekly data: upload on the **Add Weekly Data** page or run `python scripts/ingest.py new_weeks.csv`. Rows are validated and stored in `data/updates.csv` (never overwriting the official file), then the models retrain on all data in about 15 s and the app reloads via the data hash. `--reset` restores the official dataset.
 - New wards: the model uses ward attributes, so new wards work without retraining the architecture.
 - New consumers: `Engine` in `src/dengue/engine.py` is UI-independent and can be wrapped in a REST endpoint or a weekly batch job that emails the priority list.
