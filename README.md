@@ -17,7 +17,7 @@ Built for the **EDU AI Engineering Hackathon 2026, Phase 1: "AI for Urban Dengue
 
 ## Quick start (about 2 minutes)
 
-Requires **Python 3.10 - 3.14** and git. No API keys needed. These exact steps run on fresh Windows, macOS and Linux machines on every push (see the *readme quick start* badge above).
+Requires **Python 3.10 or newer** (checked on 3.11 to 3.15) and git. No API keys needed. These exact steps run on fresh Windows, macOS and Linux machines on every push (see the *readme quick start* badge above).
 
 ```bash
 git clone https://github.com/Armanbro007/dengue-early-warning.git
