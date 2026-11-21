@@ -1,0 +1,82 @@
+# Follows the README "Quick start" word for word on fresh Windows, macOS and Linux machines:
+# the Python already installed on the machine (no setup-python), no pip cache, the exact commands,
+# then checks that the app answers on http://localhost:8501 and that every page renders.
+name: readme quick start
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: dengue-early-warning
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: dengue-early-warning
+      - name: Python on this machine
+        run: py --version
+      - name: "README step 1: py -m venv .venv"
+        run: py -m venv .venv
+      - name: "README step 2: install"
+        run: .venv\Scripts\python -m pip install -r requirements.txt
+      - name: "README step 3: start, then open http://localhost:8501"
+        run: |
+          Start-Process .venv\Scripts\python -ArgumentList "-m", "streamlit", "run", "app.py" `
+            -RedirectStandardOutput app.log -RedirectStandardError app.err
+          $ok = $false
+          for ($i = 1; $i -le 90; $i++) {
+            try {
+              if ((Invoke-WebRequest http://localhost:8501/_stcore/health -UseBasicParsing).Content -eq "ok") { $ok = $true; break }
+            } catch {}
+            Start-Sleep 1
+          }
+          Get-Content app.log
+          if (-not $ok) { Get-Content app.err; exit 1 }
+          "App answered on http://localhost:8501 after $i s"
+      - name: Every page renders, in English and Bangla
+        env:
+          ALLOW_NETWORK: "0"
+        run: .venv\Scripts\python -m pytest -q
+
+  mac-linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: dengue-early-warning
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: dengue-early-warning
+      - name: Python on this machine
+        run: python3 --version
+      - name: "README step 1: python3 -m venv .venv"
+        run: python3 -m venv .venv
+      - name: "README step 2: install"
+        run: .venv/bin/python -m pip install -r requirements.txt
+      - name: "README step 3: start, then open http://localhost:8501"
+        run: |
+          .venv/bin/python -m streamlit run app.py > app.log 2>&1 &
+          for i in $(seq 1 90); do
+            if [ "$(curl -s http://localhost:8501/_stcore/health)" = "ok" ]; then
+              cat app.log; echo "App answered on http://localhost:8501 after $i s"; exit 0
+            fi
+            sleep 1
+          done
+          cat app.log; exit 1
+      - name: Every page renders, in English and Bangla
+        env:
+          ALLOW_NETWORK: "0"
+        run: .venv/bin/python -m pytest -q

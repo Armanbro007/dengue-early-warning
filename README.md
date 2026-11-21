@@ -1,6 +1,7 @@
 # DengueWatch: Ward-level Dengue Early Warning
 
 [![tests](https://github.com/Armanbro007/dengue-early-warning/actions/workflows/tests.yml/badge.svg)](https://github.com/Armanbro007/dengue-early-warning/actions/workflows/tests.yml)
+[![readme quick start](https://github.com/Armanbro007/dengue-early-warning/actions/workflows/quickstart.yml/badge.svg)](https://github.com/Armanbro007/dengue-early-warning/actions/workflows/quickstart.yml)
 
 **Rain today shows up as dengue cases in about three weeks.** DengueWatch uses that lag to forecast dengue cases for every ward in Dhaka North, Dhaka South, Chattogram, Gazipur and Narayanganj **2, 3 and 4 weeks ahead**. It ranks wards as Low / Medium / High / Critical, explains *why* each ward is at risk, and drafts an action briefing. City health officers can then send larvicide teams and hospital supplies to the right wards *before* admissions spike.
 
@@ -16,26 +17,28 @@ Built for the **EDU AI Engineering Hackathon 2026, Phase 1: "AI for Urban Dengue
 
 ## Quick start (about 2 minutes)
 
-Requires **Python 3.10 - 3.14** and git. No API keys needed. Tested on every push on Linux and Windows (see the *tests* badge above).
+Requires **Python 3.10 - 3.14** and git. No API keys needed. These exact steps run on fresh Windows, macOS and Linux machines on every push (see the *readme quick start* badge above).
 
 ```bash
 git clone https://github.com/Armanbro007/dengue-early-warning.git
 cd dengue-early-warning
-python -m venv .venv
 ```
 
-Then install and start, without activating the environment (this avoids PowerShell's "running scripts is disabled" error):
+Then run these three commands from inside that folder. They use the environment's Python directly, so there is nothing to activate (this also avoids PowerShell's "running scripts is disabled" error).
 
-| Windows (PowerShell or Command Prompt) | macOS / Linux |
-|---|---|
-| `.venv\Scripts\python -m pip install -r requirements.txt` | `.venv/bin/python -m pip install -r requirements.txt` |
-| `.venv\Scripts\python -m streamlit run app.py` | `.venv/bin/python -m streamlit run app.py` |
+| | Windows (PowerShell or Command Prompt) | macOS / Linux |
+|---|---|---|
+| 1. Create the environment | `py -m venv .venv` | `python3 -m venv .venv` |
+| 2. Install | `.venv\Scripts\python -m pip install -r requirements.txt` | `.venv/bin/python -m pip install -r requirements.txt` |
+| 3. Start | `.venv\Scripts\python -m streamlit run app.py` | `.venv/bin/python -m streamlit run app.py` |
 
 **Open http://localhost:8501 in your browser** once the terminal says "You can now view your Streamlit app". The dataset (`data/`) and trained models (`models/`) are included, so nothing else is downloaded. Install takes 1 to 2 minutes on a normal connection; the app itself is ready in a few seconds. If your scikit-learn version differs from ours, the app retrains its models on first start (about 10 seconds).
 
 **If something goes wrong**
 
-- *"Python was not found"* on Windows: use the Python launcher, `py -m venv .venv`, then the commands above.
+- *"'py' is not recognized"* on Windows: Python is not installed. Install it from python.org (3.12 is a safe choice), open a new terminal and run step 1 again. If you ticked "Add python.exe to PATH" when installing, `python -m venv .venv` works too.
+- *"Python was not found; run without arguments to install from the Microsoft Store"*: you typed `python` instead of `py`. Use `py -m venv .venv` as in step 1.
+- *"ensurepip is not available"* on Ubuntu or Debian: run `sudo apt install python3-venv`, then step 1 again.
 - *"Port 8501 is not available"*: an older copy of the app is still running. Close that terminal (or press Ctrl+C in it) and start again. To use another port instead: add `--server.port 8502` to the run command.
 - *You see an old version of the dashboard*: same cause as above, or an old download. Stop every running copy, run `git pull` in the folder, and start again.
 - Always run the commands from inside the `dengue-early-warning` folder, so the app finds its settings, fonts and models.
