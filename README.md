@@ -6,7 +6,7 @@
 
 Built for the **EDU AI Engineering Hackathon 2026, Phase 1: "AI for Urban Dengue Outbreak"** by team **Vibe Engineers**.
 
-![Ward Risk Board](docs/screenshots/risk_board.png)
+![DengueWatch overview page](docs/screenshots/overview.png)
 
 ## Quick start (about 2 minutes)
 
@@ -31,7 +31,7 @@ Optional:
 ```bash
 cp .env.example .env        # (Windows: copy .env.example .env) then add GEMINI_API_KEY for AI-worded briefings
 python scripts/train.py     # rebuild features, evaluation (metrics.json) and models (~35 s)
-python -m pytest            # 32 tests: lag correctness, no leakage, explanations, retries/fallbacks, every page loads
+python -m pytest            # 34 tests: lag correctness, no leakage, explanations, retries/fallbacks, every page loads
 python scripts/ingest.py new_weeks.csv   # add new weekly data and retrain (--reset to undo)
 ```
 
@@ -41,12 +41,13 @@ Set `ALLOW_NETWORK=0` in `.env` to run fully offline.
 
 | Page | What an officer gets |
 |---|---|
-| **Ward Risk Board** | Pick city, week and horizon. All wards are ranked by forecast cases with 80% ranges and tiers. **Escalating** wards (Low/Medium today, High+ soon) are flagged. Includes an action briefing in **English or Bangla** and a CSV export. |
-| **Ward Drivers & What-if** | A waterfall showing how rainfall, humidity, temperature and ward vulnerability push the forecast above or below the seasonal norm; the "breeding clock" rain chart; a rain what-if slider; forecast-vs-actual track record. |
-| **Season Heatmap** | Every ward × every week of a season, coloured by forecast tier (or actual tier, or forecast error). |
-| **Live Forecast (API)** | The same model fed with this week's real and forecast weather from Open-Meteo: one API call for all cities, cached, with offline fallbacks. |
-| **Model Accuracy** | Chronological test results vs naive baselines, year-by-year backtest, lag-correlation evidence, tier confusion matrix. |
-| **Add Weekly Data** | Upload the latest ward reports (CSV). The file is checked, merged and the models retrain in about 15 s. Reset any time. |
+| **Overview** | The answer first: how many wards will reach high risk and when, a four-step picture of the rain-to-cases delay, each city at a glance, and the wards to act on first. |
+| **Ward priorities** | All wards ranked by expected cases with a likely range and risk level. Wards **getting worse** (low or medium today, high or critical soon) are flagged. Includes an action briefing in **English or Bangla** and a CSV export. |
+| **Why this ward?** | Plain bars showing how recent rain, humidity, temperature and drainage, crowding and sanitation push the forecast above or below normal for the season; a "rain now, cases later" chart; a rain what-if slider; the ward's forecast-vs-real track record. |
+| **Season calendar** | Every ward × every week of a season, coloured by forecast risk (or real risk, or forecast error). |
+| **Live forecast** | The same model fed with this week's real and forecast weather from Open-Meteo: one API call for all cities, cached, with offline fallbacks. |
+| **How accurate is it?** | Plain-language results on unseen years first, then the year-by-year backtest, lag evidence, baselines and confusion matrix for reviewers. |
+| **Add weekly data** | Upload the latest ward reports (CSV). The file is checked, merged and the models retrain in about 15 s. Reset any time. |
 
 The dashboard opens on **2 June 2025**, a week the model never saw during training. 56 of the 60 wards were still Low that week. The system flagged 46 wards as High for 23 June, and 52 of the 60 wards actually reached High or Critical.
 
@@ -71,6 +72,7 @@ Details, diagrams and the efficiency and failure-handling design are in **[ARCHI
 app.py                  Streamlit entry (navigation + shared controls)
 ui_common.py            cached engine, chart styling, sidebar
 views/                  one file per dashboard page
+static/fonts/           bundled fonts, so the design works offline
 src/dengue/
   config.py             all settings: horizons, tiers, split dates, network limits
   data.py               load + validate the dataset (local CSV, sheet fallback)
@@ -97,10 +99,10 @@ models/                 trained model bundle + evaluation metrics
 |---|---|---|
 | **Claude (Anthropic), via Claude Code** | AI coding assistant | Analysing the brief and dataset, planning the architecture, and writing most of the code, tests and documentation under the team's direction. The team reviewed, ran and can explain all code. |
 | **Google Gemini API** (`generativelanguage.googleapis.com`, default model `gemini-2.5-flash`) | LLM API, **optional, off by default** | Rewording the officer briefing in plain language from model numbers only. Used only if `GEMINI_API_KEY` is set; otherwise a template is used. |
-| **Open-Meteo Forecast API** (`api.open-meteo.com`) | Weather API, free, no key | Live weather for the Live Forecast page. |
+| **Open-Meteo Forecast API** (`api.open-meteo.com`) | Weather API, free, no key | Live weather for the Live forecast page. |
 | **Google Sheets CSV export** | Dataset source | Official hackathon dataset; downloaded only if `data/bangladesh_dengue.csv` is missing. |
 
-No other AI services or external APIs are used. Open-source libraries: pandas, NumPy, scikit-learn, joblib, PyArrow, Streamlit, Plotly, Requests, python-dotenv, pytest (see `requirements.txt`). No significant third-party code snippets were copied.
+No other AI services or external APIs are used. Open-source libraries: pandas, NumPy, scikit-learn, joblib, PyArrow, Streamlit, Plotly, Requests, python-dotenv, pytest (see `requirements.txt`). Fonts: Newsreader and Plus Jakarta Sans (SIL Open Font License, bundled in `static/fonts`). No significant third-party code snippets were copied.
 
 ## Limitations and honest notes
 

@@ -88,6 +88,6 @@ All external calls go through `src/dengue/http.py`:
 
 ## 7. Scaling to a live system (Phase 2)
 
-- New weekly data: upload on the **Add Weekly Data** page or run `python scripts/ingest.py new_weeks.csv`. Rows are validated and stored in `data/updates.csv` (never overwriting the official file), then the models retrain on all data in about 15 s and the app reloads via the data hash. `--reset` restores the official dataset.
+- New weekly data: upload on the **Add weekly data** page or run `python scripts/ingest.py new_weeks.csv`. Rows are validated and stored in `data/updates.csv` (never overwriting the official file), then the models retrain on all data in about 15 s and the app reloads via the data hash. `--reset` restores the official dataset.
 - New wards: the model uses ward attributes, so new wards work without retraining the architecture.
 - New consumers: `Engine` in `src/dengue/engine.py` is UI-independent and can be wrapped in a REST endpoint or a weekly batch job that emails the priority list.
