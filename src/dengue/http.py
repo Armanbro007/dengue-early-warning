@@ -107,7 +107,7 @@ def request_json(
                 breaker.record(True)
                 return resp.json() if "json" in resp.headers.get("Content-Type", "json") else resp.text
         except (requests.ConnectionError, requests.Timeout) as exc:
-            last_err = exc
+            last_err = type(exc).__name__  # short, user-facing reason
             delay = _backoff_delay(attempt, None)
         if attempt < max_retries - 1:
             STATS.retries += 1
@@ -135,7 +135,7 @@ def download_text(service: str, url: str, **kwargs) -> str:
                 return resp.text
             last_err = RuntimeError(f"HTTP {resp.status_code}")
         except (requests.ConnectionError, requests.Timeout) as exc:
-            last_err = exc
+            last_err = type(exc).__name__
         time.sleep(_backoff_delay(attempt, None))
     breaker.record(False)
     raise NetworkUnavailable(f"{service}: download failed ({last_err})")
