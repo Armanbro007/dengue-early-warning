@@ -20,9 +20,9 @@ n = tx.num
 
 head = st.container()  # filled after the ward is chosen, but shown above the picker
 pick, _ = st.columns([1, 2])
-labels, back, key = keep_choice("wd_ward", fc["ward_id"].tolist(),
+labels, back, key, start = keep_choice("wd_ward", fc["ward_id"].tolist(),
                                 lambda w: f"{ward_name(w)} · {tx.tier(by_ward.loc[w, 'tier'])}", fc["ward_id"].iloc[0])
-ward = remember("wd_ward", back[pick.selectbox(tx.t("wd_pick"), labels, key=key)])
+ward = remember("wd_ward", back[pick.selectbox(tx.t("wd_pick"), labels, index=labels.index(start), key=key)])
 row = by_ward.loc[ward]
 groups = sorted(DRIVER_GROUPS, key=lambda g: row[g], reverse=True)
 up = groups[0]

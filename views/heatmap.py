@@ -19,10 +19,11 @@ years = sorted({d.year for d in engine.forecast_weeks()})[1:]
 year_default = c["as_of"].year if c["as_of"].year in years else years[-1]
 head = st.container()
 a, b = st.columns([1, 3])
-labels, back, key = keep_choice("hm_year", years, lambda y: n(y, "{}"), year_default)
-year = remember("hm_year", back[a.selectbox(tx.t("hm_season"), labels, key=key)])
-labels, back, key = keep_choice("hm_view", ["fc", "real", "off"], lambda v: tx.t(f"hm_v_{v}"), "fc")
-view = remember("hm_view", back[b.segmented_control("Show", labels, key=key, required=True, label_visibility="collapsed")])
+labels, back, key, start = keep_choice("hm_year", years, lambda y: n(y, "{}"), year_default)
+year = remember("hm_year", back[a.selectbox(tx.t("hm_season"), labels, index=labels.index(start), key=key)])
+labels, back, key, start = keep_choice("hm_view", ["fc", "real", "off"], lambda v: tx.t(f"hm_v_{v}"), "fc")
+view = remember("hm_view", back[b.segmented_control("Show", labels, key=key, required=True, default=start,
+                                         label_visibility="collapsed")])
 picked = tx.t(f"hm_v_{view}")
 
 with head:

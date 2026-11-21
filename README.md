@@ -37,7 +37,7 @@ Optional:
 ```bash
 cp .env.example .env        # (Windows: copy .env.example .env) then add GEMINI_API_KEY for AI-worded briefings
 python scripts/train.py     # rebuild features, evaluation (metrics.json) and models (~35 s)
-python -m pytest            # 36 tests: lag correctness, no leakage, explanations, retries/fallbacks, every page loads in English and Bangla
+python -m pytest            # 37 tests: lag correctness, no leakage, explanations, retries/fallbacks, every page loads in English and Bangla
 python scripts/ingest.py new_weeks.csv   # add new weekly data and retrain (--reset to undo)
 ```
 

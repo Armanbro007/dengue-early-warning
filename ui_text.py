@@ -462,7 +462,8 @@ TEXT = {
 
 
 def lang() -> str:
-    return st.session_state.get("lang", "en")
+    lg = st.session_state.get("lang")
+    return lg if lg in LANGS else "en"  # None can arrive if a click interrupts the first run
 
 
 def t(key: str, **kw) -> str:

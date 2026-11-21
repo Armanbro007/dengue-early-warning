@@ -34,3 +34,14 @@ def test_every_page_renders_in_bangla():
         assert not at.exception, (page, [e.value for e in at.exception])
         assert any("ঀ" <= ch <= "৿" for ch in at.title[0].value), f"{page} title is not in Bangla"
     config.ALLOW_NETWORK = True
+
+
+def test_missing_language_falls_back_to_english():
+    # A click during the first, slow run can leave the switch's value empty: the app must still render.
+    config.ALLOW_NETWORK = False
+    at = AppTest.from_file("../app.py", default_timeout=120)
+    at.session_state["lang"] = None
+    at.run()
+    assert not at.exception, [e.value for e in at.exception]
+    assert at.title[0].value == "Dengue outlook for 23 June"
+    config.ALLOW_NETWORK = True

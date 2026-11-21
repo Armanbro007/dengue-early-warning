@@ -416,12 +416,10 @@ def top_bar() -> None:
     """Title slot (filled by each page) on the left, language switch on the right."""
     bar = st.container(key="topbar", horizontal=True, vertical_alignment="bottom", gap="medium")
     st.session_state["_title_slot"] = bar.container(width="stretch")
-    if "lang" not in st.session_state:
-        st.session_state["lang"] = "en"
-    if st.session_state["lang"] == "bn":  # Geist Mono has no Bangla letters: use the Bangla sans for small labels
+    if tx.lang() == "bn":  # Geist Mono has no Bangla letters: use the Bangla sans for small labels
         st.html("<style>.mono,.dw-eyebrow,.dw-side-label,.st .w{font-family:'Noto Sans Bengali',sans-serif !important;"
                 "letter-spacing:0 !important; font-size:.8rem !important;}</style>")
-    bar.segmented_control("Language", list(tx.LANGS), format_func=tx.LANGS.get, key="lang", required=True,
+    bar.segmented_control("Language", list(tx.LANGS), format_func=tx.LANGS.get, key="lang", required=True, default="en",
                           label_visibility="collapsed", width="content")
 
 
@@ -433,17 +431,19 @@ def brand() -> str:
 def keep_choice(name: str, values: list, label_of, default):
     """Options as text in the current language, with the choice kept when the language changes.
 
-    Returns (labels, label -> value, widget key). Store the picked value with remember(name, value)."""
+    Returns (labels, label -> value, widget key, starting label). Pass the starting label to the widget as its
+    default (index / value / default), and store the picked value with remember(name, value).
+    The widget's session state is never written directly: if a click interrupts a run, Streamlit's frontend
+    can keep a stale value for a widget whose state was set from code, so the page would jump to the
+    first option. A plain default does not have that problem."""
     ss, lg = st.session_state, tx.lang()
     labels = [label_of(v) for v in values]
     key = f"{name}_{lg}"
     if ss.get(f"_{name}_lang") != lg:
         ss.pop(key, None)
-    if key not in ss or ss[key] not in labels:
-        prev = ss.get(f"v_{name}", default)
-        ss[key] = label_of(prev if prev in values else default)
+    prev = ss.get(f"v_{name}", default)
     ss[f"_{name}_lang"] = lg
-    return labels, dict(zip(labels, values)), key
+    return labels, dict(zip(labels, values)), key, label_of(prev if prev in values else default)
 
 
 def remember(name: str, value):
@@ -463,22 +463,23 @@ def sidebar_controls(engine: Engine) -> dict:
     def widget(name: str, values: list, label_of, default):
         # Options are shown as text in the current language. Each language gets its own widget key, and its
         # starting value comes from the language-neutral copy, so switching language never resets a setting.
+        # The start goes in as the widget's default rather than into session state (see keep_choice).
         labels = [label_of(v) for v in values]
         key = f"{name}_{lg}"
         if ss.get("_controls_lang") != lg:
             ss.pop(key, None)
-        if key not in ss or ss[key] not in labels:
-            ss[key] = label_of(ss.get(f"v_{name}", default))
-        return labels, dict(zip(labels, values)), key
+        prev = ss.get(f"v_{name}", default)
+        return labels, dict(zip(labels, values)), key, label_of(prev if prev in values else default)
 
     html(f'<div class="dw-side-label">{tx.t("settings")}</div>', sb)
-    labels, back, key = widget("city", ["All cities", *engine.cities], tx.city, "All cities")
-    city = back[sb.selectbox(tx.t("city"), labels, key=key)]
-    labels, back, key = widget("as_of", weeks, tx.date, default_week)
-    as_of = back[sb.select_slider(tx.t("replay"), options=labels, key=key, help=tx.t("replay_help"))]
-    labels, back, key = widget("horizon", list(config.HORIZONS), lambda h: tx.t("ahead_fmt", h=tx.num(h)),
+    labels, back, key, start = widget("city", ["All cities", *engine.cities], tx.city, "All cities")
+    city = back[sb.selectbox(tx.t("city"), labels, index=labels.index(start), key=key)]
+    labels, back, key, start = widget("as_of", weeks, tx.date, default_week)
+    as_of = back[sb.select_slider(tx.t("replay"), options=labels, value=start, key=key, help=tx.t("replay_help"))]
+    labels, back, key, start = widget("horizon", list(config.HORIZONS), lambda h: tx.t("ahead_fmt", h=tx.num(h)),
                                config.DEFAULT_HORIZON)
-    horizon = back[sb.segmented_control(tx.t("ahead"), labels, required=True, key=key, help=tx.t("ahead_help"))]
+    horizon = back[sb.segmented_control(tx.t("ahead"), labels, required=True, default=start, key=key,
+                                        help=tx.t("ahead_help"))]
     ss["v_city"], ss["v_as_of"], ss["v_horizon"], ss["_controls_lang"] = city, as_of, horizon, lg
     unseen = pd.Timestamp(as_of) > engine.train_end
     html(f'<div class="dw-side-note">{tx.t("note_unseen" if unseen else "note_seen", date=tx.date(as_of))}</div>', sb)
