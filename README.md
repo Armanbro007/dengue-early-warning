@@ -8,7 +8,7 @@ Built for the **EDU AI Engineering Hackathon 2026, Phase 1: "AI for Urban Dengue
 
 ## Quick start (about 2 minutes)
 
-Requires **Python 3.10 - 3.13** and git. No API keys needed.
+Requires **Python 3.10 - 3.14** and git. No API keys needed. Tested on every push on Linux and Windows (see the *tests* badge/Actions tab).
 
 ```bash
 git clone https://github.com/Armanbro007/dengue-early-warning.git
@@ -19,6 +19,8 @@ python -m venv .venv
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+**Windows tip:** if `python` says "Python was not found" (the Microsoft Store shortcut), use the Python launcher instead: `py -m venv .venv`, and later `py -m streamlit run app.py`. If the `streamlit` command is not on your PATH, `python -m streamlit run app.py` always works.
 
 The dashboard opens at http://localhost:8501. The dataset (`data/`) and trained models (`models/`) are included, so nothing else needs to be downloaded. If your scikit-learn version differs from ours, the app retrains its models automatically on first start (about 10 seconds).
 

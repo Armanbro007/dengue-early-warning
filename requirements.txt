@@ -1,4 +1,4 @@
-# Python 3.10 - 3.13. Install with: pip install -r requirements.txt
+# Python 3.10 - 3.14. Install with: pip install -r requirements.txt
 pandas>=2.1,<4
 numpy>=1.26,<3
 scikit-learn>=1.4,<2
