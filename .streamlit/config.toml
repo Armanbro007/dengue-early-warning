@@ -46,6 +46,7 @@ secondaryBackgroundColor = "#F4F5F8"
 
 [server]
 headless = true
+port = 8501          # fixed: if an old copy is still running, you get a clear error instead of the old app
 runOnSave = false
 enableStaticServing = true
 

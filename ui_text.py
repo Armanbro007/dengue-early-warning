@@ -100,7 +100,6 @@ TEXT = {
         "rb_ai_help": "Off: instant template. On: one cached AI call that only sees the numbers above. "
                       "Falls back to the template on any error.",
         "rb_src": "Written by: {src}. Built only from the forecast numbers.",
-        "rb_src_template": "Written automatically from this week's forecast numbers. No AI service is used.",
         "src_template": "template", "src_cache": "saved AI text", "src_llm": "AI",
         "rb_all": "All wards", "rb_all_sub": "Expected cases, the likely range and the main reason for each ward.",
         "rb_f_all": "All wards", "rb_f_high": "High and critical", "rb_f_worse": "Getting worse",
@@ -316,7 +315,6 @@ TEXT = {
         "rb_ai_help": "বন্ধ থাকলে তাৎক্ষণিক টেমপ্লেট। চালু করলে একটি এআই কল হয়, যা শুধু ওপরের সংখ্যাগুলো দেখে এবং "
                       "ফল সংরক্ষিত থাকে। কোনো সমস্যা হলে টেমপ্লেটেই ফিরে যায়।",
         "rb_src": "লিখেছে: {src}। শুধু পূর্বাভাসের সংখ্যা থেকে তৈরি।",
-        "rb_src_template": "এ সপ্তাহের পূর্বাভাসের সংখ্যা থেকে স্বয়ংক্রিয়ভাবে লেখা। কোনো এআই সেবা ব্যবহার করা হয়নি।",
         "src_template": "টেমপ্লেট", "src_cache": "সংরক্ষিত এআই লেখা", "src_llm": "এআই",
         "rb_all": "সব ওয়ার্ড", "rb_all_sub": "প্রতিটি ওয়ার্ডের সম্ভাব্য রোগী, সম্ভাব্য পরিসর ও প্রধান কারণ।",
         "rb_f_all": "সব ওয়ার্ড", "rb_f_high": "উচ্চ ও অতি উচ্চ ঝুঁকি", "rb_f_worse": "ঝুঁকি বাড়ছে",

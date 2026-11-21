@@ -76,8 +76,6 @@ with right, st.container(key="glass_brief"):
         kind = source.split(" ")[0]
         label = tx.t(f"src_{kind}") + (source[len(kind):] if tx.lang() == "en" else "")
         st.caption(tx.t("rb_src", src=label))
-    else:
-        st.caption(tx.t("rb_src_template"))
 
 # ---- Full list -------------------------------------------------------------------
 section(tx.t("rb_all"), tx.t("rb_all_sub"))

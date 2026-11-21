@@ -22,17 +22,25 @@ Requires **Python 3.10 - 3.14** and git. No API keys needed. Tested on every pus
 git clone https://github.com/Armanbro007/dengue-early-warning.git
 cd dengue-early-warning
 python -m venv .venv
-# Windows:      .venv\Scripts\activate
-# macOS/Linux:  source .venv/bin/activate
-pip install -r requirements.txt
-streamlit run app.py
 ```
 
-**Windows tip:** if `python` says "Python was not found" (the Microsoft Store shortcut), use the Python launcher instead: `py -m venv .venv`, and later `py -m streamlit run app.py`. If the `streamlit` command is not on your PATH, `python -m streamlit run app.py` always works.
+Then install and start, without activating the environment (this avoids PowerShell's "running scripts is disabled" error):
 
-The dashboard opens at http://localhost:8501. The dataset (`data/`) and trained models (`models/`) are included, so nothing else needs to be downloaded. If your scikit-learn version differs from ours, the app retrains its models automatically on first start (about 10 seconds).
+| Windows (PowerShell or Command Prompt) | macOS / Linux |
+|---|---|
+| `.venv\Scripts\python -m pip install -r requirements.txt` | `.venv/bin/python -m pip install -r requirements.txt` |
+| `.venv\Scripts\python -m streamlit run app.py` | `.venv/bin/python -m streamlit run app.py` |
 
-Optional:
+**Open http://localhost:8501 in your browser** once the terminal says "You can now view your Streamlit app". The dataset (`data/`) and trained models (`models/`) are included, so nothing else is downloaded. Install takes 1 to 2 minutes on a normal connection; the app itself is ready in a few seconds. If your scikit-learn version differs from ours, the app retrains its models on first start (about 10 seconds).
+
+**If something goes wrong**
+
+- *"Python was not found"* on Windows: use the Python launcher, `py -m venv .venv`, then the commands above.
+- *"Port 8501 is not available"*: an older copy of the app is still running. Close that terminal (or press Ctrl+C in it) and start again. To use another port instead: add `--server.port 8502` to the run command.
+- *You see an old version of the dashboard*: same cause as above, or an old download. Stop every running copy, run `git pull` in the folder, and start again.
+- Always run the commands from inside the `dengue-early-warning` folder, so the app finds its settings, fonts and models.
+
+Optional (use the same `.venv\Scripts\python` or `.venv/bin/python` in place of `python`):
 
 ```bash
 cp .env.example .env        # (Windows: copy .env.example .env) then add GEMINI_API_KEY for AI-worded briefings
