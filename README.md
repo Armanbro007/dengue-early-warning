@@ -1,5 +1,7 @@
 # DengueWatch: Ward-level Dengue Early Warning
 
+[![tests](https://github.com/Armanbro007/dengue-early-warning/actions/workflows/tests.yml/badge.svg)](https://github.com/Armanbro007/dengue-early-warning/actions/workflows/tests.yml)
+
 **Rain today shows up as dengue cases in about three weeks.** DengueWatch uses that lag to forecast dengue cases for every ward in Dhaka North, Dhaka South, Chattogram, Gazipur and Narayanganj **2, 3 and 4 weeks ahead**. It ranks wards as Low / Medium / High / Critical, explains *why* each ward is at risk, and drafts an action briefing. City health officers can then send larvicide teams and hospital supplies to the right wards *before* admissions spike.
 
 Built for the **EDU AI Engineering Hackathon 2026, Phase 1: "AI for Urban Dengue Outbreak"** by team **Vibe Engineers**.
@@ -8,7 +10,7 @@ Built for the **EDU AI Engineering Hackathon 2026, Phase 1: "AI for Urban Dengue
 
 ## Quick start (about 2 minutes)
 
-Requires **Python 3.10 - 3.14** and git. No API keys needed. Tested on every push on Linux and Windows (see the *tests* badge/Actions tab).
+Requires **Python 3.10 - 3.14** and git. No API keys needed. Tested on every push on Linux and Windows (see the *tests* badge above).
 
 ```bash
 git clone https://github.com/Armanbro007/dengue-early-warning.git
