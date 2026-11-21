@@ -1,14 +1,45 @@
+# "Calm light" theme: warm paper background, one deep-teal accent, serif headings.
+# Fonts are bundled in static/fonts (SIL Open Font License), so the look works offline.
 [theme]
 base = "light"
-primaryColor = "#2a78d6"
-backgroundColor = "#f9f9f7"
-secondaryBackgroundColor = "#f0efec"
-textColor = "#0b0b0b"
-font = "sans serif"
+primaryColor = "#1F6F6A"
+backgroundColor = "#FBFAF7"
+secondaryBackgroundColor = "#F3F1EC"
+textColor = "#1F2926"
+linkColor = "#1F6F6A"
+linkUnderline = false
+borderColor = "#E6E2DA"
+dataframeBorderColor = "#ECE9E2"
+dataframeHeaderBackgroundColor = "#F7F5F0"
+showWidgetBorder = true
+showSidebarBorder = true
+baseRadius = "10px"
+buttonRadius = "8px"
+font = "'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif"
+headingFont = "Newsreader, Georgia, 'Times New Roman', serif"
+headingFontWeights = [500, 500, 600, 600, 600, 600]
+metricValueFontWeight = 600
+
+[[theme.fontFaces]]
+family = "Plus Jakarta Sans"
+url = "app/static/fonts/PlusJakartaSans-latin.woff2"
+weight = "400 700"
+style = "normal"
+
+[[theme.fontFaces]]
+family = "Newsreader"
+url = "app/static/fonts/Newsreader-latin.woff2"
+weight = "400 600"
+style = "normal"
+
+[theme.sidebar]
+backgroundColor = "#F4F2ED"
+secondaryBackgroundColor = "#FFFFFF"
 
 [server]
 headless = true
 runOnSave = false
+enableStaticServing = true
 
 [browser]
 gatherUsageStats = false
