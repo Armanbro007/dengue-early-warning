@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 import ui_text as tx
+from dengue import config
 from dengue.briefing import build_facts, get_briefing
 from dengue.config import TIERS, TIER_MIN_CASES
 from ui_common import (INK2, MUTED, TIER_COLORS, cached_forecast, card_head, driver_name, html, keep_choice,
@@ -67,12 +68,16 @@ with left, st.container(key="glass_rank"):
 with right, st.container(key="glass_brief"):
     html(card_head(tx.t("rb_brief"), tx.t("rb_brief_sub"), "note"))
     facts = build_facts(fc, as_of, h, c["city"])
-    text, source = get_briefing(facts, use_llm=st.session_state.get("brief_llm", False), lang=tx.lang())
+    ai_ready = bool(config.GEMINI_API_KEY)  # the AI rewording switch only appears when a key is configured
+    text, source = get_briefing(facts, use_llm=ai_ready and st.session_state.get("brief_llm", False), lang=tx.lang())
     st.markdown(text)
-    st.toggle(tx.t("rb_ai"), value=False, key="brief_llm", help=tx.t("rb_ai_help"))
-    kind = source.split(" ")[0]
-    label = tx.t(f"src_{kind}") + (source[len(kind):] if tx.lang() == "en" else "")
-    st.caption(tx.t("rb_src", src=label))
+    if ai_ready:
+        st.toggle(tx.t("rb_ai"), value=False, key="brief_llm", help=tx.t("rb_ai_help"))
+        kind = source.split(" ")[0]
+        label = tx.t(f"src_{kind}") + (source[len(kind):] if tx.lang() == "en" else "")
+        st.caption(tx.t("rb_src", src=label))
+    else:
+        st.caption(tx.t("rb_src_template"))
 
 # ---- Full list -------------------------------------------------------------------
 section(tx.t("rb_all"), tx.t("rb_all_sub"))

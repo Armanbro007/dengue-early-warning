@@ -106,7 +106,7 @@ models/                 trained model bundle + evaluation metrics
 | Tool / service | Type | What it was used for |
 |---|---|---|
 | **Claude (Anthropic), via Claude Code** | AI coding assistant | Analysing the brief and dataset, planning the architecture, and writing most of the code, tests and documentation under the team's direction. The team reviewed, ran and can explain all code. |
-| **Google Gemini API** (`generativelanguage.googleapis.com`, default model `gemini-2.5-flash`) | LLM API, **optional, off by default** | Rewording the officer briefing in plain language from model numbers only. Used only if `GEMINI_API_KEY` is set; otherwise a template is used. |
+| **Google Gemini API** (`generativelanguage.googleapis.com`, default model `gemini-2.5-flash`) | LLM API, **optional, off by default** | Rewording the officer briefing in plain language from model numbers only. Used only if `GEMINI_API_KEY` is set (the "Reword with AI" switch appears only then); otherwise a template is used. |
 | **Open-Meteo Forecast API** (`api.open-meteo.com`) | Weather API, free, no key | Live weather for the Live forecast page. |
 | **Google Sheets CSV export** | Dataset source | Official hackathon dataset; downloaded only if `data/bangladesh_dengue.csv` is missing. |
 
