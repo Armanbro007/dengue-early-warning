@@ -36,7 +36,7 @@ def test_predictions_are_valid_intervals(bundle, feat):
 def test_driver_breakdown_adds_up(bundle, feat):
     week = feat[feat.date == "2024-08-05"]
     e = explain(bundle, week, 3)
-    total = e["baseline"] + e[DRIVER_GROUPS].sum(axis=1) + e["Combined effects"]
+    total = e["baseline"] + e[DRIVER_GROUPS].sum(axis=1)
     assert np.allclose(total, e["prediction"])
 
 

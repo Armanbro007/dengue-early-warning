@@ -1,15 +1,21 @@
 """Driver breakdown: why is this ward's risk high?
 
-Method (group ablation, easy to explain): start from a *reference* week, i.e. typical
-weather for this time of year and a typical ward. For each driver group (rainfall,
-humidity, temperature, ward vulnerability) we swap the ward's real values for the
-reference values and see how much the forecast drops. That drop is the group's
-contribution. Whatever is left over (groups interacting) is shown as "Combined
-effects", so the bars always add up exactly to the forecast.
+Method: exact Shapley values over 4 driver *groups* (rainfall, humidity,
+temperature, ward vulnerability), measured against a reference week.
 
-All variants for all wards are scored in ONE batched predict call (fast).
+* Reference ("baseline") = typical weather for this week of the year and a
+  typical ward (medians from the training years). Its forecast is the seasonal norm.
+* For every subset of groups we swap the ward's real values in and the rest to
+  the reference (2^4 = 16 variants), score them all in ONE batched predict call,
+  and average each group's marginal effect over all orders it could be added.
+* Result: baseline + sum(contributions) == forecast, exactly. Because the
+  Poisson model is multiplicative, a simple one-at-a-time swap would double-count;
+  Shapley shares the overlap fairly. 60 wards x 16 variants = 960 rows, ~10 ms.
 """
 from __future__ import annotations
+
+from itertools import product
+from math import factorial
 
 import numpy as np
 import pandas as pd
@@ -26,38 +32,41 @@ def _reference_rows(bundle: dict, X: pd.DataFrame) -> pd.DataFrame:
 
 
 def explain(bundle: dict, X: pd.DataFrame, h: int) -> pd.DataFrame:
-    """Return one row per ward: baseline, contribution per driver group, combined, prediction."""
-    X = X.copy()
+    """One row per ward: baseline, Shapley contribution per driver group, prediction."""
+    n = len(DRIVER_GROUPS)
     ref = _reference_rows(bundle, X)
-    variants = {"full": X}
-    base = X.copy()
-    for g in DRIVER_GROUPS:
-        cols = FEATURE_GROUPS[g]
+    masks = list(product((0, 1), repeat=n))  # 1 = use the ward's real values
+    variants = []
+    for mask in masks:
         v = X.copy()
-        v[cols] = ref[cols].to_numpy()
-        variants[g] = v
-        base[cols] = ref[cols].to_numpy()
-    variants["baseline"] = base
-
-    stacked = pd.concat(list(variants.values()), keys=list(variants.keys()))
-    preds = predict(bundle, stacked, h)["pred"]
+        for on, g in zip(mask, DRIVER_GROUPS):
+            if not on:
+                cols = FEATURE_GROUPS[g]
+                v[cols] = ref[cols].to_numpy()
+        variants.append(v)
+    preds = predict(bundle, pd.concat(variants, keys=range(len(masks))), h)["pred"]
+    f = {mask: preds.loc[i].to_numpy() for i, mask in enumerate(masks)}
 
     out = pd.DataFrame(index=X.index)
-    full = preds.loc["full"].to_numpy()
-    out["baseline"] = preds.loc["baseline"].to_numpy()
-    contrib_sum = np.zeros(len(X))
-    for g in DRIVER_GROUPS:
-        out[g] = full - preds.loc[g].to_numpy()
-        contrib_sum += out[g].to_numpy()
-    out["Combined effects"] = full - out["baseline"] - contrib_sum
-    out["prediction"] = full
-    out["main_driver"] = out[DRIVER_GROUPS].idxmax(axis=1).where(out[DRIVER_GROUPS].max(axis=1) > 0.25, "Seasonal norm")
+    out["baseline"] = f[(0,) * n]
+    for i, g in enumerate(DRIVER_GROUPS):
+        phi = np.zeros(len(X))
+        for mask in masks:
+            if mask[i]:
+                continue
+            k = sum(mask)
+            weight = factorial(k) * factorial(n - k - 1) / factorial(n)
+            with_i = mask[:i] + (1,) + mask[i + 1:]
+            phi += weight * (f[with_i] - f[mask])
+        out[g] = phi
+    out["prediction"] = f[(1,) * n]
+    top = out[DRIVER_GROUPS]
+    out["main_driver"] = top.idxmax(axis=1).where(top.max(axis=1) > 0.25, "Seasonal norm")
 
-    # Plain-language evidence for the rainfall driver
-    breeding = X[["rain_lag_1", "rain_lag_2", "rain_lag_3"]].sum(axis=1)
-    normal = ref[["rain_lag_1", "rain_lag_2", "rain_lag_3"]].sum(axis=1)
-    out["breeding_rain_mm"] = breeding
-    out["breeding_rain_normal_mm"] = normal
+    # Plain-language evidence for the rainfall driver (breeding window = 1-3 weeks back)
+    window = ["rain_lag_1", "rain_lag_2", "rain_lag_3"]
+    out["breeding_rain_mm"] = X[window].sum(axis=1)
+    out["breeding_rain_normal_mm"] = ref[window].sum(axis=1)
     return out
 
 

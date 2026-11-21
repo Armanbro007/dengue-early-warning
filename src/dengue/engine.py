@@ -111,8 +111,8 @@ class Engine:
         frame = self.wards.merge(weekly, on="city", how="inner")
         frame[TARGET] = np.nan
         feat = build_features(frame)
-        latest = feat.dropna(subset=FEATURES).groupby("ward_id")["date"].transform("max")
-        rows = feat[(feat["date"] == latest)].dropna(subset=FEATURES)
+        ok = feat.dropna(subset=FEATURES)
+        rows = ok[ok["date"] == ok.groupby("ward_id")["date"].transform("max")]
         return self.forecast_rows(rows, h)
 
 
