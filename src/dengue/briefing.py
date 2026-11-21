@@ -20,6 +20,7 @@ import pandas as pd
 
 from . import config
 from .http import NetworkUnavailable, request_json
+from .i18n import CITY_BN, bn_date, bn_digits, bn_ward
 
 CACHE = config.CACHE_DIR / "briefings"
 USAGE_FILE = config.CACHE_DIR / "llm_usage.json"
@@ -32,6 +33,7 @@ TEXT = {
         "header": "**{area}, week of {week}:** {Critical} critical, {High} high, {Medium} medium and {Low} low-risk wards.",
         "quiet": "No ward is expected to go above medium risk. Keep up routine checks and drain clearing.",
         "more": " and {n} more",
+        "name": "{ward} (~{cases})",
         "tier_line": "- **{tier}:** {names}. **Action:** {action}.",
         "tiers": {"Critical": "Critical", "High": "High"},
         "actions": {
@@ -42,6 +44,7 @@ TEXT = {
                  "Acting there now costs less than responding after hospital admissions rise.",
         "why": "- **Why:** {ward} had {mm} mm of rain in the last 3 weeks ({pct:+.0f}% compared with normal for this "
                "time of year). Main reason: {driver}.",
+        "more_less": {True: "more", False: "less"},
         "drivers": {
             "Rainfall (0-6 wks ago)": "recent rain",
             "Humidity": "humidity",
@@ -51,26 +54,29 @@ TEXT = {
         },
     },
     "bn": {
-        "header": "**{area}, {week} সপ্তাহের পূর্বাভাস:** {Critical}টি ওয়ার্ড সংকটজনক, {High}টি উচ্চ, "
-                  "{Medium}টি মাঝারি এবং {Low}টি নিম্ন ঝুঁকিতে।",
-        "quiet": "কোনো ওয়ার্ডে মাঝারির বেশি ঝুঁকির পূর্বাভাস নেই। নিয়মিত নজরদারি ও ড্রেন পরিষ্কার চালিয়ে যান।",
-        "more": " এবং আরও {n}টি",
+        "header": "**{area}: {week} থেকে শুরু হওয়া সপ্তাহের পূর্বাভাস।** অতি উচ্চ ঝুঁকিতে {Critical}টি, "
+                  "উচ্চ ঝুঁকিতে {High}টি, মাঝারি ঝুঁকিতে {Medium}টি এবং কম ঝুঁকিতে {Low}টি ওয়ার্ড।",
+        "quiet": "কোনো ওয়ার্ডে মাঝারির বেশি ঝুঁকির আশঙ্কা নেই। নিয়মিত নজরদারি ও নালা পরিষ্কার কার্যক্রম চালিয়ে যান।",
+        "more": " এবং আরও {n}টি ওয়ার্ড",
+        "name": "{ward} (আনুমানিক {cases} জন)",
         "tier_line": "- **{tier}:** {names}। **করণীয়:** {action}।",
-        "tiers": {"Critical": "সংকটজনক", "High": "উচ্চ ঝুঁকি"},
+        "tiers": {"Critical": "অতি উচ্চ ঝুঁকি", "High": "উচ্চ ঝুঁকি"},
         "actions": {
-            "Critical": "এই সপ্তাহেই লার্ভিসাইড ও ফগিং টিম পাঠান, কাছের হাসপাতালগুলোকে স্যালাইন ও NS1 কিট মজুত রাখতে বলুন",
-            "High": "ড্রেন ও পানি জমে থাকা পাত্র পরিষ্কারের অভিযান চালান এবং এলাকাবাসীকে সতর্ক করুন",
+            "Critical": "এ সপ্তাহেই লার্ভিসাইডিং ও ফগিং দল পাঠান; নিকটবর্তী হাসপাতালগুলোকে পর্যাপ্ত স্যালাইন ও "
+                        "NS1 কিট মজুত রাখতে বলুন",
+            "High": "নালা ও পানি জমে থাকা পাত্র পরিষ্কারে বিশেষ অভিযান চালান এবং এলাকায় সচেতনতামূলক প্রচার করুন",
         },
-        "early": "- **আগাম সতর্কতা:** {n}টি ওয়ার্ডে এখন ঝুঁকি নিম্ন বা মাঝারি, কিন্তু পূর্বাভাস উচ্চ বা সংকটজনক। "
-                 "হাসপাতালে ভর্তি বাড়ার আগেই সেখানে ব্যবস্থা নেওয়া কম খরচের।",
-        "why": "- **কারণ:** {ward}-এ গত ৩ সপ্তাহে {mm} মিমি বৃষ্টি হয়েছে (এই সময়ের স্বাভাবিকের তুলনায় "
-               "{pct:+.0f}%); প্রধান কারণ: {driver}।",
+        "early": "- **আগাম সতর্কতা:** {n}টি ওয়ার্ডে এখন ঝুঁকি কম বা মাঝারি, তবে শিগগিরই উচ্চ বা অতি উচ্চ ঝুঁকিতে "
+                 "পৌঁছানোর আশঙ্কা রয়েছে। হাসপাতালে রোগী বাড়ার আগেই এসব ওয়ার্ডে ব্যবস্থা নিলে খরচ ও ক্ষতি দুটোই কমে।",
+        "why": "- **কারণ:** গত ৩ সপ্তাহে {ward} এলাকায় {mm} মিলিমিটার বৃষ্টি হয়েছে, যা এ সময়ের স্বাভাবিক মাত্রার "
+               "চেয়ে {apct}% {dir}। প্রধান কারণ: {driver}।",
+        "more_less": {True: "বেশি", False: "কম"},
         "drivers": {
-            "Rainfall (0-6 wks ago)": "বৃষ্টিপাত",
+            "Rainfall (0-6 wks ago)": "সাম্প্রতিক বৃষ্টিপাত",
             "Humidity": "আর্দ্রতা",
             "Temperature": "তাপমাত্রা",
-            "Ward vulnerability": "ওয়ার্ডের জলাবদ্ধতা, ঘনবসতি ও স্যানিটেশন",
-            "Seasonal norm": "মৌসুমি স্বাভাবিক মাত্রা",
+            "Ward vulnerability": "জলাবদ্ধতা, ঘনবসতি ও স্যানিটেশন",
+            "Seasonal norm": "এ সময়ের স্বাভাবিক প্রবণতা",
         },
     },
 }
@@ -103,9 +109,14 @@ def build_facts(fc: pd.DataFrame, as_of, h: int, city: str | None) -> dict:
 
 def template_briefing(facts: dict, lang: str = "en") -> str:
     t = TEXT[lang]
+    bn = lang == "bn"
+    n = bn_digits if bn else str            # Bangla digits for numbers in the Bangla briefing
+    ward = bn_ward if bn else (lambda w: w)
     c = facts["counts"]
-    week = pd.Timestamp(facts["target_week"]).strftime("%d %b %Y").lstrip("0")
-    lines = [t["header"].format(area=facts["area"], week=week, **c)]
+    tw = pd.Timestamp(facts["target_week"])
+    week = bn_date(tw) if bn else f"{tw.day} {tw:%b %Y}"
+    area = CITY_BN.get(facts["area"], facts["area"]) if bn else facts["area"]
+    lines = [t["header"].format(area=area, week=week, **{k: n(v) for k, v in c.items()})]
     if not facts["wards"]:
         lines.append(t["quiet"])
         return "\n\n".join(lines)
@@ -113,17 +124,18 @@ def template_briefing(facts: dict, lang: str = "en") -> str:
         wards = [w for w in facts["wards"] if w["tier"] == tier]
         if not wards:
             continue
-        names = ", ".join(f"{w['ward']} (~{w['cases']:.0f})" for w in wards)
+        names = ", ".join(t["name"].format(ward=ward(w["ward"]), cases=n(f"{w['cases']:.0f}")) for w in wards)
         if c[tier] > len(wards):
-            names += t["more"].format(n=c[tier] - len(wards))
+            names += t["more"].format(n=n(c[tier] - len(wards)))
         lines.append(t["tier_line"].format(tier=t["tiers"][tier], names=names, action=t["actions"][tier]))
     if facts.get("escalating"):
-        lines.append(t["early"].format(n=facts["escalating"]))
+        lines.append(t["early"].format(n=n(facts["escalating"])))
     top = facts["wards"][0]
     if top["normal_mm"] > 0:
         pct = (top["breeding_rain_mm"] / top["normal_mm"] - 1) * 100
         driver = t["drivers"].get(top["driver"], top["driver"].lower())
-        lines.append(t["why"].format(ward=top["ward"], mm=top["breeding_rain_mm"], pct=pct, driver=driver))
+        lines.append(t["why"].format(ward=ward(top["ward"]), mm=n(top["breeding_rain_mm"]), pct=pct,
+                                     apct=n(f"{abs(pct):.0f}"), dir=t["more_less"][pct >= 0], driver=driver))
     return "\n".join(lines)
 
 
@@ -155,7 +167,8 @@ PROMPT = (
     "health officer: one summary sentence, then one bullet per ward with a concrete action "
     "(larvicide/fogging, drain clearing, hospital stock alerts). Max 120 words. No new numbers.\n\n"
 )
-BANGLA = "Write the briefing in Bangla (Bengali script); keep ward IDs and numbers as given.\n\n"
+BANGLA = ("Write the briefing in natural, professional Bangla as a Bangladeshi city corporation health office would "
+          "(Bengali script, Bangla digits), not a word-for-word translation. Keep the numbers as given.\n\n")
 
 
 def get_briefing(facts: dict, use_llm: bool = True, lang: str = "en") -> tuple[str, str]:
