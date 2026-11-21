@@ -79,8 +79,8 @@ with right, st.container(key="glass_brief"):
 
 # ---- Full list -------------------------------------------------------------------
 section(tx.t("rb_all"), tx.t("rb_all_sub"))
-labels, back, key = keep_choice("rb_filter", ["all", "high", "worse"], lambda v: tx.t(f"rb_f_{v}"), "all")
-show = remember("rb_filter", back[st.segmented_control("Show", labels, key=key, required=True,
+labels, back, key, start = keep_choice("rb_filter", ["all", "high", "worse"], lambda v: tx.t(f"rb_f_{v}"), "all")
+show = remember("rb_filter", back[st.segmented_control("Show", labels, key=key, required=True, default=start,
                                                        label_visibility="collapsed")])
 view = fc.assign(rank=range(1, len(fc) + 1))
 if show == "high":

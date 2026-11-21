@@ -39,7 +39,7 @@ else:
     message = res.message
 with top_row[0]:
     html(f'<div class="dw-callout"><div class="ib" style="background:{"#111318" if ok else TIER_COLORS["Medium"]};'
-         f'color:#fff;border:none">{icon("check" if ok else "clock", 16)}</div><div><b>{tx.t("lv_src_" + res.source)}.</b>'
+         f'color:#fff;border:none">{icon("check" if ok else "clock", 16)}</div><div><b>{tx.t("lv_src_" + res.source)}{"।" if tx.lang() == "bn" else "."}</b>'
          f'<br><span class="dw-meta">{message}</span></div></div>')
 
 fc = engine.forecast_from_city_weather(res.weekly, h)
