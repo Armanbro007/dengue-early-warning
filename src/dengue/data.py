@@ -23,10 +23,11 @@ TARGET = "dengue_cases"
 REQUIRED_COLS = ["date", "city", "ward_id", *STATIC_COLS, *WEATHER_COLS, TARGET]
 
 
-def download_dataset(path: Path = config.DATA_PATH) -> Path:
+def download_dataset(path: Path | None = None) -> Path:
     """Fetch the official sheet as CSV (one request, with retries) and save it."""
     log.info("Local dataset missing; downloading official sheet once")
     text = download_text("google-sheet", config.SHEET_CSV_URL)
+    path = path or config.DATA_PATH
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
     return path
@@ -60,12 +61,17 @@ def validate(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def load_raw(path: Path = config.DATA_PATH, allow_download: bool = True) -> pd.DataFrame:
+def load_raw(path: Path | None = None, allow_download: bool = True, include_updates: bool = True) -> pd.DataFrame:
+    """Official dataset plus any appended weekly updates (updates win on overlap)."""
+    path = path or config.DATA_PATH
     if not path.exists():
         if not allow_download:
             raise FileNotFoundError(path)
         download_dataset(path)
-    return validate(pd.read_csv(path))
+    frames = [pd.read_csv(path)]
+    if include_updates and config.UPDATES_PATH.exists():
+        frames.append(pd.read_csv(config.UPDATES_PATH))
+    return validate(pd.concat(frames, ignore_index=True))
 
 
 def load_from_bytes(data: bytes) -> pd.DataFrame:
@@ -73,10 +79,19 @@ def load_from_bytes(data: bytes) -> pd.DataFrame:
     return validate(pd.read_csv(io.BytesIO(data)))
 
 
-def file_hash(path: Path = config.DATA_PATH) -> str:
-    """Short content hash: models/caches are rebuilt only when the data changes."""
+def has_updates() -> bool:
+    return config.UPDATES_PATH.exists()
+
+
+def file_hash(path: Path | None = None) -> str:
+    """Short content hash of the data (official file + updates).
+
+    Models and caches are rebuilt only when this changes.
+    """
     h = hashlib.sha1()
-    with open(path, "rb") as f:
-        for chunk in iter(lambda: f.read(1 << 20), b""):
-            h.update(chunk)
+    for p in (path or config.DATA_PATH, config.UPDATES_PATH):
+        if p.exists():
+            with open(p, "rb") as f:
+                for chunk in iter(lambda: f.read(1 << 20), b""):
+                    h.update(chunk)
     return h.hexdigest()[:12]

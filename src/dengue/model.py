@@ -119,13 +119,15 @@ def predict(bundle: dict, X: pd.DataFrame, h: int) -> pd.DataFrame:
     return pd.DataFrame({"pred": pred, "lo": lo, "hi": hi}, index=X.index)
 
 
-def save_bundle(bundle: dict, path=config.MODEL_PATH) -> None:
+def save_bundle(bundle: dict, path=None) -> None:
+    path = path or config.MODEL_PATH
     path.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(bundle, path, compress=3)
 
 
-def load_bundle(path=config.MODEL_PATH, data_hash: str | None = None) -> dict | None:
+def load_bundle(path=None, data_hash: str | None = None) -> dict | None:
     """Load a saved bundle; return None if missing, stale or from another sklearn version."""
+    path = path or config.MODEL_PATH
     if not path.exists():
         return None
     try:
@@ -142,12 +144,19 @@ def load_bundle(path=config.MODEL_PATH, data_hash: str | None = None) -> dict | 
     return bundle
 
 
-def load_or_train(feat: pd.DataFrame, data_hash: str) -> dict:
-    """Fast path: load serialized models. Slow path (~5 s): retrain and save."""
-    bundle = load_bundle(data_hash=data_hash)
+def ship_train_end(feat: pd.DataFrame) -> str:
+    """Official data only: train through 2023 so 2024-2025 stays an honest hold-out.
+    Once new weekly data has been added (live system), train on everything."""
+    from .data import has_updates
+    return str(feat["date"].max().date()) if has_updates() else config.SHIP_TRAIN_END
+
+
+def load_or_train(feat: pd.DataFrame, data_hash: str, force: bool = False) -> dict:
+    """Fast path: load serialized models. Slow path (~10 s): retrain and save."""
+    bundle = None if force else load_bundle(data_hash=data_hash)
     if bundle is None:
         log.info("Training models (no valid saved bundle found)")
-        bundle = train_bundle(feat, config.SHIP_TRAIN_END, data_hash)
+        bundle = train_bundle(feat, ship_train_end(feat), data_hash)
         try:
             save_bundle(bundle)
         except OSError as exc:

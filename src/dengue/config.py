@@ -14,6 +14,9 @@ load_dotenv(ROOT / ".env")
 
 # ---- Data ---------------------------------------------------------------
 DATA_PATH = ROOT / "data" / "bangladesh_dengue.csv"
+# New weekly data added through the dashboard or scripts/ingest.py (kept separate
+# from the official file so it can always be reset).
+UPDATES_PATH = ROOT / "data" / "updates.csv"
 # Official dataset (Google Sheet). Used only if the bundled CSV is missing.
 SHEET_ID = "1QFI0ACJRvJQkiQT3LfGHklM3g4PgaJWUt8xSVU07NIE"
 SHEET_CSV_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
