@@ -57,10 +57,10 @@ TIERS = ("Low", "Medium", "High", "Critical")
 TIER_MIN_CASES = {"Low": 0.0, "Medium": 2.0, "High": 5.0, "Critical": 10.0}
 # Status palette (always shown with the tier name, never colour alone)
 TIER_COLORS = {
-    "Low": "#4F9A63",
-    "Medium": "#D4A52F",
-    "High": "#D9602F",
-    "Critical": "#9C2E3B",
+    "Low": "#5B8DEF",
+    "Medium": "#D9A82E",
+    "High": "#E95A2C",
+    "Critical": "#A61E4D",
 }
 
 # ---- Network / cost controls --------------------------------------------

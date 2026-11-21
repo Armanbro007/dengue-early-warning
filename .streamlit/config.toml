@@ -1,40 +1,48 @@
-# "Calm light" theme: warm paper background, one deep-teal accent, serif headings.
-# Fonts are bundled in static/fonts (SIL Open Font License), so the look works offline.
+# "Soft glass" theme: cool grey canvas, frosted white cards, ink-black accents.
+# Fonts are bundled in static/fonts (SIL Open Font License), so the look works offline,
+# and Noto Sans Bengali covers the Bangla version.
 [theme]
 base = "light"
-primaryColor = "#1F6F6A"
-backgroundColor = "#FBFAF7"
-secondaryBackgroundColor = "#F3F1EC"
-textColor = "#1F2926"
-linkColor = "#1F6F6A"
+primaryColor = "#111318"
+backgroundColor = "#ECEDF1"
+secondaryBackgroundColor = "#F4F5F8"
+textColor = "#111318"
+linkColor = "#111318"
 linkUnderline = false
-borderColor = "#E6E2DA"
-dataframeBorderColor = "#ECE9E2"
-dataframeHeaderBackgroundColor = "#F7F5F0"
-showWidgetBorder = true
-showSidebarBorder = true
-baseRadius = "10px"
-buttonRadius = "8px"
-font = "'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif"
-headingFont = "Newsreader, Georgia, 'Times New Roman', serif"
-headingFontWeights = [500, 500, 600, 600, 600, 600]
-metricValueFontWeight = 600
+borderColor = "#E2E4EA"
+dataframeBorderColor = "#ECEDF0"
+dataframeHeaderBackgroundColor = "#F6F7F9"
+showWidgetBorder = false
+showSidebarBorder = false
+baseRadius = "14px"
+buttonRadius = "999px"
+font = "Geist, 'Noto Sans Bengali', 'Segoe UI', system-ui, sans-serif"
+headingFont = "Geist, 'Noto Sans Bengali', 'Segoe UI', system-ui, sans-serif"
+codeFont = "'Geist Mono', ui-monospace, monospace"
+headingFontWeights = [650, 650, 600, 600, 600, 600]
+metricValueFontWeight = 650
 
 [[theme.fontFaces]]
-family = "Plus Jakarta Sans"
-url = "app/static/fonts/PlusJakartaSans-latin.woff2"
-weight = "400 700"
+family = "Geist"
+url = "app/static/fonts/Geist-latin.woff2"
+weight = "300 800"
 style = "normal"
 
 [[theme.fontFaces]]
-family = "Newsreader"
-url = "app/static/fonts/Newsreader-latin.woff2"
+family = "Geist Mono"
+url = "app/static/fonts/GeistMono-latin.woff2"
 weight = "400 600"
 style = "normal"
 
+[[theme.fontFaces]]
+family = "Noto Sans Bengali"
+url = "app/static/fonts/NotoSansBengali-bengali.woff2"
+weight = "300 800"
+style = "normal"
+
 [theme.sidebar]
-backgroundColor = "#F4F2ED"
-secondaryBackgroundColor = "#FFFFFF"
+backgroundColor = "#ECEDF1"
+secondaryBackgroundColor = "#F4F5F8"
 
 [server]
 headless = true

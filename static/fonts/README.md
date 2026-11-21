@@ -1,6 +1,6 @@
 # Fonts
 
-- **Newsreader** (Production Type), headings
-- **Plus Jakarta Sans** (Tokotype), body text
+- **Geist** and **Geist Mono** (Vercel), Latin text and numbers
+- **Noto Sans Bengali** (Google), Bangla text
 
-Both are from Google Fonts under the SIL Open Font License 1.1, which allows bundling them with software. Only the Latin subset is included; Bangla text uses the system's Bangla font.
+All three are from Google Fonts under the SIL Open Font License 1.1, which allows bundling them with software. They are bundled so the dashboard looks the same offline.
