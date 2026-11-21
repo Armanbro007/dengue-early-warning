@@ -1,32 +1,32 @@
 """Season calendar: every ward, every week of a season, coloured by risk level."""
 import numpy as np
+import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
+import ui_text as tx
 from dengue.config import TIERS
 from dengue.tiers import tier_index
-from ui_common import (RAIN, TIER_COLORS, UP, get_engine, html, page_header, style_fig, tier_legend,
-                       ward_name)
+from ui_common import (RAIN, TIER_COLORS, UP, card_head, get_engine, html, keep_choice, page_header, remember,
+                       style_fig, tier_legend, ward_name)
 
 engine = get_engine()
 c = st.session_state["controls"]
 h = c["horizon"]
+n = tx.num
 
 years = sorted({d.year for d in engine.forecast_weeks()})[1:]
 year_default = c["as_of"].year if c["as_of"].year in years else years[-1]
 head = st.container()
 a, b = st.columns([1, 3])
-year = a.selectbox("Season", years, index=years.index(year_default))
-view = b.segmented_control("Show", ["What we forecast", "What really happened", "Where we were off"],
-                           default="What we forecast", key="cal_view") or "What we forecast"
+labels, back, key = keep_choice("hm_year", years, lambda y: n(y, "{}"), year_default)
+year = remember("hm_year", back[a.selectbox(tx.t("hm_season"), labels, key=key)])
+labels, back, key = keep_choice("hm_view", ["fc", "real", "off"], lambda v: tx.t(f"hm_v_{v}"), "fc")
+view = remember("hm_view", back[b.segmented_control("Show", labels, key=key, required=True, label_visibility="collapsed")])
+picked = tx.t(f"hm_v_{view}")
 
 with head:
-    page_header(
-        "Season calendar", f"How the {year} dengue season unfolded, ward by ward",
-        f"Each row is a ward and each column is a week from April to November. The colour shows the risk level "
-        f"DengueWatch warned about {h} weeks before that week. Read left to right to see an outbreak spread "
-        f"and to plan teams city by city.",
-    )
+    page_header(tx.t("hm_eyebrow"), tx.t("hm_title", year=n(year, "{}")), tx.t("hm_lead", h=n(h)))
 
 
 @st.cache_data(show_spinner=False)
@@ -36,45 +36,56 @@ def grid(year: int, h: int, city):
 
 g = grid(year, h, c["city"])
 if year <= engine.train_end.year:
-    st.info(f"{year} is part of the data the model learned from. Pick 2024 or 2025 to see forecasts on years it never saw.")
+    st.info(tx.t("hm_train", year=n(year, "{}")))
 
 g = g[(g["target_week"].dt.month >= 4) & (g["target_week"].dt.month <= 11)].assign(name=lambda d: d["ward_id"].map(ward_name))
 order = g.groupby(["city", "name"])["pred"].sum().reset_index().sort_values(["city", "pred"], ascending=[True, False])
 wards = order["name"].tolist()
 
-if view == "Where we were off":
-    z = g.pivot(index="name", columns="target_week", values="pred") - g.pivot(index="name", columns="target_week", values="actual")
-    z = z.reindex(wards)
+
+def pivot(col: str) -> pd.DataFrame:
+    return g.pivot(index="name", columns="target_week", values=col).reindex(wards)
+
+
+p, act = pivot("pred"), pivot("actual")
+weeks = [tx.short(w) for w in p.columns]
+fmt = lambda v, f="{:.0f}": "–" if pd.isna(v) else n(v, f)  # noqa: E731
+
+if view == "off":
+    z = p - act
     lim = float(np.nanpercentile(np.abs(z.values), 98)) or 1
+    hover = [[tx.t("hm_hover_off", ward=w, d=d, v=fmt(v, "{:+.1f}")) for d, v in zip(weeks, rowv)]
+             for w, rowv in zip(z.index, z.values)]
     fig = go.Figure(go.Heatmap(
-        z=z.values, x=z.columns, y=z.index, zmin=-lim, zmax=lim, zmid=0,
-        colorscale=[[0, RAIN], [0.5, "#F3F1EC"], [1, UP]], xgap=2, ygap=2,
-        colorbar=dict(title=dict(text="Forecast minus real", side="right"), thickness=12, len=0.5, y=1, yanchor="top",
+        z=z.values, x=z.columns, y=z.index, zmin=-lim, zmax=lim, zmid=0, text=hover,
+        colorscale=[[0, RAIN], [0.5, "#F4F5F8"], [1, UP]], xgap=2, ygap=2,
+        colorbar=dict(title=dict(text=tx.t("hm_cb"), side="right"), thickness=12, len=0.5, y=1, yanchor="top",
                       outlinewidth=0),
-        hovertemplate="%{y}<br>Week of %{x|%d %b}<br>Off by %{z:+.1f} cases<extra></extra>",
+        hovertemplate="%{text}<extra></extra>",
     ))
-    note = (f"Warm cells: the forecast was too high. Cool cells: it was too low. Pale cells: close to right. "
-            f"Most misses are a few cases in the busiest weeks.")
+    note = tx.t("hm_note_off")
 else:
-    col = "pred" if view == "What we forecast" else "actual"
+    col = "pred" if view == "fc" else "actual"
     g = g.assign(level=tier_index(g[col].fillna(0)))
-    z = g.pivot(index="name", columns="target_week", values="level").reindex(wards)
-    p = g.pivot(index="name", columns="target_week", values="pred").reindex(wards)
-    act = g.pivot(index="name", columns="target_week", values="actual").reindex(wards)
+    z = pivot("level")
+    hover = [[tx.t("hm_hover", ward=w, d=d, p=fmt(pv, "{:.1f}"), a=fmt(av)) for d, pv, av in zip(weeks, pr, ar)]
+             for w, pr, ar in zip(z.index, p.values, act.values)]
     scale = []
     for i, t in enumerate(TIERS):
         scale += [[i / 4, TIER_COLORS[t]], [(i + 1) / 4, TIER_COLORS[t]]]
     fig = go.Figure(go.Heatmap(
         z=z.values, x=z.columns, y=z.index, zmin=-0.5, zmax=3.5, colorscale=scale, xgap=2, ygap=2, showscale=False,
-        customdata=np.dstack([p.values, act.values]),
-        hovertemplate="%{y}<br>Week of %{x|%d %b}<br>Forecast %{customdata[0]:.1f} cases · real %{customdata[1]:.0f}<extra></extra>",
+        text=hover, hovertemplate="%{text}<extra></extra>",
     ))
-    note = ("Compare this with “What really happened” to see how closely the warnings matched reality."
-            if view == "What we forecast" else
-            "Real case counts, coloured with the same risk levels, so you can compare them with the forecast.")
+    note = tx.t("hm_note_fc") if view == "fc" else tx.t("hm_note_real")
 
-fig.update_xaxes(dtick="M1", tickformat="%b", showgrid=False)
-fig.update_yaxes(tickfont=dict(size=10), autorange="reversed", showgrid=False)
-st.plotly_chart(style_fig(fig, height=max(440, 15 * len(wards) + 60), legend=False), width="stretch")
-html(tier_legend() if view != "Where we were off" else "")
-st.caption(note + " Wards are grouped by city, busiest first.")
+with st.container(key="glass_calendar"):
+    html(card_head(picked, f"{note} {tx.t('hm_group')}", "grid"))
+    cols = pd.Series(z.columns)
+    firsts = cols.groupby(cols.dt.to_period("M")).min()  # label each month at its first week
+    fig.update_xaxes(tickvals=list(firsts), ticktext=[tx.month_ticks(d, d)[1][0] for d in firsts], showgrid=False, side="top")
+    fig.update_yaxes(tickfont=dict(size=10), autorange="reversed", showgrid=False)
+    st.plotly_chart(style_fig(fig, height=max(440, 15 * len(wards) + 60), legend=False), width="stretch",
+                    config={"displayModeBar": False})
+    html(tier_legend() if view != "off" else "")
+    st.write("")
