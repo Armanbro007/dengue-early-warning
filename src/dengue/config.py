@@ -49,7 +49,7 @@ MODEL_PARAMS = dict(
 INTERVAL = (0.10, 0.90)  # 80% prediction interval
 
 # ---- Risk tiers (predicted cases per ward per week) ---------------------
-# Set from the training distribution: ~p70 / p80 / p93 of weekly ward cases.
+# Set from the historical distribution: ~p66 / p78 / p90 of weekly ward cases.
 TIERS = ("Low", "Medium", "High", "Critical")
 TIER_MIN_CASES = {"Low": 0.0, "Medium": 2.0, "High": 5.0, "Critical": 10.0}
 # Status palette (always shown with the tier name, never colour alone)
