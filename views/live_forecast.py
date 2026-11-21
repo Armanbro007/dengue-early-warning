@@ -59,7 +59,7 @@ with b:
         .style.map(lambda v: f"background-color:{TIER_COLORS.get(v, '')};color:{'#0b0b0b' if v == 'Medium' else '#fff'};font-weight:600", subset=["tier"])
         .format({"pred": "{:.1f}", "lo": "{:.1f}", "hi": "{:.1f}"}),
         hide_index=True, use_container_width=True, height=360,
-        column_config={"ward_id": "Ward", "city": "City", "tier": "Tier", "pred": "Forecast", "lo": "Low", "hi": "High",
+        column_config={"ward_id": "Ward", "city": "City", "tier": "Tier", "pred": "Forecast", "lo": "Range from", "hi": "Range to",
                        "main_driver": "Main driver"},
     )
 st.caption("November is dry season in Bangladesh, so live risk is expected to be Low now. "

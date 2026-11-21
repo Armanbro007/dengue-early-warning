@@ -58,9 +58,7 @@ with col2:
     wx = engine.ward_weather(ward, as_of, weeks=10)
     fig = go.Figure()
     fig.add_vrect(x0=target - pd.Timedelta(weeks=4, days=3), x1=target - pd.Timedelta(weeks=2, days=-3),
-                  fillcolor="#2a78d6", opacity=0.10, line_width=0,
-                  annotation_text="rain that drives<br>the forecast week", annotation_position="top left",
-                  annotation_font_color="#52514e")
+                  fillcolor="#2a78d6", opacity=0.10, line_width=0)
     fig.add_bar(x=wx["date"], y=wx["rainfall_mm"], name="Weekly rainfall (mm)", marker_color=BLUE,
                 marker_line_width=0, hovertemplate="Week of %{x|%d %b}: %{y:.0f} mm<extra></extra>")
     fig.add_vline(x=as_of, line_color=MUTED, line_dash="dot", line_width=1)
@@ -70,7 +68,8 @@ with col2:
     fig.update_layout(title="The breeding clock: rain now, cases later", yaxis_title="Rainfall (mm/week)",
                       xaxis_range=[wx["date"].min() - pd.Timedelta(days=4), target + pd.Timedelta(days=5)])
     st.plotly_chart(style_fig(fig, height=380, legend=False), use_container_width=True)
-    st.caption("Dotted line = this week. Stagnant water needs 7-14 days to produce adult mosquitoes, then incubation and symptoms add more. "
+    st.caption("Dotted line = this week. Shaded band = the weeks whose rain drives the forecast week (2-4 weeks before it). "
+               "Stagnant water needs 7-14 days to produce adult mosquitoes, then incubation and symptoms add more. "
                "That is why this week's rain shows up in hospitals 2-4 weeks later.")
 
 # ---- What-if --------------------------------------------------------------
