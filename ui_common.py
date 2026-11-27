@@ -451,12 +451,14 @@ def remember(name: str, value):
     return value
 
 
-def sidebar_controls(engine: Engine) -> dict:
-    """Controls shared by every page (kept in session state across pages and languages)."""
+def sidebar_controls(engine: Engine, where=None) -> dict:
+    """Controls shared by every page (kept in session state across pages and languages).
+
+    `where` is the container to draw them in (the sidebar by default)."""
     weeks = engine.forecast_weeks()
     demo = pd.Timestamp("2025-06-02")  # just before the 2025 season took off (56 of 60 wards still Low)
     default_week = demo if demo in weeks else weeks[-1]
-    sb = st.sidebar
+    sb = st.sidebar if where is None else where
     ss = st.session_state
     lg = tx.lang()
 
@@ -471,7 +473,8 @@ def sidebar_controls(engine: Engine) -> dict:
             ss[key] = label_of(ss.get(f"v_{name}", default))
         return labels, dict(zip(labels, values)), key
 
-    html(f'<div class="dw-side-label">{tx.t("settings")}</div>', sb)
+    if where is None:
+        html(f'<div class="dw-side-label">{tx.t("settings")}</div>', sb)
     labels, back, key = widget("city", ["All cities", *engine.cities], tx.city, "All cities")
     city = back[sb.selectbox(tx.t("city"), labels, key=key)]
     labels, back, key = widget("as_of", weeks, tx.date, default_week)
