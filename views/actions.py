@@ -70,38 +70,6 @@ def next_button(cur: str) -> None:
                   icon_position="right", type="primary", key=f"next_{cur}", on_click=lambda: ss.__setitem__("step", nxt))
 
 
-def share_pdf_whatsapp(pdf: bytes, name: str, digits: str, caption: str) -> None:
-    """One button that sends the PDF notice itself to WhatsApp.
-
-    Where the browser can share files (phones, Windows/macOS Chrome and Edge, Safari) it opens the share sheet with the PDF so
-    the officer picks WhatsApp. Elsewhere it saves the PDF and opens the WhatsApp chat in a new tab, ready to attach it."""
-    import base64
-    import streamlit.components.v1 as components
-    b64 = base64.b64encode(pdf).decode()
-    label = L("Send PDF on WhatsApp", "হোয়াটসঅ্যাপে PDF পাঠান")
-    chat = f"https://wa.me/{digits}?text=" + urllib.parse.quote(caption)
-    components.html(f"""
-<button id="b" style="font:600 14px system-ui,sans-serif;background:#111318;color:#fff;border:0;border-radius:999px;padding:10px 18px;cursor:pointer">
-&#128196; {label}</button><div id="m" style="font:12px system-ui,sans-serif;color:#4B5160;margin-top:6px"></div>
-<script>
-const bytes = Uint8Array.from(atob("{b64}"), ch => ch.charCodeAt(0));
-const file = new File([bytes], "{name}", {{type: "application/pdf"}});
-document.getElementById("b").onclick = async () => {{
-  const m = document.getElementById("m");
-  try {{
-    if (navigator.canShare && navigator.canShare({{files: [file]}})) {{
-      await navigator.share({{files: [file], title: "{name}", text: {caption!r}}});
-      m.textContent = "Pick WhatsApp in the share menu."; return;
-    }}
-  }} catch (e) {{ if (e.name === "AbortError") return; }}
-  const a = document.createElement("a"); a.href = URL.createObjectURL(file); a.download = "{name}";
-  document.body.appendChild(a); a.click(); a.remove();
-  window.open({chat!r}, "_blank");
-  m.textContent = "PDF saved. WhatsApp opened in a new tab: attach {name} (paperclip) and send.";
-}};
-</script>""", height=72)
-
-
 def answer(text: str) -> None:
     html(f'<p class="dw-answer">{text}</p>')
 
@@ -385,13 +353,8 @@ else:
                 if digits.startswith("01") and len(digits) == 11:
                     digits = "88" + digits  # Bangladesh mobile without country code
                 if len(digits) >= 10:
-                    wa_pdf = dispatch.brief_pdf(w[w["ward_id"] == pick], target)
-                    if wa_pdf:
-                        share_pdf_whatsapp(wa_pdf, f"notice_{pick}.pdf", digits,
-                                           f"Dengue dispatch notice for {dispatch.ward_label(pick)}, week of {target:%d %b %Y}. PDF attached.")
-                    else:
-                        st.link_button(L("Open in WhatsApp", "হোয়াটসঅ্যাপে খুলুন"), f"https://wa.me/{digits}?text=" + urllib.parse.quote(row["whatsapp"]),
-                                       icon=":material/chat:", type="primary")
+                    st.link_button(L("Open in WhatsApp", "হোয়াটসঅ্যাপে খুলুন"), f"https://wa.me/{digits}?text=" + urllib.parse.quote(row["whatsapp"]),
+                                   icon=":material/chat:", type="primary")
                 else:
                     st.warning(L("That does not look like an email address or a phone number.", "এটি ইমেইল বা ফোন নম্বর মনে হচ্ছে না।"))
         st.caption(L("Note: sending opens Gmail or WhatsApp in a new browser tab, so it needs internet and will not work offline. "
