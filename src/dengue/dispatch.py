@@ -242,7 +242,7 @@ def write_exports(plan, week, out_dir: Path | None = None, brief_wards: int = 5)
     paths = []
     for name, text in files.items():
         p = out / name
-        p.write_text(text, encoding="utf-8")
+        p.write_text(text, encoding="utf-8", newline="")  # no CRLF doubling of CSV rows on Windows
         paths.append(p)
     pdf = brief_pdf(top, week)
     if pdf:
