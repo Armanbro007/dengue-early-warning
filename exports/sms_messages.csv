@@ -1,0 +1,61 @@
+priority,ward_id,city,status,sms
+1,DNCC_Ward_12,Dhaka North,OK,DengueWatch DNCC W12 wk 23Jun: ~9 cases (High). Saline 21/21 Kits 10/10. Beds 3 need/4 free. Crews 1/1. OK
+2,DSCC_Ward_04,Dhaka South,OK,DengueWatch DSCC W04 wk 23Jun: ~8 cases (High). Saline 20/20 Kits 10/10. Beds 2 need/5 free. Crews 1/1. OK
+3,CCC_Ward_03,Chattogram,OK,DengueWatch CCC W03 wk 23Jun: ~9 cases (High). Saline 22/22 Kits 11/11. Beds 3 need/4 free. Crews 2/1. OK
+4,CCC_Ward_01,Chattogram,OK,DengueWatch CCC W01 wk 23Jun: ~9 cases (High). Saline 21/21 Kits 10/10. Beds 3 need/4 free. Crews 1/1. OK
+5,DNCC_Ward_18,Dhaka North,OK,DengueWatch DNCC W18 wk 23Jun: ~8 cases (High). Saline 19/19 Kits 9/9. Beds 2 need/4 free. Crews 1/1. OK
+6,DSCC_Ward_06,Dhaka South,SHORTAGE,DengueWatch DSCC W06 wk 23Jun: ~8 cases (High). Saline 19/19 Kits 5/9. Beds 2 need/4 free. Crews 1/1. SHORTAGE
+7,DNCC_Ward_19,Dhaka North,SHORTAGE,DengueWatch DNCC W19 wk 23Jun: ~9 cases (High). Saline 21/21 Kits 5/10. Beds 3 need/3 free. Crews 1/1. SHORTAGE
+8,GCC_Ward_03,Gazipur,SHORTAGE,DengueWatch GCC W03 wk 23Jun: ~8 cases (High). Saline 13/19 Kits 5/9. Beds 2 need/3 free. Crews 1/1. SHORTAGE
+9,DSCC_Ward_10,Dhaka South,SHORTAGE,DengueWatch DSCC W10 wk 23Jun: ~8 cases (High). Saline 10/19 Kits 5/9. Beds 2 need/4 free. Crews 1/1. SHORTAGE
+10,GCC_Ward_05,Gazipur,SHORTAGE,DengueWatch GCC W05 wk 23Jun: ~8 cases (High). Saline 9/18 Kits 5/9. Beds 2 need/3 free. Crews 0/1. SHORTAGE
+11,GCC_Ward_01,Gazipur,SHORTAGE,DengueWatch GCC W01 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/4 free. Crews 0/1. SHORTAGE
+12,NCC_Ward_01,Narayanganj,SHORTAGE,DengueWatch NCC W01 wk 23Jun: ~6 cases (High). Saline 8/15 Kits 4/7. Beds 2 need/4 free. Crews 0/1. SHORTAGE
+13,DNCC_Ward_05,Dhaka North,SHORTAGE,DengueWatch DNCC W05 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/4 free. Crews 0/1. SHORTAGE
+14,DSCC_Ward_19,Dhaka South,SHORTAGE,DengueWatch DSCC W19 wk 23Jun: ~7 cases (High). Saline 9/17 Kits 4/8. Beds 2 need/4 free. Crews 0/1. SHORTAGE
+15,DNCC_Ward_09,Dhaka North,SHORTAGE,DengueWatch DNCC W09 wk 23Jun: ~9 cases (High). Saline 11/21 Kits 5/10. Beds 3 need/3 free. Crews 2/1. SHORTAGE
+16,DSCC_Ward_12,Dhaka South,SHORTAGE,DengueWatch DSCC W12 wk 23Jun: ~8 cases (High). Saline 9/18 Kits 5/9. Beds 2 need/3 free. Crews 1/1. SHORTAGE
+17,GCC_Ward_02,Gazipur,SHORTAGE,DengueWatch GCC W02 wk 23Jun: ~8 cases (High). Saline 10/19 Kits 5/9. Beds 2 need/2 free. Crews 2/1. SHORTAGE
+18,GCC_Ward_04,Gazipur,SHORTAGE,DengueWatch GCC W04 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/3 free. Crews 0/1. SHORTAGE
+19,DSCC_Ward_08,Dhaka South,SHORTAGE,DengueWatch DSCC W08 wk 23Jun: ~6 cases (High). Saline 8/15 Kits 4/7. Beds 2 need/4 free. Crews 0/1. SHORTAGE
+20,DNCC_Ward_16,Dhaka North,SHORTAGE,DengueWatch DNCC W16 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/3 free. Crews 0/1. SHORTAGE
+21,DNCC_Ward_10,Dhaka North,SHORTAGE,DengueWatch DNCC W10 wk 23Jun: ~7 cases (High). Saline 8/16 Kits 4/8. Beds 2 need/3 free. Crews 1/1. SHORTAGE
+22,DSCC_Ward_13,Dhaka South,SHORTAGE,DengueWatch DSCC W13 wk 23Jun: ~7 cases (High). Saline 8/16 Kits 4/8. Beds 2 need/3 free. Crews 0/1. SHORTAGE
+23,NCC_Ward_05,Narayanganj,SHORTAGE,DengueWatch NCC W05 wk 23Jun: ~8 cases (High). Saline 9/18 Kits 5/9. Beds 2 need/2 free. Crews 1/1. SHORTAGE
+24,DNCC_Ward_11,Dhaka North,SHORTAGE,DengueWatch DNCC W11 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/3 free. Crews 0/1. SHORTAGE
+25,CCC_Ward_07,Chattogram,SHORTAGE,DengueWatch CCC W07 wk 23Jun: ~8 cases (High). Saline 10/19 Kits 5/9. Beds 2 need/2 free. Crews 1/1. SHORTAGE
+26,DNCC_Ward_02,Dhaka North,SHORTAGE,DengueWatch DNCC W02 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/3 free. Crews 0/1. SHORTAGE
+27,DNCC_Ward_01,Dhaka North,SHORTAGE,DengueWatch DNCC W01 wk 23Jun: ~7 cases (High). Saline 9/17 Kits 4/8. Beds 2 need/2 free. Crews 0/1. SHORTAGE
+28,CCC_Ward_04,Chattogram,SHORTAGE,DengueWatch CCC W04 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/3 free. Crews 0/1. SHORTAGE
+29,DNCC_Ward_07,Dhaka North,SHORTAGE,DengueWatch DNCC W07 wk 23Jun: ~5 cases (High). Saline 7/13 Kits 3/6. Beds 2 need/2 free. Crews 0/1. SHORTAGE
+30,CCC_Ward_06,Chattogram,SHORTAGE,DengueWatch CCC W06 wk 23Jun: ~6 cases (High). Saline 8/15 Kits 4/7. Beds 2 need/2 free. Crews 0/1. SHORTAGE
+31,DSCC_Ward_02,Dhaka South,SHORTAGE,DengueWatch DSCC W02 wk 23Jun: ~6 cases (High). Saline 7/13 Kits 3/6. Beds 2 need/2 free. Crews 0/1. SHORTAGE
+32,DSCC_Ward_20,Dhaka South,SHORTAGE,DengueWatch DSCC W20 wk 23Jun: ~7 cases (High). Saline 9/18 Kits 5/9. Beds 2 need/2 free. Crews 1/1. SHORTAGE
+33,DSCC_Ward_09,Dhaka South,SHORTAGE,DengueWatch DSCC W09 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/2 free. Crews 0/1. SHORTAGE
+34,DSCC_Ward_15,Dhaka South,SHORTAGE,DengueWatch DSCC W15 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/2 free. Crews 0/1. SHORTAGE
+35,DSCC_Ward_03,Dhaka South,SHORTAGE,"DengueWatch DSCC W03 wk 23Jun: ~7 cases (High). Saline 9/18 Kits 5/9. Beds 2 need/1 free, 1 to DSCC W10. Crews 0/1. SHORTAGE"
+36,CCC_Ward_08,Chattogram,SHORTAGE,DengueWatch CCC W08 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/2 free. Crews 0/1. SHORTAGE
+37,DSCC_Ward_16,Dhaka South,SHORTAGE,DengueWatch DSCC W16 wk 23Jun: ~6 cases (High). Saline 7/13 Kits 3/6. Beds 2 need/2 free. Crews 0/1. SHORTAGE
+38,DSCC_Ward_18,Dhaka South,SHORTAGE,"DengueWatch DSCC W18 wk 23Jun: ~6 cases (High). Saline 8/15 Kits 4/7. Beds 2 need/1 free, 1 to DSCC W04. Crews 0/1. SHORTAGE"
+39,DNCC_Ward_06,Dhaka North,SHORTAGE,DengueWatch DNCC W06 wk 23Jun: ~5 cases (High). Saline 6/12 Kits 3/6. Beds 1 need/1 free. Crews 0/1. SHORTAGE
+40,DNCC_Ward_15,Dhaka North,SHORTAGE,"DengueWatch DNCC W15 wk 23Jun: ~7 cases (High). Saline 9/17 Kits 4/8. Beds 2 need/1 free, 1 to DNCC W18. Crews 0/1. SHORTAGE"
+41,DSCC_Ward_11,Dhaka South,SHORTAGE,"DengueWatch DSCC W11 wk 23Jun: ~6 cases (High). Saline 7/14 Kits 4/7. Beds 2 need/1 free, 1 to DSCC W04. Crews 0/1. SHORTAGE"
+42,DNCC_Ward_08,Dhaka North,SHORTAGE,"DengueWatch DNCC W08 wk 23Jun: ~5 cases (High). Saline 7/13 Kits 3/6. Beds 2 need/1 free, 1 to DNCC W05. Crews 0/1. SHORTAGE"
+43,DSCC_Ward_05,Dhaka South,SHORTAGE,"DengueWatch DSCC W05 wk 23Jun: ~7 cases (High). Saline 9/17 Kits 4/8. Beds 2 need/1 free, 1 to DSCC W06. Crews 1/1. SHORTAGE"
+44,DNCC_Ward_03,Dhaka North,SHORTAGE,"DengueWatch DNCC W03 wk 23Jun: ~6 cases (High). Saline 8/15 Kits 4/7. Beds 2 need/1 free, 1 to DNCC W04. Crews 0/1. SHORTAGE"
+45,NCC_Ward_03,Narayanganj,SHORTAGE,"DengueWatch NCC W03 wk 23Jun: ~6 cases (High). Saline 8/15 Kits 4/7. Beds 2 need/1 free, 1 to NCC W04. Crews 0/1. SHORTAGE"
+46,NCC_Ward_02,Narayanganj,SHORTAGE,"DengueWatch NCC W02 wk 23Jun: ~6 cases (High). Saline 7/13 Kits 3/6. Beds 2 need/1 free, 1 to NCC W01. Crews 0/1. SHORTAGE"
+47,NCC_Ward_04,Narayanganj,SHORTAGE,DengueWatch NCC W04 wk 23Jun: ~4 cases (Medium). Saline 6/11 Kits 3/5. Beds 1 need/4 free. Crews 0/0. SHORTAGE
+48,DNCC_Ward_04,Dhaka North,SHORTAGE,DengueWatch DNCC W04 wk 23Jun: ~4 cases (Medium). Saline 5/10 Kits 3/5. Beds 1 need/4 free. Crews 0/0. SHORTAGE
+49,CCC_Ward_10,Chattogram,SHORTAGE,DengueWatch CCC W10 wk 23Jun: ~5 cases (Medium). Saline 6/11 Kits 3/5. Beds 1 need/3 free. Crews 0/0. SHORTAGE
+50,DNCC_Ward_17,Dhaka North,SHORTAGE,DengueWatch DNCC W17 wk 23Jun: ~4 cases (Medium). Saline 6/11 Kits 3/5. Beds 1 need/3 free. Crews 0/0. SHORTAGE
+51,DNCC_Ward_14,Dhaka North,SHORTAGE,DengueWatch DNCC W14 wk 23Jun: ~5 cases (Medium). Saline 6/11 Kits 3/5. Beds 1 need/2 free. Crews 0/0. SHORTAGE
+52,DSCC_Ward_01,Dhaka South,SHORTAGE,DengueWatch DSCC W01 wk 23Jun: ~5 cases (Medium). Saline 6/11 Kits 3/5. Beds 1 need/3 free. Crews 0/0. SHORTAGE
+53,DSCC_Ward_07,Dhaka South,SHORTAGE,DengueWatch DSCC W07 wk 23Jun: ~4 cases (Medium). Saline 6/11 Kits 3/5. Beds 1 need/2 free. Crews 0/0. SHORTAGE
+54,DNCC_Ward_13,Dhaka North,SHORTAGE,DengueWatch DNCC W13 wk 23Jun: ~4 cases (Medium). Saline 5/9 Kits 2/4. Beds 1 need/2 free. Crews 0/0. SHORTAGE
+55,DSCC_Ward_17,Dhaka South,SHORTAGE,DengueWatch DSCC W17 wk 23Jun: ~4 cases (Medium). Saline 5/10 Kits 3/5. Beds 1 need/2 free. Crews 0/0. SHORTAGE
+56,CCC_Ward_09,Chattogram,SHORTAGE,DengueWatch CCC W09 wk 23Jun: ~4 cases (Medium). Saline 5/9 Kits 2/4. Beds 1 need/2 free. Crews 0/0. SHORTAGE
+57,CCC_Ward_05,Chattogram,SHORTAGE,DengueWatch CCC W05 wk 23Jun: ~5 cases (Medium). Saline 6/12 Kits 3/6. Beds 1 need/1 free. Crews 0/0. SHORTAGE
+58,DNCC_Ward_20,Dhaka North,SHORTAGE,DengueWatch DNCC W20 wk 23Jun: ~4 cases (Medium). Saline 5/9 Kits 2/4. Beds 1 need/1 free. Crews 0/0. SHORTAGE
+59,CCC_Ward_02,Chattogram,SHORTAGE,DengueWatch CCC W02 wk 23Jun: ~4 cases (Medium). Saline 5/10 Kits 3/5. Beds 1 need/1 free. Crews 0/0. SHORTAGE
+60,DSCC_Ward_14,Dhaka South,SHORTAGE,DengueWatch DSCC W14 wk 23Jun: ~4 cases (Medium). Saline 5/9 Kits 2/4. Beds 1 need/1 free. Crews 0/0. SHORTAGE

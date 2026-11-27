@@ -1,0 +1,986 @@
+*DengueWatch dispatch | DNCC Ward 12, Dhaka North*
+Week of 23 Jun 2025 | Status: *OK*
+
+*Forecast:* ~9 cases (High risk), range 5-15
+*Priority:* #1 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 21 / 21
+- Test kits: 10 / 10
+- Hospital beds: 3 needed / 4 free
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 7 fewer cases over the next 2-4 weeks
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 04, Dhaka South*
+Week of 23 Jun 2025 | Status: *OK*
+
+*Forecast:* ~8 cases (High risk), range 4-14
+*Priority:* #2 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 20 / 20
+- Test kits: 10 / 10
+- Hospital beds: 2 needed / 5 free
+- Receive 2 patient(s) from nearby wards
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 7 fewer cases over the next 2-4 weeks
+
+-----
+
+*DengueWatch dispatch | CCC Ward 03, Chattogram*
+Week of 23 Jun 2025 | Status: *OK*
+
+*Forecast:* ~9 cases (High risk), range 5-15
+*Priority:* #3 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 22 / 22
+- Test kits: 11 / 11
+- Hospital beds: 3 needed / 4 free
+
+*Spraying crews:* 2 assigned / 1 requested
+Expected effect: about 12 fewer cases over the next 2-4 weeks
+
+-----
+
+*DengueWatch dispatch | CCC Ward 01, Chattogram*
+Week of 23 Jun 2025 | Status: *OK*
+
+*Forecast:* ~9 cases (High risk), range 5-15
+*Priority:* #4 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 21 / 21
+- Test kits: 10 / 10
+- Hospital beds: 3 needed / 4 free
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 9 fewer cases over the next 2-4 weeks
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 18, Dhaka North*
+Week of 23 Jun 2025 | Status: *OK*
+
+*Forecast:* ~8 cases (High risk), range 4-14
+*Priority:* #5 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 19 / 19
+- Test kits: 9 / 9
+- Hospital beds: 2 needed / 4 free
+- Receive 1 patient(s) from nearby wards
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 7 fewer cases over the next 2-4 weeks
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 06, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~8 cases (High risk), range 4-14
+*Priority:* #6 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 19 / 19
+- Test kits: 5 / 9
+- Hospital beds: 2 needed / 4 free
+- Receive 1 patient(s) from nearby wards
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 8 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 56% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 19, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~9 cases (High risk), range 5-15
+*Priority:* #7 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 21 / 21
+- Test kits: 5 / 10
+- Hospital beds: 3 needed / 3 free
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 7 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | GCC Ward 03, Gazipur*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~8 cases (High risk), range 4-14
+*Priority:* #8 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 13 / 19
+- Test kits: 5 / 9
+- Hospital beds: 2 needed / 3 free
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 9 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 56% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 10, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~8 cases (High risk), range 4-14
+*Priority:* #9 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 10 / 19
+- Test kits: 5 / 9
+- Hospital beds: 2 needed / 4 free
+- Receive 1 patient(s) from nearby wards
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 8 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 53% of supplies covered
+
+-----
+
+*DengueWatch dispatch | GCC Ward 05, Gazipur*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~8 cases (High risk), range 4-14
+*Priority:* #10 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 9 / 18
+- Test kits: 5 / 9
+- Hospital beds: 2 needed / 3 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | GCC Ward 01, Gazipur*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #11 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 4 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | NCC Ward 01, Narayanganj*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #12 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 8 / 15
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 4 free
+- Receive 1 patient(s) from nearby wards
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 53% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 05, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #13 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 4 free
+- Receive 1 patient(s) from nearby wards
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 19, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~7 cases (High risk), range 3-13
+*Priority:* #14 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 9 / 17
+- Test kits: 4 / 8
+- Hospital beds: 2 needed / 4 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 09, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~9 cases (High risk), range 5-15
+*Priority:* #15 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 11 / 21
+- Test kits: 5 / 10
+- Hospital beds: 3 needed / 3 free
+
+*Spraying crews:* 2 assigned / 1 requested
+Expected effect: about 12 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 12, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~8 cases (High risk), range 4-14
+*Priority:* #16 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 9 / 18
+- Test kits: 5 / 9
+- Hospital beds: 2 needed / 3 free
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 8 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | GCC Ward 02, Gazipur*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~8 cases (High risk), range 4-14
+*Priority:* #17 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 10 / 19
+- Test kits: 5 / 9
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 2 assigned / 1 requested
+Expected effect: about 13 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 53% of supplies covered
+
+-----
+
+*DengueWatch dispatch | GCC Ward 04, Gazipur*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #18 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 3 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 08, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #19 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 8 / 15
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 4 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 53% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 16, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #20 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 3 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 10, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~7 cases (High risk), range 3-13
+*Priority:* #21 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 8 / 16
+- Test kits: 4 / 8
+- Hospital beds: 2 needed / 3 free
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 8 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 13, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~7 cases (High risk), range 3-12
+*Priority:* #22 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 8 / 16
+- Test kits: 4 / 8
+- Hospital beds: 2 needed / 3 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | NCC Ward 05, Narayanganj*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~8 cases (High risk), range 4-14
+*Priority:* #23 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 9 / 18
+- Test kits: 5 / 9
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 6 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 11, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #24 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 3 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | CCC Ward 07, Chattogram*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~8 cases (High risk), range 4-14
+*Priority:* #25 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 10 / 19
+- Test kits: 5 / 9
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 6 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 53% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 02, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #26 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 3 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 01, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~7 cases (High risk), range 3-13
+*Priority:* #27 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 9 / 17
+- Test kits: 4 / 8
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | CCC Ward 04, Chattogram*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #28 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 3 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 07, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~5 cases (High risk), range 1-11
+*Priority:* #29 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 13
+- Test kits: 3 / 6
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | CCC Ward 06, Chattogram*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #30 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 8 / 15
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 53% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 02, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #31 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 13
+- Test kits: 3 / 6
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 20, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~7 cases (High risk), range 3-13
+*Priority:* #32 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 9 / 18
+- Test kits: 5 / 9
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 6 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 09, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #33 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 15, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #34 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 03, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~7 cases (High risk), range 3-13
+*Priority:* #35 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 9 / 18
+- Test kits: 5 / 9
+- Hospital beds: 2 needed / 1 free
+- Overflow: send 1 patient(s) to DSCC Ward 10
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | CCC Ward 08, Chattogram*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #36 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 16, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #37 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 13
+- Test kits: 3 / 6
+- Hospital beds: 2 needed / 2 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 18, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #38 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 8 / 15
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 1 free
+- Overflow: send 1 patient(s) to DSCC Ward 04
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 53% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 06, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~5 cases (High risk), range 1-11
+*Priority:* #39 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 6 / 12
+- Test kits: 3 / 6
+- Hospital beds: 1 needed / 1 free
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 15, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~7 cases (High risk), range 3-13
+*Priority:* #40 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 9 / 17
+- Test kits: 4 / 8
+- Hospital beds: 2 needed / 1 free
+- Overflow: send 1 patient(s) to DNCC Ward 18
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 11, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #41 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 14
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 1 free
+- Overflow: send 1 patient(s) to DSCC Ward 04
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 08, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~5 cases (High risk), range 1-11
+*Priority:* #42 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 13
+- Test kits: 3 / 6
+- Hospital beds: 2 needed / 1 free
+- Overflow: send 1 patient(s) to DNCC Ward 05
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 05, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~7 cases (High risk), range 3-13
+*Priority:* #43 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 9 / 17
+- Test kits: 4 / 8
+- Hospital beds: 2 needed / 1 free
+- Overflow: send 1 patient(s) to DSCC Ward 06
+
+*Spraying crews:* 1 assigned / 1 requested
+Expected effect: about 6 fewer cases over the next 2-4 weeks
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 03, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #44 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 8 / 15
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 1 free
+- Overflow: send 1 patient(s) to DNCC Ward 04
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 53% of supplies covered
+
+-----
+
+*DengueWatch dispatch | NCC Ward 03, Narayanganj*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-12
+*Priority:* #45 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 8 / 15
+- Test kits: 4 / 7
+- Hospital beds: 2 needed / 1 free
+- Overflow: send 1 patient(s) to NCC Ward 04
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 53% of supplies covered
+
+-----
+
+*DengueWatch dispatch | NCC Ward 02, Narayanganj*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~6 cases (High risk), range 2-11
+*Priority:* #46 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 7 / 13
+- Test kits: 3 / 6
+- Hospital beds: 2 needed / 1 free
+- Overflow: send 1 patient(s) to NCC Ward 01
+
+*Spraying crews:* 0 assigned / 1 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | NCC Ward 04, Narayanganj*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~4 cases (Medium risk), range 2-9
+*Priority:* #47 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 6 / 11
+- Test kits: 3 / 5
+- Hospital beds: 1 needed / 4 free
+- Receive 1 patient(s) from nearby wards
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 55% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 04, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~4 cases (Medium risk), range 2-9
+*Priority:* #48 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 5 / 10
+- Test kits: 3 / 5
+- Hospital beds: 1 needed / 4 free
+- Receive 1 patient(s) from nearby wards
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | CCC Ward 10, Chattogram*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~5 cases (Medium risk), range 2-9
+*Priority:* #49 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 6 / 11
+- Test kits: 3 / 5
+- Hospital beds: 1 needed / 3 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 55% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 17, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~4 cases (Medium risk), range 2-9
+*Priority:* #50 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 6 / 11
+- Test kits: 3 / 5
+- Hospital beds: 1 needed / 3 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 55% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 14, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~5 cases (Medium risk), range 2-9
+*Priority:* #51 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 6 / 11
+- Test kits: 3 / 5
+- Hospital beds: 1 needed / 2 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 55% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 01, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~5 cases (Medium risk), range 2-9
+*Priority:* #52 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 6 / 11
+- Test kits: 3 / 5
+- Hospital beds: 1 needed / 3 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 55% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 07, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~4 cases (Medium risk), range 2-9
+*Priority:* #53 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 6 / 11
+- Test kits: 3 / 5
+- Hospital beds: 1 needed / 2 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 55% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 13, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~4 cases (Medium risk), range 1-8
+*Priority:* #54 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 5 / 9
+- Test kits: 2 / 4
+- Hospital beds: 1 needed / 2 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 17, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~4 cases (Medium risk), range 2-9
+*Priority:* #55 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 5 / 10
+- Test kits: 3 / 5
+- Hospital beds: 1 needed / 2 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | CCC Ward 09, Chattogram*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~4 cases (Medium risk), range 1-8
+*Priority:* #56 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 5 / 9
+- Test kits: 2 / 4
+- Hospital beds: 1 needed / 2 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | CCC Ward 05, Chattogram*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~5 cases (Medium risk), range 2-10
+*Priority:* #57 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 6 / 12
+- Test kits: 3 / 6
+- Hospital beds: 1 needed / 1 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DNCC Ward 20, Dhaka North*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~4 cases (Medium risk), range 1-9
+*Priority:* #58 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 5 / 9
+- Test kits: 2 / 4
+- Hospital beds: 1 needed / 1 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | CCC Ward 02, Chattogram*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~4 cases (Medium risk), range 2-9
+*Priority:* #59 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 5 / 10
+- Test kits: 3 / 5
+- Hospital beds: 1 needed / 1 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 50% of supplies covered
+
+-----
+
+*DengueWatch dispatch | DSCC Ward 14, Dhaka South*
+Week of 23 Jun 2025 | Status: *SHORTAGE*
+
+*Forecast:* ~4 cases (Medium risk), range 1-9
+*Priority:* #60 of the region
+
+*Supplies (allocated / required)*
+- Saline bags: 5 / 9
+- Test kits: 2 / 4
+- Hospital beds: 1 needed / 1 free
+
+*Spraying crews:* 0 assigned / 0 requested
+*Deficit alert:* only 50% of supplies covered

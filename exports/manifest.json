@@ -1,0 +1,20 @@
+{
+  "week": "2025-06-23",
+  "settings": {
+    "stock_pct": 60,
+    "crews": 20,
+    "beds_pct": 80,
+    "cautious": false
+  },
+  "files": [
+    "sms_messages.csv",
+    "sms_bangla.txt",
+    "whatsapp_messages.txt",
+    "city_digest_whatsapp.txt",
+    "commissioner_briefs.html",
+    "dispatch_plan.csv",
+    "bed_transfers.csv",
+    "commissioner_briefs.pdf"
+  ],
+  "network_used": false
+}
