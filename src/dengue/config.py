@@ -72,7 +72,7 @@ CIRCUIT_BREAKER_FAILS = 3
 CIRCUIT_BREAKER_COOLDOWN_S = 600
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash").strip()
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite").strip()
 LLM_DAILY_CALL_BUDGET = int(os.getenv("LLM_DAILY_CALL_BUDGET", "50"))
 LLM_MAX_OUTPUT_TOKENS = 300
 
@@ -84,3 +84,28 @@ CITY_COORDS = {
     "Gazipur": (24.00, 90.42),
     "Narayanganj": (23.62, 90.50),
 }
+
+# ---- Phase 2: operations (allocation, bed routing, crews, dispatch) --------
+# Supply items in the onsite dataset. Per-case ratios are LEARNED from the
+# training years (supply.learn_ratios), not typed in here.
+SUPPLY_ITEMS = ("saline_bags_needed", "diagnostic_kits_needed", "hospital_beds_required")
+CONSUMABLES = ("saline_bags_needed", "diagnostic_kits_needed")  # ordered from regional stock
+
+# The dataset has no bed counts, so each ward's usual dengue bed capacity is an
+# assumption: the beds it needed in 95% of training weeks (rounded up, at least 2).
+BED_CAPACITY_QUANTILE = 0.95
+MIN_WARD_BEDS = 2
+
+# Lifeline: every ward first gets this share of its need; below it is a CRITICAL deficit.
+CRITICAL_FILL = 0.5
+
+# Vector control (assumption, editable): one larvicide/fogging crew clears 20% of
+# the breeding water left by the last 3 weeks of rain; more crews in the same
+# ward clear 20% of what is left (diminishing returns). Max 4 crews per ward.
+CREW_COVERAGE = 0.20
+MAX_CREWS_PER_WARD = 4
+BREEDING_RAIN_LAGS = (0, 1, 2)  # weeks of rain a crew can still act on
+# Crews a ward asks for, by forecast tier.
+CREWS_NEEDED = {"Low": 0, "Medium": 1, "High": 2, "Critical": 3}
+
+EXPORTS_DIR = ROOT / "exports"
