@@ -1,5 +1,5 @@
 {
-  "data_hash": "9220f5ae7ed0",
+  "data_hash": "8e8ee8188189",
   "rows": 31320,
   "wards": 60,
   "split": {
@@ -707,8 +707,8 @@
     }
   ],
   "timing": {
-    "train_shipped_seconds": 11.15,
-    "inference_ms_all_wards": 4.11,
+    "train_shipped_seconds": 8.31,
+    "inference_ms_all_wards": 3.1,
     "model_file_kb": 1122.6
   }
 }

@@ -21,6 +21,9 @@ WEATHER_COLS = ["avg_temp_c", "max_temp_c", "min_temp_c", "rainfall_mm", "relati
 STATIC_COLS = ["population_density_sqkm", "water_logging_risk_index", "sanitation_score"]
 TARGET = "dengue_cases"
 REQUIRED_COLS = ["date", "city", "ward_id", *STATIC_COLS, *WEATHER_COLS, TARGET]
+# Phase 2 onsite dataset: what each ward-week actually needed. Optional, so weekly
+# updates without these columns still load (they only train the supply ratios).
+SUPPLY_COLS = ["saline_bags_needed", "diagnostic_kits_needed", "hospital_beds_required"]
 
 
 def download_dataset(path: Path | None = None) -> Path:
@@ -40,9 +43,10 @@ def validate(df: pd.DataFrame) -> pd.DataFrame:
     if missing:
         raise ValueError(f"Dataset is missing required columns: {missing}")
 
-    df = df[REQUIRED_COLS].copy()
+    supply = [c for c in SUPPLY_COLS if c in df.columns]
+    df = df[REQUIRED_COLS + supply].copy()
     df["date"] = pd.to_datetime(df["date"], errors="coerce")
-    for col in [*STATIC_COLS, *WEATHER_COLS, TARGET]:
+    for col in [*STATIC_COLS, *WEATHER_COLS, TARGET, *supply]:
         df[col] = pd.to_numeric(df[col], errors="coerce")
     df = df.dropna(subset=["date", "ward_id"])
     df = df.drop_duplicates(["ward_id", "date"], keep="last")
