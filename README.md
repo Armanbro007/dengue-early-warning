@@ -5,7 +5,9 @@
 
 **Rain today shows up as dengue cases in about three weeks.** DengueWatch uses that lag to forecast dengue cases for every ward in Dhaka North, Dhaka South, Chattogram, Gazipur and Narayanganj **2, 3 and 4 weeks ahead**. It ranks wards as Low / Medium / High / Critical, explains *why* each ward is at risk, and drafts an action briefing. City health officers can then send larvicide teams and hospital supplies to the right wards *before* admissions spike.
 
-Built for the **EDU AI Engineering Hackathon 2026, Phase 1: "AI for Urban Dengue Outbreak"** by team **Vibe Engineers**.
+**Phase 2 (onsite final): a command center.** Knowing cases will rise is only useful if officers know what to send. DengueWatch now turns each forecast into **saline, test kit, bed and spraying-crew allocations under real stock limits**, **routes hospital overflow to wards with free beds in the same city**, **simulates what spraying crews would prevent 2-4 weeks later**, and writes **SMS, WhatsApp and printable dispatch notices** for every ward. All of it runs offline.
+
+Built for the **EDU AI Engineering Hackathon 2026** ("AI for Urban Dengue Outbreak": Phase 1 early warning, Phase 2 onsite command center) by team **Vibe Engineers**.
 
 **Live demo: [denguewatchedu.streamlit.app](https://denguewatchedu.streamlit.app/)** (free hosting: if the app is asleep, press the wake-up button and give it about a minute).
 
@@ -48,11 +50,13 @@ Optional (use the same `.venv\Scripts\python` or `.venv/bin/python` in place of 
 ```bash
 cp .env.example .env        # (Windows: copy .env.example .env) then add GEMINI_API_KEY for AI-worded briefings
 python scripts/train.py     # rebuild features, evaluation (metrics.json) and models (~35 s)
-python -m pytest            # 36 tests: lag correctness, no leakage, explanations, retries/fallbacks, every page loads in English and Bangla
+python -m pytest            # 58 tests: lag correctness, no leakage, explanations, retries/fallbacks, allocation, routing,
+                            #   crew simulator, notices, a no-internet kill-switch run, every page in English and Bangla
+python scripts/export_dispatch.py --stock 60 --crews 20 --beds 80   # write sample notices to exports/
 python scripts/ingest.py new_weeks.csv   # add new weekly data and retrain (--reset to undo)
 ```
 
-Set `ALLOW_NETWORK=0` in `.env` to run fully offline.
+Set `ALLOW_NETWORK=0` in `.env`, or switch on **Offline mode** in the sidebar, to run fully offline.
 
 ## What the dashboard does
 
@@ -65,6 +69,17 @@ Set `ALLOW_NETWORK=0` in `.env` to run fully offline.
 | **Live forecast** | The same model fed with this week's real and forecast weather from Open-Meteo: one API call for all cities, cached, with offline fallbacks. |
 | **How accurate is it?** | Plain-language results on unseen years first, then the year-by-year backtest, lag evidence, baselines and confusion matrix for reviewers. |
 | **Add weekly data** | Upload the latest ward reports (CSV). The file is checked, merged and the models retrain in about 15 s. Reset any time. |
+
+**Command center (Phase 2).** Four pages share sidebar controls: *Regional stock* (30-100% of need), *Spraying crews available*, *Dengue beds free* (30-100%) and *Plan for a bad week* (use the top of the forecast range).
+
+| Page | What an officer gets |
+|---|---|
+| **Supplies & crews** | Saline bags, test kits, beds and crews for every ward from the forecast. When stock is short, the riskiest and most crowded wards are served first, every ward still gets a 50% lifeline, and **critical deficit warnings** update live. |
+| **Hospital beds** | Wards that need more beds than they have free send patients to the ward with the most free beds **in the same city**. Shows transfer orders, net ward deficits, and each city's bed use and headroom. |
+| **What-if crews** | Send crews automatically (best plan) or to chosen wards and see the forecast **2, 3 and 4 weeks later** with and without them: cases, beds and saline saved, and every ward ranked by **cases prevented per crew**. |
+| **Dispatch notices** | Per-ward **SMS** (≤ 160 characters), **Bangla SMS**, **WhatsApp** message, printable **HTML/PDF commissioner brief** and a city digest, plus a ZIP of all notices. Samples are in [`exports/`](exports/). |
+
+How each module works, the assumptions (bed capacity, crew effect) and timings are in [ARCHITECTURE.md, section 7](ARCHITECTURE.md#7-phase-2-from-forecast-to-action-command-center).
 
 The dashboard opens on **2 June 2025**, a week the model never saw during training. 56 of the 60 wards were still Low that week. The system flagged 46 wards as High for 23 June, and 52 of the 60 wards actually reached High or Critical.
 
@@ -103,12 +118,20 @@ src/dengue/
   briefing.py           officer briefing (English/Bangla): template or optional cached LLM
   i18n.py               Bangla names, digits and dates shared by the briefing and the pages
   ingest.py             add new weekly data, retrain, reset
+  supply.py             Phase 2 module 1: learned supply ratios, priority allocation under scarcity
+  overflow.py           module 2: bed overflow routing inside each city
+  simulator.py          module 3: model-driven crew what-if and ROI
+  operations.py         modules 1-3 combined into one plan per week
+  dispatch.py           module 4: SMS, Bangla SMS, WhatsApp, HTML/PDF briefs, exports
   weather_api.py        Open-Meteo client with cache and fallbacks
   http.py               retries, backoff, Retry-After, circuit breaker
 scripts/train.py        rebuild models + models/metrics.json
 scripts/ingest.py       add new weekly data from the command line
+scripts/export_dispatch.py  write sample dispatch notices to exports/ (offline)
+ui_ops.py               shared controls and cached plan for the command-center pages
+exports/                sample SMS, WhatsApp, briefs (HTML + PDF), plan and bed transfers
 tests/                  pytest suite (also run by GitHub Actions on Linux and Windows)
-data/                   official hackathon dataset (60 wards × 522 weeks)
+data/                   official onsite dataset (60 wards × 522 weeks, with saline, kit and bed needs)
 models/                 trained model bundle + evaluation metrics
 ```
 
@@ -116,12 +139,12 @@ models/                 trained model bundle + evaluation metrics
 
 | Tool / service | Type | What it was used for |
 |---|---|---|
-| **Claude (Anthropic), via Claude Code** | AI coding assistant | Analysing the brief and dataset, planning the architecture, and writing most of the code, tests and documentation under the team's direction. The team reviewed, ran and can explain all code. |
-| **Google Gemini API** (`generativelanguage.googleapis.com`, default model `gemini-2.5-flash`) | LLM API, **optional, off by default** | Rewording the officer briefing in plain language from model numbers only. Used only if `GEMINI_API_KEY` is set (the "Reword with AI" switch appears only then); otherwise a template is used. |
+| **Claude (Anthropic), via Claude Code** | AI coding assistant | Phase 1 and Phase 2: analysing the brief and dataset, planning the architecture, and writing most of the code, tests and documentation under the team's direction. The team reviewed, ran and can explain all code. |
+| **Google Gemini API** (`generativelanguage.googleapis.com`, default model `gemini-3.5-flash-lite`, set by `GEMINI_MODEL`) | LLM API, **optional, off by default** | Rewording the officer briefing in plain language from model numbers only. Used only if `GEMINI_API_KEY` is set (the "Reword with AI" switch appears only then); otherwise a template is used. **Not used by any Phase 2 module**: allocation, routing, the simulator and dispatch notices are plain code and templates. |
 | **Open-Meteo Forecast API** (`api.open-meteo.com`) | Weather API, free, no key | Live weather for the Live forecast page. |
 | **Google Sheets CSV export** | Dataset source | Official hackathon dataset; downloaded only if `data/bangladesh_dengue.csv` is missing. |
 
-No other AI services or external APIs are used. Open-source libraries: pandas, NumPy, scikit-learn, joblib, PyArrow, Streamlit, Plotly, Requests, python-dotenv, pytest (see `requirements.txt`). Fonts: Geist, Geist Mono and Noto Sans Bengali (SIL Open Font License, bundled in `static/fonts`). No significant third-party code snippets were copied.
+No other AI services or external APIs are used. Open-source libraries: pandas, NumPy, scikit-learn, joblib, PyArrow, Streamlit, Plotly, Requests, python-dotenv, pytest and fpdf2 (PDF briefs, optional) (see `requirements.txt`). Fonts: Geist, Geist Mono and Noto Sans Bengali (SIL Open Font License, bundled in `static/fonts`). No significant third-party code snippets were copied.
 
 ## Limitations and honest notes
 
@@ -129,3 +152,5 @@ No other AI services or external APIs are used. Open-source libraries: pandas, N
 - Live mode uses city-level weather for all wards in a city. Ward differences come from ward attributes.
 - November is dry season, so live risk is Low right now. The historical replay shows how the system behaves during the monsoon.
 - Forecast ranges are 80% ranges: about 1 in 5 weeks will fall outside them.
+- Phase 2 planning assumptions are stated, not measured: the dataset has no bed counts (we derive each city's bed pool from its past needs) and no crew data (one crew is assumed to clear 20% of recent breeding water; the What-if page lets you test 10-30%). See ARCHITECTURE.md section 7.8.
+- The model forecasts the expected number of cases and tends to under-call the size of sudden spikes, so the allocation offers a "plan for a bad week" switch that uses the top of the forecast range.
