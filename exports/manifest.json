@@ -1,9 +1,9 @@
 {
   "week": "2025-06-23",
   "settings": {
-    "stock_pct": 60,
+    "stock_pct": 60.0,
     "crews": 20,
-    "beds_pct": 80,
+    "beds_pct": 80.0,
     "cautious": false
   },
   "files": [

@@ -21,6 +21,23 @@ flowchart LR
 
 Code layout: `src/dengue/` holds all logic and has no Streamlit dependency (so Phase 2 can add an API or a scheduled job), `views/` holds one file per dashboard page, `scripts/train.py` rebuilds everything, `tests/` checks lag correctness, leakage and explanation maths.
 
+
+## Dashboard layout (redesigned 27 Nov 2026 for first-time officers)
+
+No sidebar. Three tabs at the top, plus one floating switch:
+
+| Where | What the officer sees | Module |
+|---|---|---|
+| **Report** (`views/report.py`) | One-sentence answer, "act on these wards first", all 60 wards as tappable squares (the data has no coordinates, so an honest grid, not a fake map), why a ward is at risk and what it will need | forecast |
+| **Actions → 1 Send crews** | "How many crews?" → where they go, cases / beds / saline prevented over weeks 2-4, with vs without chart, ROI ranking, pick wards yourself | 3 |
+| **Actions → 2 Share supplies** | 30-100% stock slider, live CRITICAL / Short deficit alerts, allocation table in priority order (risk, then cases × density) | 1 |
+| **Actions → 3 Hospital beds** | beds-free slider, wards over their limit, transfer orders inside each city, net deficit per ward, city bed use and beds left | 2 |
+| **Actions → 4 Send notices** | printable notice, WhatsApp, SMS (EN + Bangla), city summary, downloads, email / WhatsApp send box | 4 |
+| **Reality check** (floating switch, bottom right) | accuracy ring (share of real high-risk wards warned in time); when on, the ward map turns warned / missed / false alarm / calm and a card compares expected vs real cases and saline, plus what the crews would have saved | backtest |
+| **More** | ward table, season calendar, accuracy report, one ward in depth, full reality comparison, system status; "Update weekly data" and "Live weather" shown as coming soon | - |
+
+Report week, look-ahead, city and the offline kill switch sit in the week menu at the top right. Shared pieces: `ui_shell.py` (top bar), `ui_map.py` (ward grid), `ui_reality.py` (Reality check), `ui_ops.py` (cached plan).
+
 ## 2. Features: the "breeding clock"
 
 Rain → stagnant water → 7-14 days for *Aedes* larvae to become adults → viral incubation → symptoms. In this dataset, weekly cases correlate most with **rainfall 3 weeks earlier (r = 0.75)**, versus 0.53 for same-week rain. Features, all computed with `groupby("ward_id").shift(k)` so a ward never reads another ward's weather:
@@ -106,7 +123,7 @@ flowchart LR
   D --> X[("/exports + downloads")]
 ```
 
-Everything in this diagram is local Python (pandas, NumPy and the saved scikit-learn models). None of it calls the internet, so it is unaffected by the offline kill switch (module 5). Code: `src/dengue/{supply,overflow,simulator,operations,dispatch}.py`; pages: `views/{allocation,overflow,simulator,dispatch}.py`; shared controls: `ui_ops.py`.
+Everything in this diagram is local Python (pandas, NumPy and the saved scikit-learn models). None of it calls the internet, so it is unaffected by the offline kill switch (module 5). Code: `src/dengue/{supply,overflow,simulator,operations,dispatch}.py`; page: `views/actions.py` (one step per module); shared plan cache: `ui_ops.py`.
 
 ### 7.2 Module 1: constrained resource allocation (`supply.py`)
 
@@ -127,7 +144,7 @@ Everything in this diagram is local Python (pandas, NumPy and the saved scikit-l
 
 A **model-driven counterfactual**, not a fixed percentage. The forecast model learned that rain 0-6 weeks ago drives cases 2-4 weeks later (rain → standing water → larvae → mosquitoes → cases). A larvicide/fogging crew destroys part of that standing water, so we ask the same trained model what it would forecast with less breeding water:
 
-- coverage(c crews) = 1 − (1 − 0.20)^c → 20%, 36%, 49%, 59% for 1-4 crews (diminishing returns, max 4 per ward). The 20% is an editable assumption (`config.CREW_COVERAGE`, and a 10-30% slider on the page to test sensitivity).
+- coverage(c crews) = 1 − (1 − 0.20)^c → 20%, 36%, 49%, 59% for 1-4 crews (diminishing returns, max 4 per ward). The 20% is an editable assumption (`config.CREW_COVERAGE`). Crew numbers are an example input (the data has no crew counts): the officer types the real number.
 - Treated features: rain lags 0, 1, 2 × (1 − coverage), rolling rain totals rebuilt.
 - Cases prevented = forecast(no crews) − forecast(with crews) at **2, 3 and 4 weeks ahead**; beds and saline saved = cases prevented × the learned ratios.
 - **ROI = cases prevented over weeks 2-4 ÷ crews.** Wet, dense, badly drained wards gain most, because that is where the model's response to rain is strongest.
@@ -143,15 +160,15 @@ Fixed templates filled from the plan row, so a notice can never contain a number
 | SMS (≤ 160 plain characters, tested) | ward health officer | cases + tier, saline and kits allocated/required, beds needed/free and transfers, crews, status |
 | Bangla SMS (Unicode) | field staff | the same in Bangla words and digits |
 | WhatsApp | ward / city groups | structured message with bold labels, deficit alert, expected effect of crews |
-| HTML brief (print → one ward per page) and PDF | ward commissioner | forecast, required vs allocated table with deficits, action list |
+| HTML notice (print → one ward per page) and PDF | ward commissioner | ref no., To/From, risk now vs that week, main reason, required / allocated / deficit (saline, kits, beds, crews), bed routing with city beds left, numbered recommended actions, signature lines |
 | City digest | city health officer | bed use, transfers, headroom, total supplies and crews per city |
 
-Samples for the 23 June 2025 replay week (60% stock, 20 crews, 80% beds free) are in [`exports/`](exports/); regenerate with `python scripts/export_dispatch.py --stock 60 --crews 20 --beds 80`. The Dispatch page also downloads one ward's brief (HTML/PDF) or a ZIP of all notices.
+Samples for the 23 June 2025 replay week (60% stock, 20 crews, 80% beds free) are in [`exports/`](exports/); regenerate with `python scripts/export_dispatch.py --stock 60 --crews 20 --beds 80`. Actions → step 4 shows one ward's notice, downloads it (HTML/PDF) or a ZIP of all 60, and can open the message in email or WhatsApp for an address the officer types (that one action needs internet; making the notices does not).
 
 ### 7.6 Module 5: offline resilience and deterministic fallback
 
 - **What needs the internet:** only the optional live weather (Open-Meteo) and the optional Gemini rewording. Forecasting, allocation, routing, the simulator and every notice are local and deterministic: same inputs, same outputs, no randomness.
-- **Kill switch:** the sidebar's *Offline mode* toggle (or `ALLOW_NETWORK=0`) cuts every outbound call at once; pages show an offline banner. Without the toggle, a real Wi-Fi loss is handled by the Phase 1 network layer (timeouts, retries, circuit breaker, cache → climatology, LLM → template).
+- **Kill switch:** the *Offline mode* toggle (top-right week menu) (or `ALLOW_NETWORK=0`) cuts every outbound call at once; pages show an offline banner. Without the toggle, a real Wi-Fi loss is handled by the Phase 1 network layer (timeouts, retries, circuit breaker, cache → climatology, LLM → template).
 - **Tested:** `tests/test_offline.py` blocks every socket and DNS lookup while the network setting is still on and a fake Gemini key is set, then runs the engine, the full plan, the exports, the LLM fallback and every dashboard page, asserting zero exceptions.
 - Fonts are bundled and charts render in the browser, so the UI looks the same offline.
 

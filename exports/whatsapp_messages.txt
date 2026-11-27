@@ -2,6 +2,7 @@
 Week of 23 Jun 2025 | Status: *OK*
 
 *Forecast:* ~9 cases (High risk), range 5-15
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +76% compared with normal for the season
 *Priority:* #1 of the region
 
 *Supplies (allocated / required)*
@@ -12,12 +13,18 @@ Week of 23 Jun 2025 | Status: *OK*
 *Spraying crews:* 1 assigned / 1 requested
 Expected effect: about 7 fewer cases over the next 2-4 weeks
 
+*Recommended actions*
+1. Deploy 1 larvicide/fogging crew(s) this week: about 7 fewer cases expected over weeks 2-4.
+2. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+3. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 04, Dhaka South*
 Week of 23 Jun 2025 | Status: *OK*
 
 *Forecast:* ~8 cases (High risk), range 4-14
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +78% compared with normal for the season
 *Priority:* #2 of the region
 
 *Supplies (allocated / required)*
@@ -29,12 +36,19 @@ Week of 23 Jun 2025 | Status: *OK*
 *Spraying crews:* 1 assigned / 1 requested
 Expected effect: about 7 fewer cases over the next 2-4 weeks
 
+*Recommended actions*
+1. Prepare to receive 2 patient(s) from neighbouring wards.
+2. Deploy 1 larvicide/fogging crew(s) this week: about 7 fewer cases expected over weeks 2-4.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | CCC Ward 03, Chattogram*
 Week of 23 Jun 2025 | Status: *OK*
 
 *Forecast:* ~9 cases (High risk), range 5-15
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +77% compared with normal for the season
 *Priority:* #3 of the region
 
 *Supplies (allocated / required)*
@@ -45,12 +59,18 @@ Week of 23 Jun 2025 | Status: *OK*
 *Spraying crews:* 2 assigned / 1 requested
 Expected effect: about 12 fewer cases over the next 2-4 weeks
 
+*Recommended actions*
+1. Deploy 2 larvicide/fogging crew(s) this week: about 12 fewer cases expected over weeks 2-4.
+2. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+3. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | CCC Ward 01, Chattogram*
 Week of 23 Jun 2025 | Status: *OK*
 
 *Forecast:* ~9 cases (High risk), range 5-15
+*Risk:* Medium now, High that week | *Why:* rain over the last 3 weeks was +82% compared with normal for the season
 *Priority:* #4 of the region
 
 *Supplies (allocated / required)*
@@ -61,12 +81,18 @@ Week of 23 Jun 2025 | Status: *OK*
 *Spraying crews:* 1 assigned / 1 requested
 Expected effect: about 9 fewer cases over the next 2-4 weeks
 
+*Recommended actions*
+1. Deploy 1 larvicide/fogging crew(s) this week: about 9 fewer cases expected over weeks 2-4.
+2. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+3. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 18, Dhaka North*
 Week of 23 Jun 2025 | Status: *OK*
 
 *Forecast:* ~8 cases (High risk), range 4-14
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +83% compared with normal for the season
 *Priority:* #5 of the region
 
 *Supplies (allocated / required)*
@@ -78,12 +104,19 @@ Week of 23 Jun 2025 | Status: *OK*
 *Spraying crews:* 1 assigned / 1 requested
 Expected effect: about 7 fewer cases over the next 2-4 weeks
 
+*Recommended actions*
+1. Prepare to receive 1 patient(s) from neighbouring wards.
+2. Deploy 1 larvicide/fogging crew(s) this week: about 7 fewer cases expected over weeks 2-4.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 06, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~8 cases (High risk), range 4-14
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +84% compared with normal for the season
 *Priority:* #6 of the region
 
 *Supplies (allocated / required)*
@@ -96,12 +129,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 8 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 56% of supplies covered
 
+*Recommended actions*
+1. Prepare to receive 1 patient(s) from neighbouring wards.
+2. Deploy 1 larvicide/fogging crew(s) this week: about 8 fewer cases expected over weeks 2-4.
+3. Supplies cover only 56% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 19, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~9 cases (High risk), range 5-15
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +73% compared with normal for the season
 *Priority:* #7 of the region
 
 *Supplies (allocated / required)*
@@ -113,12 +153,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 7 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Deploy 1 larvicide/fogging crew(s) this week: about 7 fewer cases expected over weeks 2-4.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | GCC Ward 03, Gazipur*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~8 cases (High risk), range 4-14
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +71% compared with normal for the season
 *Priority:* #8 of the region
 
 *Supplies (allocated / required)*
@@ -130,12 +177,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 9 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 56% of supplies covered
 
+*Recommended actions*
+1. Deploy 1 larvicide/fogging crew(s) this week: about 9 fewer cases expected over weeks 2-4.
+2. Supplies cover only 56% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 10, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~8 cases (High risk), range 4-14
+*Risk:* Medium now, High that week | *Why:* rain over the last 3 weeks was +79% compared with normal for the season
 *Priority:* #9 of the region
 
 *Supplies (allocated / required)*
@@ -148,12 +202,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 8 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 53% of supplies covered
 
+*Recommended actions*
+1. Prepare to receive 1 patient(s) from neighbouring wards.
+2. Deploy 1 larvicide/fogging crew(s) this week: about 8 fewer cases expected over weeks 2-4.
+3. Supplies cover only 53% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | GCC Ward 05, Gazipur*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~8 cases (High risk), range 4-14
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +76% compared with normal for the season
 *Priority:* #10 of the region
 
 *Supplies (allocated / required)*
@@ -164,12 +225,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | GCC Ward 01, Gazipur*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +77% compared with normal for the season
 *Priority:* #11 of the region
 
 *Supplies (allocated / required)*
@@ -180,12 +248,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | NCC Ward 01, Narayanganj*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +71% compared with normal for the season
 *Priority:* #12 of the region
 
 *Supplies (allocated / required)*
@@ -197,12 +272,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 53% of supplies covered
 
+*Recommended actions*
+1. Prepare to receive 1 patient(s) from neighbouring wards.
+2. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+3. Supplies cover only 53% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 05, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +75% compared with normal for the season
 *Priority:* #13 of the region
 
 *Supplies (allocated / required)*
@@ -214,12 +296,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Prepare to receive 1 patient(s) from neighbouring wards.
+2. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+3. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 19, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~7 cases (High risk), range 3-13
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +78% compared with normal for the season
 *Priority:* #14 of the region
 
 *Supplies (allocated / required)*
@@ -230,12 +319,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 09, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~9 cases (High risk), range 5-15
+*Risk:* Medium now, High that week | *Why:* rain over the last 3 weeks was +71% compared with normal for the season
 *Priority:* #15 of the region
 
 *Supplies (allocated / required)*
@@ -247,12 +343,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 12 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Deploy 2 larvicide/fogging crew(s) this week: about 12 fewer cases expected over weeks 2-4.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 12, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~8 cases (High risk), range 4-14
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +91% compared with normal for the season
 *Priority:* #16 of the region
 
 *Supplies (allocated / required)*
@@ -264,12 +367,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 8 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Deploy 1 larvicide/fogging crew(s) this week: about 8 fewer cases expected over weeks 2-4.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | GCC Ward 02, Gazipur*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~8 cases (High risk), range 4-14
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +70% compared with normal for the season
 *Priority:* #17 of the region
 
 *Supplies (allocated / required)*
@@ -281,12 +391,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 13 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 53% of supplies covered
 
+*Recommended actions*
+1. Deploy 2 larvicide/fogging crew(s) this week: about 13 fewer cases expected over weeks 2-4.
+2. Supplies cover only 53% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | GCC Ward 04, Gazipur*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +78% compared with normal for the season
 *Priority:* #18 of the region
 
 *Supplies (allocated / required)*
@@ -297,12 +414,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 08, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +88% compared with normal for the season
 *Priority:* #19 of the region
 
 *Supplies (allocated / required)*
@@ -313,12 +437,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 53% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 53% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 16, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +76% compared with normal for the season
 *Priority:* #20 of the region
 
 *Supplies (allocated / required)*
@@ -329,12 +460,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 10, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~7 cases (High risk), range 3-13
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +79% compared with normal for the season
 *Priority:* #21 of the region
 
 *Supplies (allocated / required)*
@@ -346,12 +484,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 8 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Deploy 1 larvicide/fogging crew(s) this week: about 8 fewer cases expected over weeks 2-4.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 13, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~7 cases (High risk), range 3-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +72% compared with normal for the season
 *Priority:* #22 of the region
 
 *Supplies (allocated / required)*
@@ -362,12 +507,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | NCC Ward 05, Narayanganj*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~8 cases (High risk), range 4-14
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +71% compared with normal for the season
 *Priority:* #23 of the region
 
 *Supplies (allocated / required)*
@@ -379,12 +531,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 6 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Deploy 1 larvicide/fogging crew(s) this week: about 6 fewer cases expected over weeks 2-4.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 11, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +80% compared with normal for the season
 *Priority:* #24 of the region
 
 *Supplies (allocated / required)*
@@ -395,12 +554,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | CCC Ward 07, Chattogram*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~8 cases (High risk), range 4-14
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +82% compared with normal for the season
 *Priority:* #25 of the region
 
 *Supplies (allocated / required)*
@@ -412,12 +578,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 6 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 53% of supplies covered
 
+*Recommended actions*
+1. Deploy 1 larvicide/fogging crew(s) this week: about 6 fewer cases expected over weeks 2-4.
+2. Supplies cover only 53% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 02, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +88% compared with normal for the season
 *Priority:* #26 of the region
 
 *Supplies (allocated / required)*
@@ -428,12 +601,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 01, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~7 cases (High risk), range 3-13
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +59% compared with normal for the season
 *Priority:* #27 of the region
 
 *Supplies (allocated / required)*
@@ -444,12 +624,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | CCC Ward 04, Chattogram*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +67% compared with normal for the season
 *Priority:* #28 of the region
 
 *Supplies (allocated / required)*
@@ -460,12 +647,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 07, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~5 cases (High risk), range 1-11
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +77% compared with normal for the season
 *Priority:* #29 of the region
 
 *Supplies (allocated / required)*
@@ -476,12 +670,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | CCC Ward 06, Chattogram*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +71% compared with normal for the season
 *Priority:* #30 of the region
 
 *Supplies (allocated / required)*
@@ -492,12 +693,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 53% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 53% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 02, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +70% compared with normal for the season
 *Priority:* #31 of the region
 
 *Supplies (allocated / required)*
@@ -508,12 +716,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 20, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~7 cases (High risk), range 3-13
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +70% compared with normal for the season
 *Priority:* #32 of the region
 
 *Supplies (allocated / required)*
@@ -525,12 +740,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 6 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Deploy 1 larvicide/fogging crew(s) this week: about 6 fewer cases expected over weeks 2-4.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 09, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +82% compared with normal for the season
 *Priority:* #33 of the region
 
 *Supplies (allocated / required)*
@@ -541,12 +763,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 15, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +83% compared with normal for the season
 *Priority:* #34 of the region
 
 *Supplies (allocated / required)*
@@ -557,12 +786,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 03, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~7 cases (High risk), range 3-13
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +70% compared with normal for the season
 *Priority:* #35 of the region
 
 *Supplies (allocated / required)*
@@ -574,12 +810,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Transfer 1 patient(s) to DSCC Ward 10 (same city) when local beds are full.
+2. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+3. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | CCC Ward 08, Chattogram*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Medium now, High that week | *Why:* rain over the last 3 weeks was +88% compared with normal for the season
 *Priority:* #36 of the region
 
 *Supplies (allocated / required)*
@@ -590,12 +833,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 16, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +87% compared with normal for the season
 *Priority:* #37 of the region
 
 *Supplies (allocated / required)*
@@ -606,12 +856,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 18, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +81% compared with normal for the season
 *Priority:* #38 of the region
 
 *Supplies (allocated / required)*
@@ -623,12 +880,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 53% of supplies covered
 
+*Recommended actions*
+1. Transfer 1 patient(s) to DSCC Ward 04 (same city) when local beds are full.
+2. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+3. Supplies cover only 53% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 06, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~5 cases (High risk), range 1-11
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +79% compared with normal for the season
 *Priority:* #39 of the region
 
 *Supplies (allocated / required)*
@@ -639,12 +903,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+4. Alert clinics and pharmacies: test fever cases early (NS1) and report new cases daily.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 15, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~7 cases (High risk), range 3-13
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +74% compared with normal for the season
 *Priority:* #40 of the region
 
 *Supplies (allocated / required)*
@@ -656,12 +927,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Transfer 1 patient(s) to DNCC Ward 18 (same city) when local beds are full.
+2. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+3. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 11, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +75% compared with normal for the season
 *Priority:* #41 of the region
 
 *Supplies (allocated / required)*
@@ -673,12 +951,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Transfer 1 patient(s) to DSCC Ward 04 (same city) when local beds are full.
+2. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+3. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 08, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~5 cases (High risk), range 1-11
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +73% compared with normal for the season
 *Priority:* #42 of the region
 
 *Supplies (allocated / required)*
@@ -690,12 +975,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Transfer 1 patient(s) to DNCC Ward 05 (same city) when local beds are full.
+2. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+3. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 05, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~7 cases (High risk), range 3-13
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +93% compared with normal for the season
 *Priority:* #43 of the region
 
 *Supplies (allocated / required)*
@@ -708,12 +1000,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 Expected effect: about 6 fewer cases over the next 2-4 weeks
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Transfer 1 patient(s) to DSCC Ward 06 (same city) when local beds are full.
+2. Deploy 1 larvicide/fogging crew(s) this week: about 6 fewer cases expected over weeks 2-4.
+3. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 03, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +80% compared with normal for the season
 *Priority:* #44 of the region
 
 *Supplies (allocated / required)*
@@ -725,12 +1024,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 53% of supplies covered
 
+*Recommended actions*
+1. Transfer 1 patient(s) to DNCC Ward 04 (same city) when local beds are full.
+2. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+3. Supplies cover only 53% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | NCC Ward 03, Narayanganj*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-12
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +92% compared with normal for the season
 *Priority:* #45 of the region
 
 *Supplies (allocated / required)*
@@ -742,12 +1048,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 53% of supplies covered
 
+*Recommended actions*
+1. Transfer 1 patient(s) to NCC Ward 04 (same city) when local beds are full.
+2. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+3. Supplies cover only 53% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | NCC Ward 02, Narayanganj*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~6 cases (High risk), range 2-11
+*Risk:* Low now, High that week | *Why:* rain over the last 3 weeks was +76% compared with normal for the season
 *Priority:* #46 of the region
 
 *Supplies (allocated / required)*
@@ -759,12 +1072,19 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 1 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Transfer 1 patient(s) to NCC Ward 01 (same city) when local beds are full.
+2. 1 spraying crew(s) requested but none available: start source reduction with volunteers.
+3. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+4. Clear standing water (drains, tyres, rooftops, construction sites) with a ward clean-up drive this week.
+
 -----
 
 *DengueWatch dispatch | NCC Ward 04, Narayanganj*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~4 cases (Medium risk), range 2-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +77% compared with normal for the season
 *Priority:* #47 of the region
 
 *Supplies (allocated / required)*
@@ -776,12 +1096,18 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 55% of supplies covered
 
+*Recommended actions*
+1. Prepare to receive 1 patient(s) from neighbouring wards.
+2. Supplies cover only 55% of need: ration saline for severe cases and request a top-up.
+3. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 04, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~4 cases (Medium risk), range 2-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +64% compared with normal for the season
 *Priority:* #48 of the region
 
 *Supplies (allocated / required)*
@@ -793,12 +1119,18 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Prepare to receive 1 patient(s) from neighbouring wards.
+2. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+3. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | CCC Ward 10, Chattogram*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~5 cases (Medium risk), range 2-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +71% compared with normal for the season
 *Priority:* #49 of the region
 
 *Supplies (allocated / required)*
@@ -809,12 +1141,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 55% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 55% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 17, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~4 cases (Medium risk), range 2-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +72% compared with normal for the season
 *Priority:* #50 of the region
 
 *Supplies (allocated / required)*
@@ -825,12 +1162,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 55% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 55% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 14, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~5 cases (Medium risk), range 2-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +85% compared with normal for the season
 *Priority:* #51 of the region
 
 *Supplies (allocated / required)*
@@ -841,12 +1183,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 55% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 55% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 01, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~5 cases (Medium risk), range 2-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +74% compared with normal for the season
 *Priority:* #52 of the region
 
 *Supplies (allocated / required)*
@@ -857,12 +1204,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 55% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 55% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 07, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~4 cases (Medium risk), range 2-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +69% compared with normal for the season
 *Priority:* #53 of the region
 
 *Supplies (allocated / required)*
@@ -873,12 +1225,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 55% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 55% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 13, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~4 cases (Medium risk), range 1-8
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +69% compared with normal for the season
 *Priority:* #54 of the region
 
 *Supplies (allocated / required)*
@@ -889,12 +1246,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 17, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~4 cases (Medium risk), range 2-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +79% compared with normal for the season
 *Priority:* #55 of the region
 
 *Supplies (allocated / required)*
@@ -905,12 +1267,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | CCC Ward 09, Chattogram*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~4 cases (Medium risk), range 1-8
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +83% compared with normal for the season
 *Priority:* #56 of the region
 
 *Supplies (allocated / required)*
@@ -921,12 +1288,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | CCC Ward 05, Chattogram*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~5 cases (Medium risk), range 2-10
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +72% compared with normal for the season
 *Priority:* #57 of the region
 
 *Supplies (allocated / required)*
@@ -937,12 +1309,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | DNCC Ward 20, Dhaka North*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~4 cases (Medium risk), range 1-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +74% compared with normal for the season
 *Priority:* #58 of the region
 
 *Supplies (allocated / required)*
@@ -953,12 +1330,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | CCC Ward 02, Chattogram*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~4 cases (Medium risk), range 2-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +76% compared with normal for the season
 *Priority:* #59 of the region
 
 *Supplies (allocated / required)*
@@ -969,12 +1351,17 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 50% of supplies covered
 
+*Recommended actions*
+1. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.
+
 -----
 
 *DengueWatch dispatch | DSCC Ward 14, Dhaka South*
 Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Forecast:* ~4 cases (Medium risk), range 1-9
+*Risk:* Low now, Medium that week | *Why:* rain over the last 3 weeks was +75% compared with normal for the season
 *Priority:* #60 of the region
 
 *Supplies (allocated / required)*
@@ -984,3 +1371,7 @@ Week of 23 Jun 2025 | Status: *SHORTAGE*
 
 *Spraying crews:* 0 assigned / 0 requested
 *Deficit alert:* only 50% of supplies covered
+
+*Recommended actions*
+1. Supplies cover only 50% of need: ration saline for severe cases and request a top-up.
+2. Inspect known breeding sites and keep weekly watch on fever cases.

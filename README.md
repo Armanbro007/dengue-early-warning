@@ -11,11 +11,9 @@ Built for the **EDU AI Engineering Hackathon 2026** ("AI for Urban Dengue Outbre
 
 **Live demo: [denguewatchedu.streamlit.app](https://denguewatchedu.streamlit.app/)** (free hosting: if the app is asleep, press the wake-up button and give it about a minute).
 
-![DengueWatch overview page](docs/screenshots/overview.png)
+![DengueWatch Report: which wards may reach high dengue risk in 3 weeks](docs/screenshots/report.png)
 
 **Two languages.** A switch at the top right shows the whole dashboard in **English or Bangla (বাংলা)**, including the officer briefing, chart labels, dates and numbers. The Bangla is written the way a city corporation health office would say it, not translated word for word. Your city, week and look-ahead settings stay the same when you switch.
-
-![DengueWatch overview page in Bangla](docs/screenshots/overview_bangla.png)
 
 ## Quick start (about 2 minutes)
 
@@ -56,32 +54,22 @@ python scripts/export_dispatch.py --stock 60 --crews 20 --beds 80   # write samp
 python scripts/ingest.py new_weeks.csv   # add new weekly data and retrain (--reset to undo)
 ```
 
-Set `ALLOW_NETWORK=0` in `.env`, or switch on **Offline mode** in the sidebar, to run fully offline.
+Set `ALLOW_NETWORK=0` in `.env`, or switch on **Offline mode** in the week menu (top right), to run fully offline.
 
 ## What the dashboard does
 
-| Page | What an officer gets |
+Built so a ward officer can use it **without training**: no sidebar, three tabs at the top and one floating switch.
+
+| Where | What an officer gets |
 |---|---|
-| **Overview** | The answer first: how many wards will reach high risk and when, a four-step picture of the rain-to-cases delay, each city at a glance, and the wards to act on first. |
-| **Ward priorities** | All wards ranked by expected cases with a likely range and risk level. Wards **getting worse** (low or medium today, high or critical soon) are flagged. Includes an action briefing that follows the language switch, and a CSV export. |
-| **Why this ward?** | Plain bars showing how recent rain, humidity, temperature and drainage, crowding and sanitation push the forecast above or below normal for the season; a "rain now, cases later" chart; a rain what-if slider; the ward's forecast-vs-real track record. |
-| **Season calendar** | Every ward × every week of a season, coloured by forecast risk (or real risk, or forecast error). |
-| **Live forecast** | The same model fed with this week's real and forecast weather from Open-Meteo: one API call for all cities, cached, with offline fallbacks. |
-| **How accurate is it?** | Plain-language results on unseen years first, then the year-by-year backtest, lag evidence, baselines and confusion matrix for reviewers. |
-| **Add weekly data** | Upload the latest ward reports (CSV). The file is checked, merged and the models retrain in about 15 s. Reset any time. |
+| **Report** | The answer in one sentence ("46 of 60 wards may reach high dengue risk by 23 June"), the wards to act on first, and all 60 wards as coloured squares. Tap a ward to read **why** in plain words (rain vs normal, drainage and crowding) and **what it will need** (crews, saline, kits, beds). A 3-step "Start here" guide greets first-time visitors. |
+| **Actions** | Four steps, one plain question each, results update the moment an answer changes: **1 Send crews** (what-if simulator: cases, beds and saline prevented over weeks 2-4, ROI ranking, pick wards yourself), **2 Share supplies** (30-100% stock slider, risk-and-density priority, live **CRITICAL deficit** alerts), **3 Hospital beds** (overflow patients routed to wards with free beds **in the same city**, net deficits, city bed use and beds left), **4 Send notices** (printable HTML/PDF notice, WhatsApp, SMS in English and Bangla, ZIP of all 60, and an email / WhatsApp send box). |
+| **Reality check** (floating switch, bottom right) | Shows the accuracy at a glance (share of real high-risk wards warned in time). Switch it on and the ward map turns *warned / missed / false alarm / calm*, and a card compares expected vs real cases and saline for that week and what the crews would have saved. |
+| **More** | Ward table, season calendar, accuracy report, one ward in depth, the full reality comparison and system status. *Update weekly data* and *Live weather* are marked coming soon: every core function runs on the 2016-2025 data, offline. |
 
-**Command center (Phase 2).** Four pages share sidebar controls: *Regional stock* (30-100% of need), *Spraying crews available*, *Dengue beds free* (30-100%) and *Plan for a bad week* (use the top of the forecast range).
+Report week, look-ahead (2-4 weeks), city and the **Offline mode** kill switch are in the week menu at the top right. Every page is in English and Bangla.
 
-| Page | What an officer gets |
-|---|---|
-| **Supplies & crews** | Saline bags, test kits, beds and crews for every ward from the forecast. When stock is short, the riskiest and most crowded wards are served first, every ward still gets a 50% lifeline, and **critical deficit warnings** update live. |
-| **Hospital beds** | Wards that need more beds than they have free send patients to the ward with the most free beds **in the same city**. Shows transfer orders, net ward deficits, and each city's bed use and headroom. |
-| **What-if crews** | Send crews automatically (best plan) or to chosen wards and see the forecast **2, 3 and 4 weeks later** with and without them: cases, beds and saline saved, and every ward ranked by **cases prevented per crew**. |
-| **Dispatch notices** | Per-ward **SMS** (≤ 160 characters), **Bangla SMS**, **WhatsApp** message, printable **HTML/PDF commissioner brief** and a city digest, plus a ZIP of all notices. Samples are in [`exports/`](exports/). |
-
-![Supplies & crews page: stock shared by priority with live deficit warnings](docs/screenshots/command_supplies.png)
-
-![What-if crews page: forecast with and without crews and the ROI ranking](docs/screenshots/command_whatif.png)
+![Actions, step 2: stock shared by priority with live CRITICAL and deficit alerts](docs/screenshots/actions_supplies.png)
 
 How each module works, the assumptions (bed capacity, crew effect) and timings are in [ARCHITECTURE.md, section 7](ARCHITECTURE.md#7-phase-2-from-forecast-to-action-command-center).
 
@@ -105,8 +93,11 @@ Details, diagrams and the efficiency and failure-handling design are in **[ARCHI
 ## Project structure
 
 ```
-app.py                  Streamlit entry (navigation + shared controls)
-ui_common.py            cached engine, chart styling, sidebar
+app.py                  Streamlit entry (top tabs: Report, Actions, More)
+ui_shell.py             top bar, week menu, start-here guide
+ui_map.py               the 60-ward grid you can tap
+ui_reality.py           floating Reality check switch and card
+ui_common.py            cached engine, chart styling, shared controls
 views/                  one file per dashboard page
 ui_text.py              every English and Bangla string on the dashboard
 static/fonts/           bundled fonts, so the design works offline
