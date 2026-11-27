@@ -34,9 +34,12 @@ FALLBACK_RATIOS = {"saline_bags_needed": 2.378, "diagnostic_kits_needed": 1.147,
 def learn_ratios(raw: pd.DataFrame, end: str = config.SHIP_TRAIN_END) -> dict[str, float]:
     """Units of each item per dengue case, learned from the training years only."""
     train = raw[raw["date"] <= pd.Timestamp(end)]
-    cases = train[TARGET].sum()
-    return {item: (float(train[item].sum() / cases) if item in train and cases > 0 else FALLBACK_RATIOS[item])
-            for item in ITEMS}
+    ratios = {}
+    for item in ITEMS:
+        rows = train[train[item].notna()] if item in train else train.iloc[:0]
+        cases = rows[TARGET].sum()  # only weeks that report this item (weekly updates may not)
+        ratios[item] = float(rows[item].sum() / cases) if cases > 0 else FALLBACK_RATIOS[item]
+    return ratios
 
 
 def bed_capacity(raw: pd.DataFrame, end: str = config.SHIP_TRAIN_END) -> pd.Series:
