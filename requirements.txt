@@ -9,3 +9,5 @@ plotly>=5.20,<8
 requests>=2.31,<3
 python-dotenv>=1.0
 pytest>=8
+# Optional: PDF version of the commissioner briefs (the HTML brief prints to PDF without it)
+fpdf2>=2.7
