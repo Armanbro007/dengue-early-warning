@@ -17,6 +17,12 @@ SECTIONS = {
         st.Page("views/ward_detail.py", title=tx.t("page_why"), icon=":material/help:"),
         st.Page("views/heatmap.py", title=tx.t("page_calendar"), icon=":material/calendar_month:"),
     ],
+    "nav_ops": [
+        st.Page("views/allocation.py", title=tx.t("page_alloc"), icon=":material/inventory_2:"),
+        st.Page("views/overflow.py", title=tx.t("page_beds"), icon=":material/local_hospital:"),
+        st.Page("views/simulator.py", title=tx.t("page_sim"), icon=":material/pest_control:"),
+        st.Page("views/dispatch.py", title=tx.t("page_dispatch"), icon=":material/send:"),
+    ],
     "nav_more": [
         st.Page("views/live_forecast.py", title=tx.t("page_live"), icon=":material/cloud:"),
         st.Page("views/accuracy.py", title=tx.t("page_accuracy"), icon=":material/verified:"),

@@ -27,7 +27,9 @@ TEXT = {
     "en": {
         # ---- chrome and settings
         "brand_tag": "Dengue early warning",
-        "nav_early": "Early warning", "nav_more": "More",
+        "nav_early": "Early warning", "nav_more": "More", "nav_ops": "Command center",
+        "page_alloc": "Supplies & crews", "page_beds": "Hospital beds", "page_sim": "What-if crews",
+        "page_dispatch": "Dispatch notices",
         "page_overview": "Overview", "page_wards": "Ward priorities", "page_why": "Why this ward?",
         "page_calendar": "Season calendar", "page_live": "Live forecast", "page_accuracy": "How accurate is it?",
         "page_data": "Add weekly data",
@@ -230,7 +232,9 @@ TEXT = {
     "bn": {
         # ---- chrome and settings
         "brand_tag": "ডেঙ্গু আগাম সতর্কতা ব্যবস্থা",
-        "nav_early": "আগাম সতর্কতা", "nav_more": "অন্যান্য",
+        "nav_early": "আগাম সতর্কতা", "nav_more": "অন্যান্য", "nav_ops": "কমান্ড সেন্টার",
+        "page_alloc": "সরবরাহ ও স্প্রে দল", "page_beds": "হাসপাতালের শয্যা", "page_sim": "স্প্রে দলের প্রভাব",
+        "page_dispatch": "নির্দেশনা পাঠানো",
         "page_overview": "সার্বিক চিত্র", "page_wards": "ওয়ার্ডভিত্তিক অগ্রাধিকার", "page_why": "ঝুঁকির কারণ",
         "page_calendar": "মৌসুমের চিত্র", "page_live": "চলতি পূর্বাভাস", "page_accuracy": "পূর্বাভাসের নির্ভুলতা",
         "page_data": "সাপ্তাহিক তথ্য হালনাগাদ",
