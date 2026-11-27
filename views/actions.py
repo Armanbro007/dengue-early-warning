@@ -70,6 +70,38 @@ def next_button(cur: str) -> None:
                   icon_position="right", type="primary", key=f"next_{cur}", on_click=lambda: ss.__setitem__("step", nxt))
 
 
+def share_pdf_whatsapp(pdf: bytes, name: str, digits: str, caption: str) -> None:
+    """One button that sends the PDF notice itself to WhatsApp.
+
+    Where the browser can share files (phones, Windows/macOS Chrome and Edge, Safari) it opens the share sheet with the PDF so
+    the officer picks WhatsApp. Elsewhere it saves the PDF and opens the WhatsApp chat in a new tab, ready to attach it."""
+    import base64
+    import streamlit.components.v1 as components
+    b64 = base64.b64encode(pdf).decode()
+    label = L("Send PDF on WhatsApp", "হোয়াটসঅ্যাপে PDF পাঠান")
+    chat = f"https://wa.me/{digits}?text=" + urllib.parse.quote(caption)
+    components.html(f"""
+<button id="b" style="font:600 14px system-ui,sans-serif;background:#111318;color:#fff;border:0;border-radius:999px;padding:10px 18px;cursor:pointer">
+&#128196; {label}</button><div id="m" style="font:12px system-ui,sans-serif;color:#4B5160;margin-top:6px"></div>
+<script>
+const bytes = Uint8Array.from(atob("{b64}"), ch => ch.charCodeAt(0));
+const file = new File([bytes], "{name}", {{type: "application/pdf"}});
+document.getElementById("b").onclick = async () => {{
+  const m = document.getElementById("m");
+  try {{
+    if (navigator.canShare && navigator.canShare({{files: [file]}})) {{
+      await navigator.share({{files: [file], title: "{name}", text: {caption!r}}});
+      m.textContent = "Pick WhatsApp in the share menu."; return;
+    }}
+  }} catch (e) {{ if (e.name === "AbortError") return; }}
+  const a = document.createElement("a"); a.href = URL.createObjectURL(file); a.download = "{name}";
+  document.body.appendChild(a); a.click(); a.remove();
+  window.open({chat!r}, "_blank");
+  m.textContent = "PDF saved. WhatsApp opened in a new tab: attach {name} (paperclip) and send.";
+}};
+</script>""", height=72)
+
+
 def answer(text: str) -> None:
     html(f'<p class="dw-answer">{text}</p>')
 
@@ -81,18 +113,23 @@ if step == "crews":
         html(card_head(L("How many spray crews can you send this week?", "এ সপ্তাহে কয়টি স্প্রে দল পাঠাতে পারবেন?"),
                        L("Larvicide or fogging teams. One crew works in one ward.", "লার্ভিসাইড বা ফগিং দল। একটি দল একটি ওয়ার্ডে কাজ করে।"),
                        "mosquito"))
-        crews = int(st.number_input(L("Crews", "দল"), 0, 240, step=1, label_visibility="collapsed", **keep("crews")))
-        st.caption(L("Example number: the data does not say how many crews each city has, so 20 is only a starting example. "
-                     "Type your real number and the results change at once.",
-                     "উদাহরণ: ডেটায় প্রতিটি সিটির দলের সংখ্যা নেই, তাই ২০ শুধু একটি উদাহরণ। আপনার আসল সংখ্যা লিখুন, ফল সঙ্গে সঙ্গে বদলাবে।"))
-        mode = st.segmented_control(L("Choose wards", "ওয়ার্ড বাছাই"), ["auto", "manual"], key="crew_mode", default="auto",
+        manual_now = ss.get("crew_mode") == "manual"
+        crews = int(st.number_input(L("Crews", "দল"), 0, 240, step=1, label_visibility="collapsed", disabled=manual_now, **keep("crews")))
+        if manual_now:
+            st.caption(L("You are picking wards yourself below, so this box is off. Switch back to \"Best plan for me\" to use it.",
+                         "আপনি নিচে নিজে ওয়ার্ড বাছছেন, তাই এই ঘর বন্ধ। ব্যবহার করতে \"সেরা পরিকল্পনা\" বাছুন।"))
+        else:
+            st.caption(L("Example number: the data does not say how many crews each city has, so 20 is only a starting example. "
+                         "Type your real number and the results change at once.",
+                         "উদাহরণ: ডেটায় প্রতিটি সিটির দলের সংখ্যা নেই, তাই ২০ শুধু একটি উদাহরণ। আপনার আসল সংখ্যা লিখুন, ফল সঙ্গে সঙ্গে বদলাবে।"))
+        mode = st.segmented_control(L("Choose wards", "ওয়ার্ড বাছাই"), ["auto", "manual"], key="crew_mode", default="auto", required=True,
                                     format_func=lambda m: L("Best plan for me", "সেরা পরিকল্পনা") if m == "auto" else L("I pick the wards", "আমি বাছব"))
         next_button("crews")
     plan = plan_now()
     eff = plan.effects
     if mode == "manual":
         rank = simulator.roi_ranking(eff)
-        with q:
+        with q, st.container(key="glass_q_crewpick"):
             picked = st.multiselect(L("Wards to spray", "যে ওয়ার্ডে স্প্রে"), rank["ward_id"].tolist(), default=rank["ward_id"].head(5).tolist(),
                                     format_func=ward, key="crew_pick")
             per = st.slider(L("Crews per ward", "প্রতি ওয়ার্ডে দল"), 1, config.MAX_CREWS_PER_WARD, 1, key="crew_per")
@@ -146,7 +183,7 @@ if step == "crews":
                 st.plotly_chart(style_fig(fig, height=300), width="stretch", config={"displayModeBar": False})
         else:
             st.info(L("Add at least one crew (or pick wards) to see where it should go.", "অন্তত একটি দল যোগ করুন বা ওয়ার্ড বাছুন।"))
-    with st.expander(L("Which wards gain most from one crew? (ROI ranking)", "একটি দলে কোন ওয়ার্ডে সবচেয়ে বেশি লাভ?"), icon=":material/leaderboard:"):
+    with st.expander(L("Which wards gain most from one crew? (ROI ranking)", "একটি দলে কোন ওয়ার্ডে সবচেয়ে বেশি লাভ?"), icon=":material/leaderboard:", expanded=True):
         r = simulator.roi_ranking(eff).head(15).iloc[::-1]
         fig = go.Figure(go.Bar(y=r["ward_id"].map(ward), x=r["prevented_by_1_crew"], orientation="h",
                                marker_color=["#2E8B57" if w in crew_plan else "rgba(17,19,24,.25)" for w in r["ward_id"]],
@@ -193,12 +230,16 @@ elif step == "supplies":
                          f"**ঘাটতি:** আরও {n(short - len(crit))}টি ওয়ার্ড অর্ধেকের বেশি পাচ্ছে, তবে পুরোটা নয়।"), icon=":material/warning:")
         if not short:
             st.success(L("Every ward is fully supplied at this stock level.", "এই মজুতে সব ওয়ার্ড পুরো সরবরাহ পাচ্ছে।"), icon=":material/check_circle:")
-        with st.container(key="dark_supply"):
-            k = st.columns(4)
-            k[0].metric(L("Saline bags", "স্যালাইন"), f"{n(sal['allocated'])} / {n(sal['need'])}")
-            k[1].metric(L("Test kits", "কিট"), f"{n(kit['allocated'])} / {n(kit['need'])}")
-            k[2].metric(L("Beds needed", "শয্যা চাহিদা"), n(int(w["need_hospital_beds_required"].sum())))
-            k[3].metric(L("Crews sent", "স্প্রে দল"), f"{n(sum(plan.crew_plan.values()))} / {n(int(w['crews_needed'].sum()))}")
+        where = L("all wards", "সব ওয়ার্ড") if c["city"] in (None, "", "All", "All cities") else tx.city(c["city"])
+        tiles = [(L("Saline bags", "স্যালাইন"), sal["allocated"], sal["need"]),
+                 (L("Test kits", "কিট"), kit["allocated"], kit["need"]),
+                 (L("Spray crews", "স্প্রে দল"), sum(plan.crew_plan.values()), int(w["crews_needed"].sum())),
+                 (L("Hospital beds", "শয্যা"), None, int(w["need_hospital_beds_required"].sum()))]
+        html('<div class="dw-stock"><div class="dw-stock-tag">' + L(f"AVAILABLE STOCK · {where}", f"হাতে থাকা মজুত · {where}") + "</div>"
+             '<div class="dw-stock-grid">' + "".join(
+                 f'<div class="t"><div class="l">{lab}</div><div class="v">{n(int(have)) if have is not None else n(int(need))}'
+                 f'<span>{(" / " + n(int(need)) + " " + L("needed", "দরকার")) if have is not None else " " + L("needed", "দরকার")}</span></div></div>'
+                 for lab, have, need in tiles) + "</div></div>")
     st.write("")
     with st.container(key="glass_alloc_table"):
         html(card_head(L("Who gets what, in priority order", "কে কী পাবে, অগ্রাধিকার অনুযায়ী"),
@@ -262,24 +303,29 @@ elif step == "beds":
         for _, r in cities[cities["net_deficit"] > 0].iterrows():
             st.error(L(f"**{r['city']} is full:** {int(r['net_deficit'])} patient(s) have no bed after routing. Open surge beds or ask for help.",
                        f"**{tx.city(r['city'])} ভর্তি:** স্থানান্তরের পরও {n(int(r['net_deficit']))} জন শয্যা পাননি।"), icon=":material/emergency:")
-        if len(moves):
-            html(f'<div class="mono" style="margin:10px 0 4px">{L("TRANSFER ORDERS", "স্থানান্তর নির্দেশ")}</div>' + "".join(
+        cards = []
+        for _, r in cities.iterrows():
+            util = r["utilisation_pct"]
+            color = config.TIER_COLORS["Critical"] if util > 100 else (config.TIER_COLORS["High"] if util >= 90 else "#2E8B57")
+            cards.append(f'<div class="dw-city"><div class="nm">{tx.city(r["city"])}</div>'
+                         f'<div class="pc" style="color:{color}">{n(util)}%</div>'
+                         f'<div class="mt">{L("beds in use", "শয্যা ব্যবহৃত")}: {n(int(r["beds_needed"]))} / {n(int(r["beds_available"]))}<br>'
+                         f'{L("beds left", "বাকি খালি")}: <b>{n(int(r["headroom_left"]))}</b><br>'
+                         f'{L("moved", "স্থানান্তর")}: {n(int(r["transfers"]))} · {L("no bed", "শয্যাহীন")}: <b>{n(int(r["net_deficit"]))}</b></div>'
+                         f'<div class="dw-stack" style="margin-top:8px"><span style="width:{min(util, 100):.0f}%;background:{color}"></span></div></div>')
+        html(f'<div class="mono" style="margin:6px 0 8px">{L("BEDS BY CITY", "সিটি অনুযায়ী শয্যা")}</div><div class="dw-cities">' + "".join(cards) + "</div>")
+    if len(moves):
+        st.write("")
+        with st.container(key="glass_moves"):
+            html(card_head(L("Transfer orders", "স্থানান্তর নির্দেশ"),
+                           L("Patients from full wards go to the nearest-in-need ward with free beds in the same city.",
+                             "ভর্তি ওয়ার্ডের রোগী একই সিটির খালি শয্যার ওয়ার্ডে যাবেন।"), "arrow")
+                 + '<div class="dw-moves">' + "".join(
                 f'<div class="dw-crewrow" style="grid-template-columns:minmax(0,1.3fr) auto minmax(0,1.3fr) auto">'
                 f'<div><div class="nm">{ward(m.from_ward)}</div><div class="sub">{L("full", "ভর্তি")}</div></div>'
                 f'<div style="color:#8B909C">→</div><div><div class="nm">{ward(m.to_ward)}</div><div class="sub">{tx.city(m.city)}</div></div>'
                 f'<div class="gain"><b>{n(int(m.patients))}</b> {L("patient" if int(m.patients) == 1 else "patients", "রোগী")}</div></div>'
-                for m in moves.sort_values("patients", ascending=False).itertuples()))
-    st.write("")
-    cols = st.columns(len(cities), gap="small")
-    for col, (_, r) in zip(cols, cities.iterrows()):
-        util = r["utilisation_pct"]
-        color = config.TIER_COLORS["Critical"] if util > 100 else (config.TIER_COLORS["High"] if util >= 90 else "#2E8B57")
-        col.html(f'<div class="gc" style="padding:16px"><div style="font-weight:650">{tx.city(r["city"])}</div>'
-                 f'<div style="font-size:1.7rem;font-weight:650;color:{color}">{n(util)}%</div>'
-                 f'<div style="font-size:.8rem;color:#4B5160">{L("beds in use", "শয্যা ব্যবহৃত")}: {n(int(r["beds_needed"]))} / {n(int(r["beds_available"]))}<br>'
-                 f'{L("beds left", "বাকি খালি")}: <b>{n(int(r["headroom_left"]))}</b><br>'
-                 f'{L("moved", "স্থানান্তর")}: {n(int(r["transfers"]))} · {L("no bed", "শয্যাহীন")}: <b>{n(int(r["net_deficit"]))}</b></div>'
-                 f'<div class="dw-stack" style="margin-top:8px"><span style="width:{min(util, 100):.0f}%;background:{color}"></span></div></div>')
+                for m in moves.sort_values("patients", ascending=False).itertuples()) + "</div>")
     st.write("")
     with st.container(key="glass_beds_table"):
         html(card_head(L("Wards over their bed limit", "শয্যার সীমা ছাড়ানো ওয়ার্ড"),
@@ -328,19 +374,27 @@ else:
                       "অফলাইন মোড: পাঠাতে ইন্টারনেট লাগে। নোটিশ ডাউনলোড করে পরে পাঠান।"), icon=":material/wifi_off:")
         elif to:
             if "@" in to:
-                url = (f"mailto:{urllib.parse.quote(to)}?subject=" + urllib.parse.quote(f"Dengue dispatch notice: {dispatch.ward_label(pick)}, week of {target:%d %b %Y}")
-                       + "&body=" + urllib.parse.quote(body))
-                st.link_button(L("Open in email", "ইমেইলে খুলুন"), url, icon=":material/mail:", type="primary")
+                url = "https://mail.google.com/mail/?" + urllib.parse.urlencode({
+                    "view": "cm", "fs": "1", "to": to,
+                    "su": f"Dengue dispatch notice: {dispatch.ward_label(pick)}, week of {target:%d %b %Y}", "body": body})
+                st.link_button(L("Open in Gmail (new tab)", "জিমেইলে খুলুন (নতুন ট্যাব)"), url, icon=":material/mail:", type="primary")
+                st.caption(L("Gmail opens with the notice filled in. Attach the PDF from the download button on the right if you want it too.",
+                             "জিমেইলে নোটিশ লেখা থাকবে। চাইলে ডান পাশ থেকে PDF নামিয়ে যুক্ত করুন।"))
             else:
                 digits = "".join(ch for ch in to if ch.isdigit())
                 if digits.startswith("01") and len(digits) == 11:
                     digits = "88" + digits  # Bangladesh mobile without country code
                 if len(digits) >= 10:
-                    st.link_button(L("Open in WhatsApp", "হোয়াটসঅ্যাপে খুলুন"), f"https://wa.me/{digits}?text=" + urllib.parse.quote(row["whatsapp"]),
-                                   icon=":material/chat:", type="primary")
+                    wa_pdf = dispatch.brief_pdf(w[w["ward_id"] == pick], target)
+                    if wa_pdf:
+                        share_pdf_whatsapp(wa_pdf, f"notice_{pick}.pdf", digits,
+                                           f"Dengue dispatch notice for {dispatch.ward_label(pick)}, week of {target:%d %b %Y}. PDF attached.")
+                    else:
+                        st.link_button(L("Open in WhatsApp", "হোয়াটসঅ্যাপে খুলুন"), f"https://wa.me/{digits}?text=" + urllib.parse.quote(row["whatsapp"]),
+                                       icon=":material/chat:", type="primary")
                 else:
                     st.warning(L("That does not look like an email address or a phone number.", "এটি ইমেইল বা ফোন নম্বর মনে হচ্ছে না।"))
-        st.caption(L("Note: sending opens your email app or WhatsApp with the message filled in, so it needs internet. "
+        st.caption(L("Note: sending opens Gmail or WhatsApp in a new browser tab, so it needs internet and will not work offline. "
                      "Making the notices does not: it works offline.",
                      "লক্ষ্য করুন: পাঠাতে ইন্টারনেট লাগে। নোটিশ তৈরি অফলাইনেও হয়।"))
     with a, st.container(key="glass_a_notices"):
