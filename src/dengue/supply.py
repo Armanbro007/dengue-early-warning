@@ -68,6 +68,10 @@ def demand(fc: pd.DataFrame, ratios: dict[str, float], cautious: bool = False) -
     expected number, which is what a surge planner would stock for.
     """
     d = fc[["ward_id", "city", "population_density_sqkm", "tier", "tier_rank", "pred", "lo", "hi"]].copy()
+    # Context the dispatch notices quote (issue date, risk now, main reason), when the forecast has it
+    for col in ("date", "tier_now", "main_driver", "breeding_rain_mm", "breeding_rain_normal_mm"):
+        if col in fc:
+            d[col] = fc[col].to_numpy()
     d["plan_cases"] = (d["hi"] if cautious else d["pred"]).clip(lower=0)
     for item in ITEMS:
         # Round half up (same rule as the dataset), never negative.
