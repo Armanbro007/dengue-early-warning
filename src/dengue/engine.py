@@ -116,8 +116,8 @@ class Engine:
     def bed_capacity(self):
         return bed_capacity(self.raw)
 
-    def crew_effects(self, as_of, city: str | None = None):
-        return effect_table(self.bundle, self._rows(as_of, city))
+    def crew_effects(self, as_of, city: str | None = None, per_crew: float | None = None):
+        return effect_table(self.bundle, self._rows(as_of, city), per_crew=per_crew)
 
     def plan(self, as_of, h: int, city: str | None = None, settings: Settings | None = None,
              fc: pd.DataFrame | None = None, effects: pd.DataFrame | None = None) -> Plan:

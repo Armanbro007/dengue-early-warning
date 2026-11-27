@@ -27,26 +27,27 @@ from .features import add_rain_derived
 from .model import predict
 
 
-def coverage(crews) -> np.ndarray:
-    return 1 - (1 - config.CREW_COVERAGE) ** np.asarray(crews, dtype=float)
+def coverage(crews, per_crew: float | None = None) -> np.ndarray:
+    per_crew = config.CREW_COVERAGE if per_crew is None else per_crew
+    return 1 - (1 - per_crew) ** np.asarray(crews, dtype=float)
 
 
-def treat(rows: pd.DataFrame, crews) -> pd.DataFrame:
+def treat(rows: pd.DataFrame, crews, per_crew: float | None = None) -> pd.DataFrame:
     """Copy of the feature rows with crews' share of breeding water removed."""
     X = rows.copy()
-    keep = 1 - coverage(crews)
+    keep = 1 - coverage(crews, per_crew)
     for k in config.BREEDING_RAIN_LAGS:
         X[f"rain_lag_{k}"] = X[f"rain_lag_{k}"] * keep
     return add_rain_derived(X)
 
 
-def effect_table(bundle: dict, rows: pd.DataFrame, horizons=config.HORIZONS) -> pd.DataFrame:
+def effect_table(bundle: dict, rows: pd.DataFrame, horizons=config.HORIZONS, per_crew: float | None = None) -> pd.DataFrame:
     """Forecast for every ward x crew level (0..MAX) x horizon in one batch.
 
     Returns one row per (ward_id, crews) with cases_h{h} columns and cases_2to4 total.
     """
     levels = range(config.MAX_CREWS_PER_WARD + 1)
-    batch = pd.concat([treat(rows, c) for c in levels], keys=list(levels), names=["crews", "row"])
+    batch = pd.concat([treat(rows, c, per_crew) for c in levels], keys=list(levels), names=["crews", "row"])
     out = pd.DataFrame({"ward_id": np.tile(rows["ward_id"].to_numpy(), len(levels)),
                         "crews": batch.index.get_level_values("crews")})
     for h in horizons:
@@ -55,14 +56,14 @@ def effect_table(bundle: dict, rows: pd.DataFrame, horizons=config.HORIZONS) -> 
     return out
 
 
-def simulate(effects: pd.DataFrame, plan: dict[str, int], ratios: dict[str, float]) -> pd.DataFrame:
+def simulate(effects: pd.DataFrame, plan: dict[str, int], ratios: dict[str, float], per_crew: float | None = None) -> pd.DataFrame:
     """Before/after for each ward in `plan` ({ward_id: crews})."""
     base = effects[effects["crews"] == 0].set_index("ward_id")
     rows = []
     for ward, c in plan.items():
         c = int(min(max(c, 0), config.MAX_CREWS_PER_WARD))
         after = effects[(effects["ward_id"] == ward) & (effects["crews"] == c)].iloc[0]
-        r = {"ward_id": ward, "crews": c, "coverage_pct": round(100 * float(coverage(c)), 0)}
+        r = {"ward_id": ward, "crews": c, "coverage_pct": round(100 * float(coverage(c, per_crew)), 0)}
         for h in config.HORIZONS:
             r[f"before_h{h}"], r[f"after_h{h}"] = base.at[ward, f"cases_h{h}"], after[f"cases_h{h}"]
         r["cases_before"], r["cases_after"] = base.at[ward, "cases_2to4"], after["cases_2to4"]
