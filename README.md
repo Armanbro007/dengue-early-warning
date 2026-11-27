@@ -79,6 +79,10 @@ Set `ALLOW_NETWORK=0` in `.env`, or switch on **Offline mode** in the sidebar, t
 | **What-if crews** | Send crews automatically (best plan) or to chosen wards and see the forecast **2, 3 and 4 weeks later** with and without them: cases, beds and saline saved, and every ward ranked by **cases prevented per crew**. |
 | **Dispatch notices** | Per-ward **SMS** (≤ 160 characters), **Bangla SMS**, **WhatsApp** message, printable **HTML/PDF commissioner brief** and a city digest, plus a ZIP of all notices. Samples are in [`exports/`](exports/). |
 
+![Supplies & crews page: stock shared by priority with live deficit warnings](docs/screenshots/command_supplies.png)
+
+![What-if crews page: forecast with and without crews and the ROI ranking](docs/screenshots/command_whatif.png)
+
 How each module works, the assumptions (bed capacity, crew effect) and timings are in [ARCHITECTURE.md, section 7](ARCHITECTURE.md#7-phase-2-from-forecast-to-action-command-center).
 
 The dashboard opens on **2 June 2025**, a week the model never saw during training. 56 of the 60 wards were still Low that week. The system flagged 46 wards as High for 23 June, and 52 of the 60 wards actually reached High or Critical.
