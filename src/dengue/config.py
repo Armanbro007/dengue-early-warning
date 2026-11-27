@@ -105,7 +105,7 @@ CRITICAL_FILL = 0.5
 CREW_COVERAGE = 0.20
 MAX_CREWS_PER_WARD = 4
 BREEDING_RAIN_LAGS = (0, 1, 2)  # weeks of rain a crew can still act on
-# Crews a ward asks for, by forecast tier.
-CREWS_NEEDED = {"Low": 0, "Medium": 1, "High": 2, "Critical": 3}
+# Crews a ward asks for, by forecast tier (Low/Medium wards keep routine source reduction).
+CREWS_NEEDED = {"Low": 0, "Medium": 0, "High": 1, "Critical": 2}
 
 EXPORTS_DIR = ROOT / "exports"

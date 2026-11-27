@@ -38,10 +38,9 @@ class Plan:
 
     @property
     def alerts(self) -> pd.DataFrame:
-        """Wards with any problem, worst first (shown as live warnings)."""
+        """Wards short of supplies or beds, in priority order (shown as live warnings)."""
         w = self.wards
-        bad = (w["deficit"] != "Fully supplied") | (w["net_bed_deficit"] > 0) | (w["crews_short"] > 0)
-        return w[bad]
+        return w[(w["deficit"] != "Fully supplied") | (w["net_bed_deficit"] > 0)]
 
 
 def build_plan(fc: pd.DataFrame, rows: pd.DataFrame, bundle: dict, ratios: dict, capacity: pd.Series,
