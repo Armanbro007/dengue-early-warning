@@ -2,6 +2,8 @@
 
 DengueWatch forecasts weekly dengue cases for each of 60 wards **2, 3 and 4 weeks ahead**, turns them into Low / Medium / High / Critical tiers, and explains each forecast. The goal is to give city health officers a 2-4 week early-warning window before hospital admissions rise.
 
+**Phase 2 (onsite final)** turns that forecast into an operational command center: how many saline bags, test kits, beds and spraying crews each ward gets when stock is short, where overflow patients go, what crews would prevent, and the dispatch notices to send. Sections 1-6 describe the forecasting core from Phase 1; **section 7** describes the Phase 2 modules.
+
 ## 1. Data flow
 
 ```mermaid
@@ -86,7 +88,96 @@ All external calls go through `src/dengue/http.py`:
 - `ALLOW_NETWORK=0` runs fully offline. The core dashboard needs no network or API keys at all.
 - These paths are tested (`tests/test_resilience.py`) with a fake HTTP session: 429 + `Retry-After`, growing backoff, no retry on 4xx, breaker opening, stale-cache and climatology fallbacks, LLM failure, cache hits and the daily budget. GitHub Actions runs the whole suite on Linux and Windows on every push.
 
-## 7. Scaling to a live system (Phase 2)
+## 7. Phase 2: from forecast to action (command center)
+
+### 7.1 Data flow
+
+```mermaid
+flowchart LR
+  F["engine.forecast()<br/>cases per ward, 80% range, tier"] --> S["supply.py (module 1)<br/>need = cases × learned ratio<br/>priority: tier, then cases × density"]
+  K["Officer controls<br/>stock 30-100%, crews,<br/>beds free %, bad-week toggle"] --> S
+  S --> A["two-round fill<br/>50% lifeline → top-up<br/>deficit / CRITICAL flags"]
+  F --> B["overflow.py (module 2)<br/>beds needed vs free,<br/>greedy routing inside each city"]
+  K --> B
+  R["feature rows<br/>(same as the forecast)"] --> M["simulator.py (module 3)<br/>remove breeding water,<br/>re-forecast h = 2, 3, 4<br/>60 wards × 5 crew levels, 1 batch"]
+  M --> C["crews by marginal ROI<br/>(cases prevented per crew)"]
+  A & B & C --> P["operations.Plan<br/>one table, one row per ward"]
+  P --> D["dispatch.py (module 4)<br/>SMS · Bangla SMS · WhatsApp ·<br/>HTML/PDF brief · city digest"]
+  D --> X[("/exports + downloads")]
+```
+
+Everything in this diagram is local Python (pandas, NumPy and the saved scikit-learn models). None of it calls the internet, so it is unaffected by the offline kill switch (module 5). Code: `src/dengue/{supply,overflow,simulator,operations,dispatch}.py`; pages: `views/{allocation,overflow,simulator,dispatch}.py`; shared controls: `ui_ops.py`.
+
+### 7.2 Module 1: constrained resource allocation (`supply.py`)
+
+1. **Ratios are learned, not typed in.** The onsite dataset adds `saline_bags_needed`, `diagnostic_kits_needed` and `hospital_beds_required` per ward-week. Because these grow with cases, we learn one number per item from the training years (2016-2023): ratio = total units ÷ total cases = **2.378 saline bags, 1.147 kits and 0.290 beds per case**. On the unseen 2024-2025 weeks, `round(cases × ratio)` is off by 0.002 bags, 0.021 kits and 0.011 beds per ward-week on average (`tests/test_supply.py`).
+2. **Need** per ward = round(planned cases × ratio). Planned cases = the forecast, or with *Plan for a bad week* the top of its 80% range.
+3. **Priority** = tier first (Critical > High > Medium > Low); inside a tier, *crowded cases* = forecast cases × (ward density ÷ median density). So of two wards with the same cases, the denser one is served first (`population_density_sqkm`).
+4. **Scarcity.** Regional stock = slider % × total need (30-100%). It is shared in **two greedy rounds, both in priority order**: round 1 gives every ward a 50% lifeline, round 2 tops wards up to 100%. Pure greedy would leave the lowest-priority wards with nothing even though their patients need saline just as much; pure proportional sharing ignores priority. The two rounds do both, and stay explainable in one sentence.
+5. **Deficit flags**, live on every slider move: fill below 100% = *Short*; below the 50% lifeline = **CRITICAL** (fill = the worst-covered item).
+6. **Crews.** High wards ask for 1 crew, Critical wards for 2. Available crews are assigned by the simulator's ROI rule (7.4), and the gap is reported.
+
+### 7.3 Module 2: hospital surge and overflow routing (`overflow.py`)
+
+- **Bed capacity is a stated assumption** because the dataset has no bed counts: each city's dengue bed pool = the beds it needed in 95% of training weeks (it coped then), split between its wards by population density ("hospitals follow people, dengue follows water"). The *Dengue beds free* slider scales it (30-100%) to test a crunch.
+- **Routing, per city, never across a city boundary** (Dhaka North, Dhaka South, Chattogram, Gazipur, Narayanganj): overflow = needed − free. Take the ward with the largest overflow and move patients to the ward with the most free beds, then the next, until it fits or the city is full. Repeat.
+- **Output:** transfer orders (from, to, patients), per-ward overflow / sent / received / **net deficit**, and per-city utilisation, **headroom left** and patients with no bed. Tests check that patients are conserved, no ward goes over capacity and no transfer leaves its city (`tests/test_overflow.py`).
+
+### 7.4 Module 3: what-if vector-control simulator (`simulator.py`)
+
+A **model-driven counterfactual**, not a fixed percentage. The forecast model learned that rain 0-6 weeks ago drives cases 2-4 weeks later (rain → standing water → larvae → mosquitoes → cases). A larvicide/fogging crew destroys part of that standing water, so we ask the same trained model what it would forecast with less breeding water:
+
+- coverage(c crews) = 1 − (1 − 0.20)^c → 20%, 36%, 49%, 59% for 1-4 crews (diminishing returns, max 4 per ward). The 20% is an editable assumption (`config.CREW_COVERAGE`, and a 10-30% slider on the page to test sensitivity).
+- Treated features: rain lags 0, 1, 2 × (1 − coverage), rolling rain totals rebuilt.
+- Cases prevented = forecast(no crews) − forecast(with crews) at **2, 3 and 4 weeks ahead**; beds and saline saved = cases prevented × the learned ratios.
+- **ROI = cases prevented over weeks 2-4 ÷ crews.** Wet, dense, badly drained wards gain most, because that is where the model's response to rain is strongest.
+- **Best plan:** crews are sent one at a time, each to the ward where the *next* crew prevents the most cases (greedy on marginal gain; this is optimal when each extra crew in a ward adds less than the one before, which the diminishing coverage formula makes the normal case).
+- **Cost:** all 60 wards × 5 crew levels × 3 horizons = 900 rows scored in one batch, about 30 ms. The model's monotonic rain constraint guarantees that more crews never raise a forecast (tested).
+
+### 7.5 Module 4: dispatch notices (`dispatch.py`)
+
+Fixed templates filled from the plan row, so a notice can never contain a number the plan does not have, and they need no AI and no internet:
+
+| Format | For | Contents |
+|---|---|---|
+| SMS (≤ 160 plain characters, tested) | ward health officer | cases + tier, saline and kits allocated/required, beds needed/free and transfers, crews, status |
+| Bangla SMS (Unicode) | field staff | the same in Bangla words and digits |
+| WhatsApp | ward / city groups | structured message with bold labels, deficit alert, expected effect of crews |
+| HTML brief (print → one ward per page) and PDF | ward commissioner | forecast, required vs allocated table with deficits, action list |
+| City digest | city health officer | bed use, transfers, headroom, total supplies and crews per city |
+
+Samples for the 23 June 2025 replay week (60% stock, 20 crews, 80% beds free) are in [`exports/`](exports/); regenerate with `python scripts/export_dispatch.py --stock 60 --crews 20 --beds 80`. The Dispatch page also downloads one ward's brief (HTML/PDF) or a ZIP of all notices.
+
+### 7.6 Module 5: offline resilience and deterministic fallback
+
+- **What needs the internet:** only the optional live weather (Open-Meteo) and the optional Gemini rewording. Forecasting, allocation, routing, the simulator and every notice are local and deterministic: same inputs, same outputs, no randomness.
+- **Kill switch:** the sidebar's *Offline mode* toggle (or `ALLOW_NETWORK=0`) cuts every outbound call at once; pages show an offline banner. Without the toggle, a real Wi-Fi loss is handled by the Phase 1 network layer (timeouts, retries, circuit breaker, cache → climatology, LLM → template).
+- **Tested:** `tests/test_offline.py` blocks every socket and DNS lookup while the network setting is still on and a fake Gemini key is set, then runs the engine, the full plan, the exports, the LLM fallback and every dashboard page, asserting zero exceptions.
+- Fonts are bundled and charts render in the browser, so the UI looks the same offline.
+
+### 7.7 Efficiency (measured in our test environment, CPU only)
+
+| Step | Time |
+|---|---|
+| Crew effect table (900 predictions, one batch) | ≈ 30 ms per week, cached per (week, city, crew effect) |
+| Full plan: allocation + routing + crew assignment | ≈ 65 ms |
+| 60 SMS + Bangla SMS + WhatsApp notices | ≈ 6 ms |
+| 60-page PDF of briefs | ≈ 0.2 s |
+
+Ratios and bed capacity are computed once per server. `st.cache_data` keys the plan on (week, horizon, city, stock, crews, beds, bad-week), so moving a slider back costs nothing.
+
+### 7.8 Assumptions to state in Q&A
+
+| Assumption | Value | Why | Where to change |
+|---|---|---|---|
+| Supplies per case | learned 2.378 / 1.147 / 0.290 | from the onsite data, checked on unseen years | data |
+| Ward bed capacity | city 95th-percentile need, split by density | dataset has no bed counts | `BED_CAPACITY_QUANTILE` |
+| Lifeline share | 50% | nobody with patients gets nothing | `CRITICAL_FILL` |
+| One crew's effect | 20% of breeding water from the last 3 weeks | planning assumption, slider 10-30% | `CREW_COVERAGE` |
+| Crews requested | High 1, Critical 2, max 4 per ward | simple, matches tiers | `CREWS_NEEDED`, `MAX_CREWS_PER_WARD` |
+
+## 8. Scaling to a live system
+
 
 - New weekly data: upload on the **Add weekly data** page or run `python scripts/ingest.py new_weeks.csv`. Rows are validated and stored in `data/updates.csv` (never overwriting the official file), then the models retrain on all data in about 15 s and the app reloads via the data hash. `--reset` restores the official dataset.
 - New wards: the model uses ward attributes, so new wards work without retraining the architecture.
