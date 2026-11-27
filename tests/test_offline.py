@@ -10,8 +10,8 @@ from dengue import briefing, config, dispatch
 from dengue.engine import Engine
 from dengue.operations import Settings
 
-OPS_PAGES = ["views/allocation.py", "views/overflow.py", "views/simulator.py", "views/dispatch.py",
-             "views/live_forecast.py", "views/risk_board.py", "views/overview.py"]
+OPS_PAGES = ["views/report.py", "views/actions.py", "views/reality.py", "views/more.py", "views/risk_board.py"]
+STEPS = ["crews", "supplies", "beds", "notices"]
 
 
 class NoInternet(OSError):
@@ -87,13 +87,20 @@ def test_every_page_renders_with_no_internet(no_internet):
         at.switch_page(page).run()
         assert not at.exception, (page, [e.value for e in at.exception])
         assert at.title, page
+    at.switch_page("views/actions.py").run()
+    for step in STEPS:
+        at.session_state["step"] = step
+        at.run()
+        assert not at.exception, (step, [e.value for e in at.exception])
 
 
 def test_offline_toggle_cuts_network_in_the_app():
     at = AppTest.from_file("../app.py", default_timeout=180).run()
     at.toggle(key="offline").set_value(True).run()
     assert config.ALLOW_NETWORK is False
-    at.switch_page("views/allocation.py").run()
+    at.switch_page("views/actions.py").run()
+    at.session_state["step"] = "notices"
+    at.run()
     assert not at.exception and any("Offline mode" in i.value for i in at.info)
     at.toggle(key="offline").set_value(False).run()
     assert config.ALLOW_NETWORK is config.NETWORK_FROM_ENV
