@@ -64,7 +64,8 @@ TIER_COLORS = {
 }
 
 # ---- Network / cost controls --------------------------------------------
-ALLOW_NETWORK = os.getenv("ALLOW_NETWORK", "1") != "0"
+NETWORK_FROM_ENV = os.getenv("ALLOW_NETWORK", "1") != "0"
+ALLOW_NETWORK = NETWORK_FROM_ENV  # also switched off live by the dashboard's "Offline mode" toggle
 HTTP_TIMEOUT_S = 8
 HTTP_MAX_RETRIES = 4
 WEATHER_CACHE_TTL_H = 6

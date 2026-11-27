@@ -494,6 +494,14 @@ def engine_footer(engine: Engine) -> None:
     llm = llm_status()
     state = tx.t("st_llm_on", model=llm["model"]) if llm["enabled"] else tx.t("st_llm_off")
     n = tx.num
+    # Kill switch for the live judging test: cuts every internet call (weather API, Gemini) at once.
+    # Everything in the command center keeps working because it never needed the network.
+    ss = st.session_state
+    ss.setdefault("v_offline", not config.NETWORK_FROM_ENV)
+    ss["offline"] = ss["v_offline"]
+    off = st.sidebar.toggle(tx.t("offline"), key="offline", help=tx.t("offline_help"),
+                            on_change=lambda: ss.__setitem__("v_offline", ss["offline"]))
+    config.ALLOW_NETWORK = config.NETWORK_FROM_ENV and not off
     with st.sidebar.expander(tx.t("status")):
         st.markdown("\n".join("- " + line for line in (
             tx.t("st_trained", date=tx.date(b["train_end"]), s=n(f"{b['train_seconds']}")),

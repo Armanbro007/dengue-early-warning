@@ -10,10 +10,10 @@ PAGES = ["views/risk_board.py", "views/ward_detail.py", "views/heatmap.py", "vie
 
 @pytest.fixture(scope="module")
 def app():
-    config.ALLOW_NETWORK = False  # the live page must still work with no network
+    config.ALLOW_NETWORK = config.NETWORK_FROM_ENV = False  # the live page must still work with no network
     at = AppTest.from_file("../app.py", default_timeout=120).run()
     yield at
-    config.ALLOW_NETWORK = True
+    config.ALLOW_NETWORK = config.NETWORK_FROM_ENV = True
 
 
 def test_overview_answers_the_main_question(app):

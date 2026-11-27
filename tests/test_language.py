@@ -5,7 +5,7 @@ from dengue import config
 
 
 def test_switching_language_keeps_settings():
-    config.ALLOW_NETWORK = False
+    config.ALLOW_NETWORK = config.NETWORK_FROM_ENV = False
     at = AppTest.from_file("../app.py", default_timeout=120).run()
     assert not at.exception
     at.selectbox(key="city_en").set_value("Chattogram")
@@ -21,11 +21,11 @@ def test_switching_language_keeps_settings():
     assert at.selectbox(key="city_en").value == "Chattogram"
     assert at.select_slider(key="as_of_en").value == "7 Jul 2025"
     assert at.title[0].value == "Dengue outlook for 28 July"
-    config.ALLOW_NETWORK = True
+    config.ALLOW_NETWORK = config.NETWORK_FROM_ENV = True
 
 
 def test_every_page_renders_in_bangla():
-    config.ALLOW_NETWORK = False
+    config.ALLOW_NETWORK = config.NETWORK_FROM_ENV = False
     at = AppTest.from_file("../app.py", default_timeout=120).run()
     at.segmented_control(key="lang").set_value("bn").run()
     for page in ["views/risk_board.py", "views/ward_detail.py", "views/heatmap.py", "views/accuracy.py",
@@ -33,4 +33,4 @@ def test_every_page_renders_in_bangla():
         at.switch_page(page).run()
         assert not at.exception, (page, [e.value for e in at.exception])
         assert any("ঀ" <= ch <= "৿" for ch in at.title[0].value), f"{page} title is not in Bangla"
-    config.ALLOW_NETWORK = True
+    config.ALLOW_NETWORK = config.NETWORK_FROM_ENV = True
