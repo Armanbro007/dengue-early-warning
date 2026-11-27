@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass
+from functools import cached_property
 
 import numpy as np
 import pandas as pd
@@ -16,6 +17,9 @@ from .data import STATIC_COLS, TARGET, file_hash, load_raw
 from .explain import DRIVER_GROUPS, apply_rain_whatif, explain
 from .features import FEATURES, add_targets, build_features
 from .model import load_or_train, predict
+from .operations import Plan, Settings, build_plan
+from .simulator import effect_table
+from .supply import bed_capacity, learn_ratios
 from .tiers import add_tiers
 
 
@@ -101,6 +105,26 @@ class Engine:
     def ward_weather(self, ward: str, end, weeks: int = 12) -> pd.DataFrame:
         r = self.raw[(self.raw["ward_id"] == ward) & (self.raw["date"] <= pd.Timestamp(end))]
         return r.tail(weeks)
+
+    # ---- Phase 2: operations --------------------------------------------
+    @cached_property
+    def supply_ratios(self) -> dict[str, float]:
+        """Units per case, learned once from the training years."""
+        return learn_ratios(self.raw)
+
+    @cached_property
+    def bed_capacity(self):
+        return bed_capacity(self.raw)
+
+    def crew_effects(self, as_of, city: str | None = None):
+        return effect_table(self.bundle, self._rows(as_of, city))
+
+    def plan(self, as_of, h: int, city: str | None = None, settings: Settings | None = None,
+             fc: pd.DataFrame | None = None, effects: pd.DataFrame | None = None) -> Plan:
+        """Full operational plan (supplies, beds, crews) for the forecast h weeks after as_of."""
+        fc = self.forecast(as_of, h, city) if fc is None else fc
+        return build_plan(fc, self._rows(as_of, city), self.bundle, self.supply_ratios, self.bed_capacity,
+                          settings or Settings(), effects)
 
     # ---- live mode ------------------------------------------------------
     def forecast_from_city_weather(self, weekly: pd.DataFrame, h: int) -> pd.DataFrame:
