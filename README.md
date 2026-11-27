@@ -145,7 +145,4 @@ No other AI services or external APIs are used. Open-source libraries: pandas, N
 
 - The dataset is the organisers' ward-week dataset (2016-2025). It has density but no population counts, so we forecast case **counts**, not incidence per 100k.
 - Live mode uses city-level weather for all wards in a city. Ward differences come from ward attributes.
-- November is dry season, so live risk is Low right now. The historical replay shows how the system behaves during the monsoon.
-- Forecast ranges are 80% ranges: about 1 in 5 weeks will fall outside them.
-- Phase 2 planning assumptions are stated, not measured: the dataset has no bed counts (we derive each city's bed pool from its past needs) and no crew data (one crew is assumed to clear 20% of recent breeding water; the What-if page lets you test 10-30%). See ARCHITECTURE.md section 7.8.
-- The model forecasts the expected number of cases and tends to under-call the size of sudden spikes, so the allocation offers a "plan for a bad week" switch that uses the top of the forecast range.
+
