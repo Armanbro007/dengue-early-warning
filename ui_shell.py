@@ -72,7 +72,7 @@ section[data-testid="stSidebar"], [data-testid="stSidebarCollapsedControl"], [da
 .dw-tile p{font-size:.88rem; color:var(--ink2); line-height:1.5; margin:0 0 12px;}
 @media (max-width: 760px){ .dw-guide{grid-template-columns:1fr;} .st-key-shell{border-radius:26px;} .dk{min-height:0 !important;} }
 /* Supplies: available stock tiles (values never cut off) */
-.dw-stock{position:relative;background:radial-gradient(30rem 18rem at 100% 0%, #2A2E38 0%, #15171C 60%);border-radius:22px;padding:30px 14px 14px;margin-top:10px;}
+.dw-stock{position:relative;margin-bottom:24px;background:radial-gradient(30rem 18rem at 100% 0%, #2A2E38 0%, #15171C 60%);border-radius:22px;padding:30px 14px 14px;margin-top:10px;}
 .dw-stock-tag{position:absolute;top:10px;right:16px;font:600 .68rem/1 ui-monospace,monospace;letter-spacing:.08em;color:rgba(255,255,255,.6);text-transform:uppercase;}
 .dw-stock-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;}
 .dw-stock .t{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:12px 14px;min-width:0;}
@@ -80,9 +80,12 @@ section[data-testid="stSidebar"], [data-testid="stSidebarCollapsedControl"], [da
 .dw-stock .v{color:#fff;font-size:1.45rem;font-weight:650;letter-spacing:-.02em;line-height:1.2;overflow-wrap:anywhere;}
 .dw-stock .v span{display:block;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:0;}
 /* Beds: city cards on the right */
-.dw-cities{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
-.dw-city{background:rgba(255,255,255,.7);border:1px solid rgba(17,19,24,.08);border-radius:16px;padding:12px 14px;}
-.dw-city .nm{font-weight:650;} .dw-city .pc{font-size:1.5rem;font-weight:650;} .dw-city .mt{font-size:.78rem;color:#4B5160;line-height:1.5;}
+.dw-cities{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:24px;}
+.dw-city .mt{overflow-wrap:anywhere;}
+@media (max-width:1100px){.dw-cities{grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media (max-width:700px){.dw-cities{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.dw-city{background:rgba(255,255,255,.7);border:1px solid rgba(17,19,24,.08);border-radius:16px;padding:10px 11px;min-width:0;}
+.dw-city .nm{font-weight:650;} .dw-city .pc{font-size:1.35rem;font-weight:650;} .dw-city .mt{font-size:.78rem;color:#4B5160;line-height:1.5;}
 @media (max-width:700px){.dw-stock-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 
 </style>
